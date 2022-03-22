@@ -23,7 +23,7 @@ Feature: Atualização dos dados
         Given : Estou logado como “Breno” no sistema
         And :  Estou na página do meu perfil com o e-mail “bcfc@cin.ufpe.br”
         When : Eu tento atualizar meu e-mail no perfil
-        Then : O sistema pede uma confirmação por código enviado via celular
+        Then : O sistema me pede para uma autenticação por senha
         And : Eu tenho sucesso na autenticação
         And : Volto para minha página de perfil e atualizo o e-mail como “bccf@cin.ufpe.br”
 
@@ -31,7 +31,7 @@ Feature: Atualização dos dados
         Given : Estou logado como “Breno” no sistema
         And : Estou na minha página de perfil com o telefone “81 984752737”
         When : Eu tento atualizar meu número de celular no perfil
-        Then : O sistema me pede uma confirmação via código enviado para o meu e-mail
+        Then : O sistema me pede para uma autenticação por senha
         And : Eu tenho sucesso na autenticação
         And : Volto para minha página de perfil coloco o novo número “81 984752773”
         And : Ele é alterado com sucesso
@@ -40,7 +40,7 @@ Feature: Atualização dos dados
         Given : Estou logado como “Breno” no sistema
         And : Estou na minha página de perfil com o telefone “81 984752737”
         When : Eu tento atualizar meu número de celular no perfil
-        Then : O sistema me pede uma confirmação via código enviado para o meu e-mail
+        Then : O sistema me pede para uma autenticação por senha
         And : Eu não tenho sucesso na autenticação e aparece uma mensagem de erro
         And : Eu volto para minha página de perfil inalterada
 
@@ -48,7 +48,7 @@ Feature: Atualização dos dados
         Given : Estou logado como “Breno” no sistema com senha "123456"
         And :  Estou na página do meu perfil com o e-mail “bcfc@cin.ufpe.br”
         When : Eu tento atualizar meu e-mail no perfil
-        Then : O sistema pede uma confirmação por código enviado via sms para o celular "81 984752773"
+        Then : O sistema me pede para uma autenticação por senha
         And : Eu digito o código errado
         And : Eu não tenho sucesso na autenticação e aparece uma mensagem de erro
         And : Eu não consigo alterar o e-mail
