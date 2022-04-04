@@ -1,0 +1,27 @@
+
+.titulo{
+    position:relative;
+    left:15%;
+    top:5%;
+    bottom:5%;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.background {
+    position: absolute;
+    top:15%;
+    left:10%;
+    width: 69%;
+    border-radius: 5px;
+    background: rgb(243, 182, 101);
+    padding-left: 150px;
+    padding-top: 170px;
+    padding-bottom: 30%;
+}
+
+.comp_perfil{
+    position:relative;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
