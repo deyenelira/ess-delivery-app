@@ -93,6 +93,21 @@ export class ClientService {
       .catch(this.catch);
   }
 
+  passwordCheck(password: string): Promise<Client>{
+    var body = {password: password};
+    return this.http
+      .post(this.taURL + '/client/login', JSON.stringify(body), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res) => {
+        if (res.status === 201) {
+          return true;
+        } else return false;
+      })
+      .catch(this.catch);
+  }
+
   forgot_password(email: string): Promise<Client> {
     return this.http
       .post(this.taURL + `/client/forgot_password/${email}`, {

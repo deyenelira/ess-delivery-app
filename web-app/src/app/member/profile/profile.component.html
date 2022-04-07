@@ -1,18 +1,19 @@
 <div>
   <div class="background">
+    <img src="assets/images/profile.png">    
+    <form action="" method="POST" >
 
-    <img src="web-app/src/assets/images/profile.jpg">
+      <div class="comp_perfil"> <font size="+3"> Nome: </font> <input name="newName" type="text" value="{{this.name}}"> </div><br>
 
-    <button type="button"> <div class="botao_editar">editar dados</div></button> 
+      <div class ="comp_perfil"> <font size="+3">Telefone: </font> <input name="newTelefone" type="text" value="{{this.telefone}}"> </div><br>
 
-    <div class="comp_perfil"> <font size="+3"> Nome: {{this.name}} </font> <br></div>
+      <div class ="comp_perfil"> <font size="+3">Métodos de Pagamento: </font> <input name="new_metodosPag" type="text" value="{{this.metodos_pag}}"> </div><br>
 
-    <div class ="comp_perfil"> <font size="+1">Telefone: {{this.telefone}} </font> <br></div>
+      <div class="comp_perfil"> <font size="+3">Endereço (lista): {{this.enderecos[0]}}</font> </div><br>
 
-    <div class ="comp_perfil"> <font size="+1">Métodos de Pagamento: {{this.metodos_pag}} </font> <br></div>
-
-    <div class="comp_perfil"> <font size="+1">Endereço (lista): {{this.enderecos[0]}}</font> <br></div>
-
+    <input name="password" type="password" placeholder="escreva a senha para alterar" required>
+    <button type="submit">Salvar Alterações</button>
+    </form>
   </div>
 </div>
 

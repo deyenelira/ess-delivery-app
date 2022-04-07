@@ -21,12 +21,15 @@
 }
 
 .comp_perfil{
+    display: inline-block;
     position:relative;
     padding-top: 40px;
     padding-bottom: 40px;
 }
-
-.botao_editar{
-    color:blue;
-    text-decoration:underline blue;
-}
+.msg-erro {
+    color: #ff0000;
+    text-align: center;
+    margin: 0px;
+    height: 19px;
+  }
+  
