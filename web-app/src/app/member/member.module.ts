@@ -6,6 +6,7 @@ import { HistoryComponent } from "./history/history.component";
 import { HomeComponent } from "./home/home.component";
 import { MemberComponent } from "./member.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { Order } from "../orders/order";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { ProfileComponent } from "./profile/profile.component";
         children: [
           { path: "", component: HomeComponent },
           { path: "profile", component: ProfileComponent },
-          { path: "history", component: HistoryComponent },
+          { path: "history", component: HistoryComponent }
         ],
       },
     ]),
