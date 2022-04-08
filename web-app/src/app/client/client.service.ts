@@ -96,7 +96,7 @@ export class ClientService {
   passwordCheck(password: string): Promise<Client>{
     var body = {password: password};
     return this.http
-      .post(this.taURL + '/client/login', JSON.stringify(body), {
+      .post(this.taURL + '/client/profile', JSON.stringify(body), {
         headers: this.headers,
       })
       .toPromise()

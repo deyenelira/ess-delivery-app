@@ -1,19 +1,57 @@
 <div>
   <div class="background">
     <img src="assets/images/profile.png">    
-    <form action="" method="POST" >
+    <form [formGroup]="profileForm" >
 
-      <div class="comp_perfil"> <font size="+3"> Nome: </font> <input name="newName" type="text" value="{{this.name}}"> </div><br>
+      <div class="comp_perfil"> 
+        <font size="+3"> Nome: </font> 
+        <input 
+          name="newName" 
+          type="text" 
+          value="{{this.name}}"> 
+      </div><br>
 
-      <div class ="comp_perfil"> <font size="+3">Telefone: </font> <input name="newTelefone" type="text" value="{{this.telefone}}"> </div><br>
+      <div class ="comp_perfil"> 
+        <font size="+3">Telefone: </font> 
+        <input name="newTelefone" 
+        type="text" 
+        value="{{this.telefone}}"> 
+      </div><br>
 
-      <div class ="comp_perfil"> <font size="+3">Métodos de Pagamento: </font> <input name="new_metodosPag" type="text" value="{{this.metodos_pag}}"> </div><br>
+      <div class ="comp_perfil"> 
+        <font size="+3">Métodos de Pagamento: </font> 
+        <input 
+          name="new_metodosPag" 
+          type="text" 
+          value="{{this.metodos_pag}}"> 
+      </div><br>
 
-      <div class="comp_perfil"> <font size="+3">Endereço (lista): {{this.enderecos[0]}}</font> </div><br>
+      <div class="comp_perfil"> 
+        <font size="+3">Endereço (lista): {{this.enderecos[0]}}</font> 
+      </div><br>
 
-    <input name="password" type="password" placeholder="escreva a senha para alterar" required>
-    <button type="submit">Salvar Alterações</button>
-    </form>
+    <div> 
+      <input
+        formControlName="password"
+        name="password"  
+        placeholder="escreva a senha para alterar" 
+        required>
+      
+      <div class="msg-erro">
+        <span *ngIf="!acertouCheck">Senha incorreta!</span>
+      </div>
+    </div>
+  
+    <button 
+      class="button-medium" 
+      type="submit"
+      (click) ="confirmPassword()"
+      [disabled]="!profileForm.valid" 
+      >
+      Salvar Alterações
+    </button>
+    
+  </form>
   </div>
 </div>
 

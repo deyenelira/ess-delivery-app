@@ -1,7 +1,6 @@
 import { Component, OnInit  } from "@angular/core";
 import { ClientService } from "src/app/client/client.service";
-import { Client } from "src/app/client/client";
-
+import {ReactiveFormsModule} from '@angular/forms';
 import {
   FormBuilder,
   FormControl,
@@ -15,30 +14,7 @@ import {
   styleUrls: ["./profile.component.css"],
 })
 
-// export class PasswordComponent implements OnInit {
-//   errouCheck: boolean = false;
-//   passwordForm: FormGroup
-
-//   constructor(private clientService: ClientService){
-// 
-//   }
-
-//   confirmPassword(): void{
-//     this.clientService
-//       .passwordCheck(this.passwordForm.value.password)
-//       .then((result)=> {
-//         if(!result){
-//           this.errouCheck = true;
-//         }
-//       })
-//       .catch(()=> (this.errouCheck = true))
-//   }
-
-//   ngOnInit(): void {}
-// }
-
-
-export class ProfileComponent implements OnInit{
+export class ProfileComponent{
   name:string;
   cpf:string;
   telefone:string;
@@ -46,38 +22,38 @@ export class ProfileComponent implements OnInit{
   metodos_pag:string;
   password:string;
 
-  errouCheck: boolean = false;
-  passwordForm: FormGroup;
+  acertouCheck: boolean = true;
+  profileForm: FormGroup;
   
 
   constructor(private clientService: ClientService) {
-    this.passwordForm = new FormGroup({
+    this.profileForm = new FormGroup({
             name: new FormControl(),
             telefone: new FormControl(),
             metodo_pag: new FormControl(),
-            password: new FormControl()
+            password: new FormControl(),
           });
   }
 
   confirmPassword(): void{
-        this.clientService
-          .passwordCheck(this.passwordForm.value.password)
-          .then((result)=> {
-            if(!result){
-              this.errouCheck = true;
-            }
-          })
-          .catch(()=> (this.errouCheck = true))
+        this.clientService.getClient().then((result) => {
+          if(this.profileForm.value.password != result.password){
+            this.acertouCheck=false;
+          }
+          if(this.profileForm.value.password == result.password){
+            this.acertouCheck=true;
+          }
+        });
       }
 
   ngOnInit(): void {
     this.clientService.getClient().then((result) => {
       this.name = result.name;
-      this.cpf = result.cpf
-      this.telefone = result.phone
-      this.enderecos = result.addresses
-      this.metodos_pag = result.pay_method
-      this.password = result.password
+      this.cpf = result.cpf;
+      this.telefone = result.phone;
+      this.enderecos = result.addresses;
+      this.metodos_pag = result.pay_method;
+      this.password = result.password;
     });
   }
   
