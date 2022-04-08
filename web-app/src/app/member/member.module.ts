@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { MemberComponent } from "./member.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ExpensesComponent } from "./expenses/expenses.component";
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,9 @@ import { ExpensesComponent } from "./expenses/expenses.component";
     ExpensesComponent
   ],
   imports: [
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
     CommonModule,
     FormsModule,
     RouterModule.forChild([
