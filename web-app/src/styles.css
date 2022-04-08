@@ -53,8 +53,31 @@ a {
   font-family: ABeeZee Regular;
   font-size: 20px;
   color: #ffff;
-
+  white-space: nowrap;
   box-shadow: 0px 0px 3px 0px #e93574;
+}
+
+.button-order {
+  height: 40px;
+  width: 170px;
+
+  background-color: #e93574;
+
+  border: 1px solid #e93574;
+  border-radius: 50px;
+
+  text-decoration: none;
+  font-family: ABeeZee Regular;
+  font-size: 20px;
+  color: #ffff;
+  white-space: nowrap;
+  box-shadow: 0px 0px 3px 0px #e93574;
+}
+
+.button-order:hover:enabled {
+  background-color: #ff5200;
+  border: 1px solid #ff5200;
+  box-shadow: 0px 0px 3px 0px #ff5200;
 }
 
 .button-medium:hover:enabled {
