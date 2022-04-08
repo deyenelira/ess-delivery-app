@@ -1,3 +1,89 @@
-<div>
-  <h1>Historico</h1>
+<div class="background">
+   <div *ngIf="getHistory">
+      <div class="header">
+         <h1 class="title ">Histórico de pedidos</h1>
+      </div>
+      <div class="container">
+         <div class="buttons">
+           <a>
+              <button class="button-order" (click)="previousPage()">voltar página</button>
+           </a>
+           <a>
+               <button class="button-order" (click)="nextPage()">próxima pagina</button>
+            </a>
+           <a>
+              <button class="button-order" (click)="monthFilter()" [disabled]="getFilter">filtrar mês</button>
+           </a>
+           <a>
+              <button class="button-order" (click)="weekFilter()" [disabled]="!getFilter">filtrar semana</button>
+           </a>
+         </div>
+         <div class="item">
+            <ul *ngFor=" let order of orders">
+               <button class="pedido" (click)="clickOrder(order.id)">
+                  <span class="text">
+                     Pedido n° #2020{{order.id}} realizado em {{order.created_at}}
+                  </span>
+               </button>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div *ngIf="getOrder">
+      <div class="header">
+         <h1 class="title ">Detalhes do pedido</h1>
+      </div>
+      <div class="container">
+         <span class="text">
+            <div class="details">
+            <h3>
+               <a class="h">
+                  Pedido #2020{{this.order.id}}
+               </a>
+               <br>
+               <br>
+               <a class="h">
+                  Cliente
+               </a>
+               <br>{{this.client.name}}
+               <br>{{this.client.cpf}}
+               <br><br>
+               <a class="h">
+                  Endereço de entrega
+               </a>
+               <br>{{this.order.address["postal_code"]}} -
+                  {{this.order.address["address"]}} -
+                  {{this.order.address["district"]}} -
+                  {{this.order.address["city"]}} -
+                  {{this.order.address["state"]}}
+               <br>{{this.order.address["complement"]}}
+               <br><br>
+               <a class="h">
+                  Itens do pedido
+               </a>
+               <div *ngFor="let item of order.items">
+                  Quantidade: {{item["qt"]}}
+                  <br>
+                  Item: {{item["description"]}}
+                  <br>
+                  Preço: R${{item["price"]}},00
+                  <br>
+                  <br>
+               </div>
+               <a class="h">
+                  Pagamento
+               </a>
+               <br>
+               Subtotal: {{this.order.cost}}
+               <br>
+               Taxa de entrega: {{this.order.deliveryTax}}
+               <br>
+               Total: {{this.order.cost + this.order.deliveryTax}}
+            </h3>
+            </div>
+         </span>
+         <div class="back">
+            <button class="button-order" (click)="clickOrder(this.order.id)">voltar</button>    
+         </div> 
+      </div>
 </div>
