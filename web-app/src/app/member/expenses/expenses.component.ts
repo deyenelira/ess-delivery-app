@@ -37,52 +37,27 @@ export class ExpensesComponent{
       value: 18
     }
   ];
-  options: any;
+  optionsCompraCusto: any;
+  optionsRestauranteCusto: any;
+  optionsCompraFreq: any;
+  optionsRestauranteFreq: any;
   initOpts: any;
   constructor() {}
   
+  ordered: boolean = false;
+
   ngOnInit(): void {
+    
     this.initOpts = {
       renderer: "canvas",
-      width: 1282*devicePixelRatio,
-      height: 1280*devicePixelRatio
+      width: 450,
+      height: 500,
     };
-  
-    this.options = {
-      //Settando os titulos
-      
+    
+  /*===========Chart do Restaurante mais caro=============*/
+    this.optionsRestauranteCusto = {
+      //Settando o titulo
       title: [
-        //Comida mais cara 
-        {
-          text: 'Comida mais cara',
-          textStyle:{
-            fontFamily: 'ABeeZee Regular',
-            fontStyle: 'normal',
-            fontWeight: 400,
-            fontSize: 32,
-            color: "#FFFFFF",
-          },
-          left: '75%',
-          top: '5%',
-          textAlign: 'center',
-        },
-        {
-          subtext: 'Comidaaaaaaaaaaaa mais caraaaaaaaaaaaaaaaaaaaa',
-          subtextStyle:{
-            fontFamily: 'Cherry Bomb One Regular',
-            fontStyle: 'normal',
-            fontWeight: 400,
-            fontSize: 24,
-            color: '#FF5200',
-            width: 450,
-            overflow: 'break',
-          },
-          left: '75%',
-          top: '7.5%',
-          textAlign: 'center',
-        },
-
-        //Restaurante mais caro
         {
           text: 'Restaurante mais caro',
           textStyle:{
@@ -92,8 +67,8 @@ export class ExpensesComponent{
             fontSize: 32,
             color: "#FFFFFF",
           },
-          left: '25%',
-          top: '5%',
+          left: '50%',
+          top: '2.5%',
           textAlign: 'center',
         },
         {
@@ -107,14 +82,57 @@ export class ExpensesComponent{
             width: 450,
             overflow: 'break',
           },
-          left: '25%',
-          top: '7.5%',
+          left: '50%',
+          top: '12.5%',
           textAlign: 'center'
         },
-
-        //Comida mais comprada
+      ],
+      tooltip: {
+        trigger: "item",
+        width: "100%"
+      },
+      legend: {
+        show: false,
+      },
+      //Definindo o Chart
+      series: [
         {
-          text: 'Comida mais comprada',
+          name: "Restaurante:",
+          type: "pie",
+          radius: "50%",
+          center: ['50%', '55%'],
+          data: this.data,
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: "#fff",
+            borderWidth: 2
+          },
+          label: {
+            show: false,
+            position: "center"
+          },
+          emphasis: {
+            label: {
+              show: false,
+              fontSize: "40",
+              fontWeight: "bold"
+            }
+          },
+          labelLine: {
+            show: false
+          },
+        },
+      ],
+    };
+
+
+  /*===========Chart da comida mais cara=============*/
+    this.optionsCompraCusto = {
+      //Settando o titulo
+      title: [
+        {
+          text: 'Comida mais cara',
           textStyle:{
             fontFamily: 'ABeeZee Regular',
             fontStyle: 'normal',
@@ -122,12 +140,12 @@ export class ExpensesComponent{
             fontSize: 32,
             color: "#FFFFFF",
           },
-          left: '75%',
-          top: '55%',
+          left: '50%',
+          top: '2.5%',
           textAlign: 'center',
         },
         {
-          subtext: 'Comida mais comprada',
+          subtext: 'Comidaaaaaaaaaaaa mais caraaaaaaaaaaaaaaaaaaaa',
           subtextStyle:{
             fontFamily: 'Cherry Bomb One Regular',
             fontStyle: 'normal',
@@ -137,12 +155,55 @@ export class ExpensesComponent{
             width: 450,
             overflow: 'break',
           },
-          left: '75%',
-          top: '57.5%',
-          textAlign: 'center'
+          left: '50%',
+          top: '12.5%',
+          textAlign: 'center',
         },
+      ],
+      tooltip: {
+        trigger: "item",
+        width: "100%"
+      },
+      legend: {
+        show: false,
+      },
+      //Definindo o Chart
+      series: [
+        {
+          name: "Comida:",
+          type: "pie",
+          radius: "50%",
+          center: ['50%', '55%'],
+          data: this.data,
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: "#fff",
+            borderWidth: 2
+          },
+          label: {
+            show: false,
+            position: "center"
+          },
+          emphasis: {
+            label: {
+              show: false,
+              fontSize: "40",
+              fontWeight: "bold"
+            }
+          },
+          labelLine: {
+            show: false
+          },
+        }, 
+      ]
+    };
 
-        //Restaurante mais comprado
+
+  /*===========Chart do Restaurante mais comprado=============*/
+    this.optionsRestauranteFreq = {
+      //Settando o titulo
+      title: [
         {
           text: 'Restaurante mais comprado',
           textStyle:{
@@ -152,8 +213,8 @@ export class ExpensesComponent{
             fontSize: 32,
             color: "#FFFFFF",
           },
-          left: '25%',
-          top: '55%',
+          left: '50%',
+          top: '2.5%',
           textAlign: 'center',
         },
         {
@@ -167,12 +228,11 @@ export class ExpensesComponent{
             width: 450,
             overflow: 'break',
           },
-          left: '25%',
-          top: '57.5%',
+          left: '50%',
+          top: '12.5%',
           textAlign: 'center'
         },
       ],
-
       tooltip: {
         trigger: "item",
         width: "100%"
@@ -180,71 +240,13 @@ export class ExpensesComponent{
       legend: {
         show: false,
       },
+      //Definindo o Chart
       series: [
-        //Chart da comida mais cara
-        {
-          name: "Comida:",
-          type: "pie",
-          radius: "25%",
-          center: ['75%', '25%'],
-          data: this.data,
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: "#fff",
-            borderWidth: 2
-          },
-          label: {
-            show: false,
-            position: "center"
-          },
-          emphasis: {
-            label: {
-              show: false,
-              fontSize: "40",
-              fontWeight: "bold"
-            }
-          },
-          labelLine: {
-            show: false
-          },
-        },
-        
-        //Chart da comida mais comprada
-        {
-          name: "Comida:",
-          type: "pie",
-          radius: "25%",
-          center: ['75%', '75%'],
-          data: this.data,
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: "#fff",
-            borderWidth: 2
-          },
-          label: {
-            show: false,
-            position: "center"
-          },
-          emphasis: {
-            label: {
-              show: false,
-              fontSize: "40",
-              fontWeight: "bold"
-            }
-          },
-          labelLine: {
-            show: false
-          },
-        },
-
-        //Chart do restaurante mais caro
         {
           name: "Restaurante:",
           type: "pie",
-          radius: "25%",
-          center: ['25%', '25%'],
+          radius: "50%",
+          center: ['50%', '55%'],
           data: this.data,
           avoidLabelOverlap: false,
           itemStyle: {
@@ -267,36 +269,80 @@ export class ExpensesComponent{
             show: false
           },
         },
-        
-        //Chart do restaurante mais comprado
-        {
-          name: "Restaurante:",
-          type: "pie",
-          radius: "25%",
-          center: ['25%', '75%'],
-          data: this.data,
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: "#fff",
-            borderWidth: 2
-          },
-          label: {
-            show: false,
-            position: "center"
-          },
-          emphasis: {
-            label: {
-              show: false,
-              fontSize: "40",
-              fontWeight: "bold"
-            }
-          },
-          labelLine: {
-            show: false
-          },
-        },
-      ]
+      ],
     };
+    
+  /*===========Chart da comida mais comprada=============*/
+    this.optionsCompraFreq = {
+      //Settando o titulo
+      title: [
+        {
+          text: 'Comida mais comprada',
+          textStyle:{
+            fontFamily: 'ABeeZee Regular',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            fontSize: 32,
+            color: "#FFFFFF",
+          },
+          left: '50%',
+          top: '2.5%',
+          textAlign: 'center',
+        },
+        {
+          subtext: 'Comida mais comprada',
+          subtextStyle:{
+            fontFamily: 'Cherry Bomb One Regular',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            fontSize: 24,
+            color: '#FF5200',
+            width: 450,
+            overflow: 'break',
+          },
+          left: '50%',
+          top: '12.5%',
+          textAlign: 'center'
+        },
+      ],
+      tooltip: {
+        trigger: "item",
+        width: "100%"
+      },
+      legend: {
+        show: false,
+      },
+      //Definindo o Chart
+      series: [
+        {
+          name: "Comida:",
+          type: "pie",
+          radius: "50%",
+          center: ['50%', '55%'],
+          data: this.data,
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: "#fff",
+            borderWidth: 2
+          },
+          label: {
+            show: false,
+            position: "center"
+          },
+          emphasis: {
+            label: {
+              show: false,
+              fontSize: "40",
+              fontWeight: "bold"
+            }
+          },
+          labelLine: {
+            show: false
+          },
+        },
+      ],
+    };
+
   }
 }
