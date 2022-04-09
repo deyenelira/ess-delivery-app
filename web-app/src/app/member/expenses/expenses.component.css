@@ -1,0 +1,81 @@
+.container1 {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    height: 500px;
+    width: 450px;
+    
+    transform: translate(-50%, 0%);
+
+    border-radius: 20px;
+    background: #F7C3AA;
+}
+
+.titulo {
+    position: absolute;
+    height: 55px;
+    width: 450px;
+
+    border-radius: 20px;
+    background: -webkit-linear-gradient(#e93574, #ff5200);
+}
+
+.container2 {
+    position: absolute;
+    top: 20%;
+    left: 75%;
+    height: 500px;
+    width: 450px;
+    
+    transform: translate(-50%, 0%);
+
+    border-radius: 20px;
+    background: #F7C3AA;
+}
+
+.container3 {
+    position: absolute;
+    top: 120%;
+    left: 25%;
+    height: 500px;
+    width: 450px;
+
+    transform: translate(-50%, 0%);
+    
+    border-radius: 20px;
+    background: #F7C3AA;
+}
+
+.container4 {
+    position: absolute;
+    top: 120%;
+    left: 75%;
+    height: 500px;
+    width: 450px;
+    
+    transform: translate(-50%, 0%);
+
+    border-radius: 20px;
+    background: #F7C3AA;
+}
+
+.semPedidos{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    height: 300px;
+    width: 800px;
+    
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+
+}
+
+h3 {
+    margin: 0;
+    font-family: Cherry Bomb One Regular;
+    font-size: 32px;
+    color: #000000;
+  }

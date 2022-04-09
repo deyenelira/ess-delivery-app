@@ -6,15 +6,21 @@ import { HistoryComponent } from "./history/history.component";
 import { HomeComponent } from "./home/home.component";
 import { MemberComponent } from "./member.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { ExpensesComponent } from "./expenses/expenses.component";
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
     HomeComponent,
     ProfileComponent,
     HistoryComponent,
-    MemberComponent
+    MemberComponent,
+    ExpensesComponent
   ],
   imports: [
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
     CommonModule,
     FormsModule,
     RouterModule.forChild([
@@ -25,6 +31,7 @@ import { ProfileComponent } from "./profile/profile.component";
           { path: "", component: HomeComponent },
           { path: "profile", component: ProfileComponent },
           { path: "history", component: HistoryComponent },
+          { path: "expenses", component: ExpensesComponent },
         ],
       },
     ]),

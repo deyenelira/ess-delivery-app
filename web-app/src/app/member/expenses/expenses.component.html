@@ -1,0 +1,30 @@
+<!-- Caso tenham pedidos -->
+<div class="graficos" *ngIf="ordered" > 
+    <div class="container1" >
+        <div class="titulo" ></div>
+        <echarts [initOpts]="initOpts" [options]="optionsRestauranteCusto"></echarts>
+    </div>
+
+    <div class="container2" >
+        <div class="titulo" ></div>
+        <echarts [initOpts]="initOpts" [options]="optionsCompraCusto"></echarts>
+    </div>
+    
+    <div class="container3" >
+        <div class="titulo" ></div>
+        <echarts [initOpts]="initOpts" [options]="optionsRestauranteFreq"></echarts>
+    </div>
+    
+    <div class="container4" >
+        <div class="titulo" ></div>
+        <echarts [initOpts]="initOpts" [options]="optionsCompraFreq"></echarts>
+    </div>
+</div>
+
+<!-- Caso não tenham pedidos -->
+<div class="semPedidos" *ngIf="!ordered">
+    <img src="assets/images/cryingCat.png" alt=":(">
+    <h3>Parece que você não comprou nada esse mês</h3>
+</div>
+
+
