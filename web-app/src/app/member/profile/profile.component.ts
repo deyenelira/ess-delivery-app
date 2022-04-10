@@ -5,6 +5,7 @@ import { Component, OnInit  } from "@angular/core";
 import { ClientService } from "src/app/client/client.service";
 import {ReactiveFormsModule} from '@angular/forms';
 import { Client } from 'src/app/client/client';
+import { Observable } from 'rxjs';
 import {
   FormBuilder,
   FormControl,
@@ -38,20 +39,9 @@ export class ProfileComponent{
             telefone: new FormControl(),
             metodo_pag: new FormControl(),
             password: new FormControl(),
+            endereco: new FormControl(),
           });
   }
-
-  // método leigo
-  // confirmPassword(): void{
-  //       this.clientService.getClient().then((result) => {
-  //         if(this.profileForm.value.password != result.password){
-  //           this.acertouCheck=false;
-  //         }
-  //         if(this.profileForm.value.password == result.password){
-  //           this.acertouCheck=true;
-  //         }
-  //       });
-  //     }
 
   // método melhorzin
   confirmPassword() : void{
@@ -72,6 +62,7 @@ export class ProfileComponent{
           if (this.profileForm.value.name != null){Novo.name = this.profileForm.value.name};
           if (this.profileForm.value.telefone != null){Novo.phone = this.profileForm.value.telefone};
           if (this.profileForm.value.metodo_pag != null){Novo.pay_method = this.profileForm.value.metodo_pag};
+          
           
           Novo.addresses = this.enderecos;
           Novo.id = this.id;
@@ -95,6 +86,5 @@ export class ProfileComponent{
       this.password = result.password;
       this.id = result.id
     });
-  }
-  
+  }  
 }

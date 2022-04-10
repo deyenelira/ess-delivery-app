@@ -35,35 +35,28 @@
 
       <div class="comp_perfil"> 
         <font size="+3">Endereço (lista): {{this.enderecos[0]}}</font> 
-      </div><br>
-
-    <div class="container">
-      <button type="submit" class="button-medium ">Submit</button>
-      <div class="popup">
-        <h2> Confirme a senha para atualizar dados </h2>
-        <div> 
-          <input
-            formControlName="password"
-            name="password"  
-            placeholder="confirme a senha para alterar" 
-            required>
-          
-          <div class="msg-erro">
-            <span *ngIf="!acertouCheck">Senha incorreta!</span>
-          </div>
-        </div>
-        <button 
-          class="button-medium" 
-          type="submit"
-          (click) ="confirmPassword()"
-          [disabled]="!profileForm.valid" 
-          >
-          Confirmar
-        </button>
+      </div><br>   
+      
+      
+      <h2> Confirme a senha para atualizar dados </h2> 
+      <input
+        formControlName="password"
+        name="password"
+        type="text"  
+        placeholder="confirme a senha para alterar" 
+        required>
+      <div class="msg-erro">
+        <span *ngIf="!acertouCheck">Senha incorreta!</span>
       </div>
-    </div>
-    
-  </form>
+      <button
+        class="buttom-medium"
+        type="submit"
+        (click) ="confirmPassword()"
+        [disabled]="!profileForm.valid"
+      >
+      Confirmar
+      </button>
+    </form>
   </div>
 </div>
 

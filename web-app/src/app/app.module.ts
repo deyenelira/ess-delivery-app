@@ -31,7 +31,7 @@ import { AuthGuard } from "./guards/auth.guard";
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    MemberModule
+    MemberModule,
   ],
   providers: [ClientService, NegateAuthGuard, AuthGuard],
   bootstrap: [AppComponent],
