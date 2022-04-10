@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ClientService } from "src/app/client/client.service";
+import { orderService } from "src/app/orders/order.service";
 
 @Component({
   selector: "expenses",
@@ -22,7 +23,8 @@ export class ExpensesComponent{
                         'Outubro', 'Novembro', 'Dezembro'];
 
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private orderService : orderService
   ) {}
   
   ordered: boolean = false;
@@ -40,7 +42,7 @@ export class ExpensesComponent{
 
   public getData() {
     console.log(this.filters);
-    this.clientService.getAnalytics(this.clientService.getId(), this.filters)
+    this.orderService.getAnalytics(this.clientService.getId(), this.filters)
       .then(res => {
         console.log(res);
         this.data = res;
@@ -354,7 +356,7 @@ export class ExpensesComponent{
   closeDatePicker(eventData: any, dp?: any) {
     var s = new Date(eventData);
     var e = new Date(eventData);
-    e.setMonth(e.getMonth() + 1)
+    e.setMonth(e.getMonth() + 1);
     this.filters = {
       start: s,
       end: e

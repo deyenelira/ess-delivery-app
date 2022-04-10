@@ -6,6 +6,7 @@ const { isTaggedTemplateExpression } = require("typescript");
 const COMPANY_EMAIL = 'fomiauu@gmail.com';
 const COMPANY_PASSWORD = 'mgot qlcj oojz krvp';
 const ordersPerPage = 3;
+const ordersPerChart = 3;
 
 class OrderService {
 
@@ -176,14 +177,14 @@ class OrderService {
         
         var result = [], aux = 0;
         arrayAux.map(item => {
-            if (aux < 3) result.push(item);
-            else if (aux === 3) {
+            if (aux < ordersPerChart) result.push(item);
+            else if (aux === ordersPerChart) {
                 result.push({
                     name: 'others',
                     value: item.value
                 });
             } else {
-                result[3].value += item.value;
+                result[ordersPerChart].value += item.value;
             }
             aux++;
         });

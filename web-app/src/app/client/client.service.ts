@@ -154,23 +154,6 @@ export class ClientService {
       .catch(this.catch);
   }
 
-  getAnalytics(id: number, filters: any): Promise<Client> {
-    return this.http
-      .get(this.taURL + `/orders/analytics/${id}`, { 
-        headers: this.headers,
-        params: { filters: filters }
-      })
-      .toPromise()
-      .then((res) => {
-        if (res?.status === 201) {
-          return res.json();
-        } else {
-          return null;
-        }
-      })
-      .catch(this.catch);
-  }
-
   private catch(erro: any): Promise<any> {
     console.error('Oops, something went wrong', erro);
     return Promise.reject(erro.message || erro);

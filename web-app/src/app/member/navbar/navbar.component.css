@@ -20,6 +20,10 @@ nav {
   cursor: pointer;
 }
 
+.navbar-title .title {
+  align-self: center;
+}
+
 .logo {
   position: relative;
   top: 13px;

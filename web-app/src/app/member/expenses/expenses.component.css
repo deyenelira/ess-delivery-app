@@ -33,6 +33,7 @@
     grid-row: auto auto;
     grid-column-gap: 300px;
     grid-row-gap: 200px;
+    padding-bottom: 100px;
 }
 
 @media (max-width: 1200px) {
@@ -63,6 +64,10 @@
 
     border-radius: 20px;
     background: -webkit-linear-gradient(#e93574, #ff5200);
+}
+
+echarts {
+    position: revert !important;
 }
 
 .semPedidos{
