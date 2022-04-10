@@ -74,4 +74,6 @@ body {
     border: none;
     box-shadow: none;
   }
-  
+
+html, body { height: 100%; }
+body { margin: 0; font-family: ABeeZee Regular; }

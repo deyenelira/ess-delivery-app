@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { ClientService } from "src/app/client/client.service";
+import { orderService } from "src/app/orders/order.service";
 
 @Component({
   selector: "expenses",
@@ -7,54 +9,58 @@ import { Component } from "@angular/core";
 })
 
 export class ExpensesComponent{
-  data = [
-    {
-      name: 'Apples',
-      value: 70
-    },
-    {
-      name: 'Strawberries',
-      value: 68
-    },
-    {
-      name: 'Bananas',
-      value: 48
-    },
-    {
-      name: 'Oranges',
-      value: 40
-    },
-    {
-      name: 'Pears',
-      value: 32
-    },
-    {
-      name: 'Pineapples',
-      value: 27,
-    },
-    {
-      name: 'Grapes',
-      value: 18
-    }
-  ];
+  data: any;
+  filters: any;
   optionsCompraCusto: any;
   optionsRestauranteCusto: any;
   optionsCompraFreq: any;
   optionsRestauranteFreq: any;
   initOpts: any;
-  constructor() {}
+  period: string = 'Últimos 30 dias';
+
+  monthNames: string[] = ['Janeiro', 'Fevereiro', 'Março', 'Abril',
+                        'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                        'Outubro', 'Novembro', 'Dezembro'];
+
+  constructor(
+    private clientService: ClientService,
+    private orderService : orderService
+  ) {}
   
   ordered: boolean = false;
 
   ngOnInit(): void {
-    
-    this.initOpts = {
-      renderer: "canvas",
-      width: 450,
-      height: 500,
+    var today = new Date();
+    var priorMonth = new Date(new Date().setDate(today.getDate() - 30));
+    this.filters = {
+      start: priorMonth,
+      end: today
     };
-    
-  /*===========Chart do Restaurante mais caro=============*/
+
+    this.getData();
+  }
+
+  public getData() {
+    console.log(this.filters);
+    this.orderService.getAnalytics(this.clientService.getId(), this.filters)
+      .then(res => {
+        console.log(res);
+        this.data = res;
+        this.initOpts = {
+          renderer: "canvas",
+          width: 450,
+          height: 500,
+        };
+
+        if (!this.data.most_expensive.food.length) this.ordered = false;
+        else this.setData();
+      });
+  }
+
+  public setData() {
+    this.ordered = true;
+
+    /*===========Chart do Restaurante mais caro=============*/
     this.optionsRestauranteCusto = {
       //Settando o titulo
       title: [
@@ -72,7 +78,7 @@ export class ExpensesComponent{
           textAlign: 'center',
         },
         {
-          subtext: 'Restaurante mais caro',
+          subtext: this.data.most_expensive.restaurant[0].name,
           subtextStyle:{
             fontFamily: 'Cherry Bomb One Regular',
             fontStyle: 'normal',
@@ -101,7 +107,7 @@ export class ExpensesComponent{
           type: "pie",
           radius: "50%",
           center: ['50%', '55%'],
-          data: this.data,
+          data: this.data.most_expensive.restaurant,
           avoidLabelOverlap: false,
           itemStyle: {
             borderRadius: 10,
@@ -126,8 +132,7 @@ export class ExpensesComponent{
       ],
     };
 
-
-  /*===========Chart da comida mais cara=============*/
+    /*===========Chart da comida mais cara=============*/
     this.optionsCompraCusto = {
       //Settando o titulo
       title: [
@@ -145,7 +150,7 @@ export class ExpensesComponent{
           textAlign: 'center',
         },
         {
-          subtext: 'Comidaaaaaaaaaaaa mais caraaaaaaaaaaaaaaaaaaaa',
+          subtext: this.data.most_expensive.food[0].name,
           subtextStyle:{
             fontFamily: 'Cherry Bomb One Regular',
             fontStyle: 'normal',
@@ -174,7 +179,7 @@ export class ExpensesComponent{
           type: "pie",
           radius: "50%",
           center: ['50%', '55%'],
-          data: this.data,
+          data: this.data.most_expensive.food,
           avoidLabelOverlap: false,
           itemStyle: {
             borderRadius: 10,
@@ -199,8 +204,7 @@ export class ExpensesComponent{
       ]
     };
 
-
-  /*===========Chart do Restaurante mais comprado=============*/
+    /*===========Chart do Restaurante mais comprado=============*/
     this.optionsRestauranteFreq = {
       //Settando o titulo
       title: [
@@ -218,7 +222,7 @@ export class ExpensesComponent{
           textAlign: 'center',
         },
         {
-          subtext: 'Restaurante mais comprado',
+          subtext: this.data.most_request.restaurant[0].name,
           subtextStyle:{
             fontFamily: 'Cherry Bomb One Regular',
             fontStyle: 'normal',
@@ -247,7 +251,7 @@ export class ExpensesComponent{
           type: "pie",
           radius: "50%",
           center: ['50%', '55%'],
-          data: this.data,
+          data: this.data.most_request.restaurant,
           avoidLabelOverlap: false,
           itemStyle: {
             borderRadius: 10,
@@ -272,7 +276,7 @@ export class ExpensesComponent{
       ],
     };
     
-  /*===========Chart da comida mais comprada=============*/
+    /*===========Chart da comida mais comprada=============*/
     this.optionsCompraFreq = {
       //Settando o titulo
       title: [
@@ -290,7 +294,7 @@ export class ExpensesComponent{
           textAlign: 'center',
         },
         {
-          subtext: 'Comida mais comprada',
+          subtext: this.data.most_request.food[0].name,
           subtextStyle:{
             fontFamily: 'Cherry Bomb One Regular',
             fontStyle: 'normal',
@@ -319,7 +323,7 @@ export class ExpensesComponent{
           type: "pie",
           radius: "50%",
           center: ['50%', '55%'],
-          data: this.data,
+          data: this.data.most_request.food,
           avoidLabelOverlap: false,
           itemStyle: {
             borderRadius: 10,
@@ -343,6 +347,23 @@ export class ExpensesComponent{
         },
       ],
     };
+  }
 
+  openDatePicker(dp: any) {
+    dp.open();
+  }
+
+  closeDatePicker(eventData: any, dp?: any) {
+    var s = new Date(eventData);
+    var e = new Date(eventData);
+    e.setMonth(e.getMonth() + 1);
+    this.filters = {
+      start: s,
+      end: e
+    }
+    dp.close();   
+    this.period = this.monthNames[s.getMonth()] + '/' + s.getFullYear();
+    
+    this.getData();
   }
 }
