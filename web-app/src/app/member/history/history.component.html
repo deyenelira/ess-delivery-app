@@ -43,42 +43,51 @@
                <br>
                <br>
                <a class="h">
-                  Cliente
+                  Cliente:
                </a>
-               <br>{{this.client.name}}
-               <br>{{this.client.cpf}}
-               <br><br>
+               {{ this.client.name }} •
+               {{ this.client.cpf}}
+               <br>
                <a class="h">
-                  Endereço de entrega
+                  Endereço de entrega:
                </a>
-               <br>{{this.order.address["postal_code"]}} -
-                  {{this.order.address["address"]}} -
-                  {{this.order.address["district"]}} -
-                  {{this.order.address["city"]}} -
-                  {{this.order.address["state"]}}
-               <br>{{this.order.address["complement"]}}
-               <br><br>
+               {{ this.order.address["postal_code"]}} •
+               {{this.order.address["address"]}} •
+               {{this.order.address["district"]}} •
+               {{this.order.address["city"]}} •
+               {{this.order.address["state"]}},
+               {{ this.order.address["complement"]}}
+               <br>
+               <br>
                <a class="h">
                   Itens do pedido
                </a>
                <div *ngFor="let item of order.items">
-                  Quantidade: {{item["qt"]}}
+                  <a class="h2">
+                  &nbsp; Quantidade:
+                  </a>{{ item["qt"]}}
                   <br>
-                  Item: {{item["description"]}}
-                  <br>
-                  Preço: R${{item["price"]}},00
+                  <a class="h2">
+                  &nbsp; Item:
+                  </a>{{ item["description"]}}
+                  <br><a class="h2">
+                  &nbsp; Preço:
+                  </a>R${{ item["price"]}},00
                   <br>
                   <br>
                </div>
                <a class="h">
-                  Pagamento
+                  Forma de Pagamento
                </a>
-               <br>
-               Subtotal: {{this.order.cost}}
-               <br>
-               Taxa de entrega: {{this.order.deliveryTax}}
-               <br>
-               Total: {{this.order.cost + this.order.deliveryTax}}
+               <br><a class="h2">
+                  &nbsp; Subtotal:
+                  </a>R${{ this.order.cost}}
+               <br><a class="h2">
+                  &nbsp; Taxa de entrega:
+                  </a>R${{ this.order.deliveryTax}}
+               <br><a class="h2">
+                  &nbsp; Total:
+                  </a>R${{ this.order.cost + this.order.deliveryTax}}
             </h3>
             </div>
          </span>

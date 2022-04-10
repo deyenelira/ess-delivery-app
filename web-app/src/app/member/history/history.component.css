@@ -79,6 +79,11 @@
   color:black;
 }
 
+.h2 {
+  font-size: 18px;
+  color: black;
+}
+
 h3 {
   font-family: ABeeZee Regular;
 }
@@ -87,6 +92,7 @@ h3 {
   color: #e93574;
   position: absolute;
   top: 10%;
+  height: 200px;
   padding: 20px;
   display: grid;
   row-gap: 5px;
