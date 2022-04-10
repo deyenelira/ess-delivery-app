@@ -1,21 +1,28 @@
+<div class="filter">
+    <input placeholder="{{period}}" [matDatepicker]="dp" (click)="openDatePicker(dp)">
+    <mat-datepicker-toggle [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp startView="year" (monthSelected)="closeDatePicker($event, dp)"></mat-datepicker>
+</div>
+
 <!-- Caso tenham pedidos -->
+
 <div class="graficos" *ngIf="ordered" > 
-    <div class="container1" >
+    <div class="container" >
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsRestauranteCusto"></echarts>
     </div>
 
-    <div class="container2" >
+    <div class="container" >
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsCompraCusto"></echarts>
     </div>
     
-    <div class="container3" >
+    <div class="container" >
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsRestauranteFreq"></echarts>
     </div>
     
-    <div class="container4" >
+    <div class="container" >
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsCompraFreq"></echarts>
     </div>

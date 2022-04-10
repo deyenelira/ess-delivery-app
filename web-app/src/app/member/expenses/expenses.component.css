@@ -1,12 +1,57 @@
-.container1 {
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    height: 500px;
-    width: 450px;
-    
-    transform: translate(-50%, 0%);
+.filter {
+    display: flex;
+    margin: 80px auto;
+    justify-content: right;
+    width: 1200px;
+}
 
+.filter input {
+    width: 240px;
+    font-family: 'ABeeZee Regular';
+    padding: 0 25px;
+    font-size: x-large;
+    border: none;
+    background: -webkit-linear-gradient(#e93574, #ff5200);
+    border-radius: 10px 0 0 10px;
+}
+
+::placeholder {
+    color: #ffffff;
+}
+
+.filter mat-datepicker-toggle {
+    background: -webkit-linear-gradient(#e93574, #ff5200);
+    color: #ffffff;
+    border-radius: 0 10px 10px 0;
+}
+
+.graficos {
+    margin: 80px auto;
+    width: 1200px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row: auto auto;
+    grid-column-gap: 300px;
+    grid-row-gap: 200px;
+}
+
+@media (max-width: 1200px) {
+    .filter {
+        width: 450px;
+        justify-content: center;
+    }
+    .graficos {
+        width: 450px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 450px;
+        grid-row: auto;
+        grid-column-gap: 0;
+        grid-row-gap: 200px;
+    }
+}
+
+.container {
     border-radius: 20px;
     background: #F7C3AA;
 }
@@ -18,45 +63,6 @@
 
     border-radius: 20px;
     background: -webkit-linear-gradient(#e93574, #ff5200);
-}
-
-.container2 {
-    position: absolute;
-    top: 20%;
-    left: 75%;
-    height: 500px;
-    width: 450px;
-    
-    transform: translate(-50%, 0%);
-
-    border-radius: 20px;
-    background: #F7C3AA;
-}
-
-.container3 {
-    position: absolute;
-    top: 120%;
-    left: 25%;
-    height: 500px;
-    width: 450px;
-
-    transform: translate(-50%, 0%);
-    
-    border-radius: 20px;
-    background: #F7C3AA;
-}
-
-.container4 {
-    position: absolute;
-    top: 120%;
-    left: 75%;
-    height: 500px;
-    width: 450px;
-    
-    transform: translate(-50%, 0%);
-
-    border-radius: 20px;
-    background: #F7C3AA;
 }
 
 .semPedidos{
