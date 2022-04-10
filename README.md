@@ -9,7 +9,8 @@ Esse projeto desenvolve as features relacionadas ao registro de clientes para um
 - Caio de Mendonça Barbosa
 - Dayane Lira da Silva
 - Matheus Rodrigues Bueno Godinho
-
+- Pedro Jorge Lima da Silva
+- Victoria Luisi
 
 ## Como rodar o projeto
 
