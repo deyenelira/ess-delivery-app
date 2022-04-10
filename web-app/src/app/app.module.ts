@@ -16,6 +16,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MemberModule } from "./member/member.module";
 import { AuthGuard } from "./guards/auth.guard";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,9 @@ import { AuthGuard } from "./guards/auth.guard";
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    HttpClientModule,
     MemberModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [ClientService, orderService, NegateAuthGuard, AuthGuard],
   bootstrap: [AppComponent],
