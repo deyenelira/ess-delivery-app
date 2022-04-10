@@ -8,6 +8,7 @@ const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 const COMPANY_EMAIL = 'fomiauu@gmail.com';
 const COMPANY_PASSWORD = 'mgot qlcj oojz krvp';
+const PHONECODE = 'ABC123'
 
 class ClientService {
 
@@ -36,7 +37,8 @@ class ClientService {
         if (this.phoneRegistered(client.phone))
             return "phone";
 
-        var checkCode = crypto.randomBytes(3).toString('hex');
+        // var checkCode = crypto.randomBytes(3).toString('hex');
+        var checkCode = PHONECODE;
         var newClient = new Client({
             id: this.idCount,
             name: client.name,

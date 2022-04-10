@@ -1,3 +1,1 @@
-{"clients":[{"id":0,"name":"Aninha","cpf":"123","email":"alas3@cin.ufpe.br","phone":"123","pay_method":"","addresses":[],"password":"aninha123A"},
-{"id":1,"name":"Dayane Lira","cpf":"897-298-092-98","email":"dls6@cin.ufpe.br","phone":"(81) 3379-2580","pay_method":"","addresses":[],"password":"daylol"}]}
-
+{"clients":[{"id":0,"name":"Aninha","cpf":"123","phone":"123","email":"alas3@cin.ufpe.br","password":"aninha123","pay_method":"","addresses":[]},{"id":1,"name":"EDUARDO J S SILVA","cpf":"10170207447","phone":"(81) 995732414","email":"pjls2@cin.ufpe.br","password":"sdasad","pay_method":"","addresses":[],"code":"ABC123","validPhone":true},{"id":2,"name":"EDUARDO J S SILVA","cpf":"10170207448","phone":"(81) 995732413","email":"pjls3@cin.ufpe.br","password":"asdA123","pay_method":"","addresses":[],"code":"ABC123","validPhone":true}]}
