@@ -14,19 +14,29 @@
          id="name" 
          name="name" 
          required
-         
          >
+         <div class="msg-erro">
+          <small *ngIf="(registrationForm.get('name')!.invalid && registrationForm.get('name')!.touched)" >
+            Forneça um nome valido.
+          </small>
+        </div>
       </div>
 
       <div class="item">
          <label for="cpf">CPF</label>
-         <input 
+         <input [class.is-invalid] = "registrationForm.get('cpf')!.invalid && registrationForm.get('cpf')!.touched"
          formControlName="cpf"
          type="text" 
          id="cpf" 
          name="cpf" 
-         placeholder="999.999.999-11" 
+         placeholder="99999999911" 
          required>
+
+         <div class="msg-erro">
+          <small *ngIf="(registrationForm.get('cpf')!.invalid && registrationForm.get('cpf')!.touched)" >
+            Forneça um cpf valido.
+          </small>
+        </div>
       </div>
       
       <div class="item">
@@ -36,29 +46,45 @@
          type="text" 
          id="phone" 
          name="phone" 
-         placeholder="(XX) 9XXXX-XXXX" 
+         placeholder="(XX)9XXXX-XXXX" 
          required>
+
+         <div class="msg-erro">
+          <small *ngIf="(registrationForm.get('phone')!.invalid && registrationForm.get('phone')!.touched)" >
+            Forneça um número valido.
+          </small>
+        </div>
       </div> 
 
      <div class="item">
        <label for="email">E-mail</label>
-       <input
+       <input [class.is-invalid] = "registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched"
          formControlName="email"
          type="email"
          name="email"
          placeholder="nome@email.com.br"
          required
        />
+       <div class="msg-erro">
+        <small *ngIf="(registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched)" >
+          Forneça um email valido.
+        </small>
+      </div>
      </div>
      <div class="item">
        <label for="password">Senha</label>
-       <input
+       <input [class.is-invalid] = "registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched"
          formControlName="password"
          type="password"
          name="password"
          placeholder="•••••••••"
          required
        />
+       <div class="msg-erro">
+        <small *ngIf="(registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched)" >
+          Forneça uma senha valida.
+        </small>
+      </div>
      </div> 
 
      <div class="item">
@@ -70,9 +96,11 @@
         placeholder="•••••••••"
         required
       />
-      <script>
-        
-      </script>
+      <div class="msg-erro">
+        <small *ngIf="passwordMismatch" >
+          As senhas são diferentes.
+        </small>
+      </div> 
       
     </div> 
 
