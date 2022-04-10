@@ -21,7 +21,7 @@
             ],
             "cost": 39.00,
             "deliveryTax": 2.00,
-            "created_at": "2022-04-02T15:10:35.206Z"
+            "created_at": "2022-04-02"
         },
         {
             "id": 1,
@@ -44,7 +44,7 @@
             ],
             "cost": 20.00,
             "deliveryTax": 2.00,
-            "created_at": "2022-04-02T15:10:35.206Z"
+            "created_at": "2022-04-02"
         },
         {
             "id": 2,
@@ -67,7 +67,7 @@
             ],
             "cost": 39.00,
             "deliveryTax": 2.00,
-            "created_at": "2022-04-02T15:10:35.206Z"
+            "created_at": "2022-04-02"
         },
         {
             "id": 3,
@@ -90,7 +90,7 @@
             ],
             "cost": 39.00,
             "deliveryTax": 2.00,
-            "created_at": "2022-04-02T15:10:35.206Z"
+            "created_at": "2022-04-02"
         },
         {
             "id": 4,
@@ -113,7 +113,53 @@
             ],
             "cost": 80.00,
             "deliveryTax": 2.00,
-            "created_at": "2022-04-02T15:10:35.206Z"
+            "created_at": "2022-04-02"
+        },
+        {
+            "id": 5,
+            "clientId": 0,
+            "restaurantId": 4,
+            "address": {
+                "postal_code": 11111111,
+                "address": "Rua Paraiso",
+                "district": "Bairro Feliz",
+                "city": "Jaboatão",
+                "state": "PE",
+                "complement": "Apt 201"
+            },
+            "items": [
+                {
+                    "qt": 20,
+                    "description": "coxinha",
+                    "price": 10
+                }
+            ],
+            "cost": 200.00,
+            "deliveryTax": 2.00,
+            "created_at": "2022-04-07"
+        },
+        {
+            "id": 6,
+            "clientId": 1,
+            "restaurantId": 1,
+            "address": {
+                "postal_code": 45150090,
+                "address": "Rua Paraiso",
+                "district": "Bairro Feliz",
+                "city": "Jaboatão",
+                "state": "PE",
+                "complement": "Apt 201"
+            },
+            "items": [
+                {
+                    "qt": 3,
+                    "description": "sorvete",
+                    "price": 13
+                }
+            ],
+            "cost": 39.00,
+            "deliveryTax": 2.00,
+            "created_at": "2022-04-02"
         }
     ]
 }

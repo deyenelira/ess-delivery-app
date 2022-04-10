@@ -13,6 +13,10 @@ class OrderService {
         this.orders = new DBService('orders');
         this.idCount = this.orders.getIdCount();
     }
+    
+    getById(orderId) {
+        return this.orders.getData().find(({ id }) => id == orderId);
+    }
 
     get(page, filters) {
         var start = new Date(filters.start);
@@ -26,8 +30,8 @@ class OrderService {
     }
 
     getByClientId(client_id, page, filters) {
-        var start = new Date(filters.start);
-        var end = new Date(filters.end);
+        var start = new Date(filters[0]);
+        var end = new Date(filters[1]);
         var data = this.orders.getData().filter(item => {
             var itemDate = new Date(item.created_at);
             if (item.clientId == client_id && itemDate >= start && itemDate <= end) return true;
