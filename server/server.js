@@ -28,7 +28,7 @@ app.get('/clients', function (req, res) {
     if (result) {
       res.status(201).send(result);
     } else {
-      res.status(403).send({ message: 'Client list could not be found' });
+      res.status(404).send({ message: 'Client list could not be found' });
     }
   } catch (err) {
     const { message } = err;
@@ -42,9 +42,31 @@ app.get('/client/:id', function (req, res) {
   try {
     const result = clientService.getById(id);
     if (result) {
-      res.status(201).send(result);
+      res.status(200).send(result);
     } else {
-      res.status(403).send({ message: 'Client could not be found' });
+      res.status(404).send({ message: 'Client could not be found' });
+    }
+  } catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
+app.put('/client/valid_phone/:id&:code', function (req, res) {
+  // get code to valid phone number
+  const id = req.params.id;
+  const code = req.params.code;
+  try {
+    const resultID = clientService.getById(id);
+    if(resultID){
+      const result = clientService.updateValidNumberStatus(id, code);
+      if (resultID && result.code === code) {
+        res.status(200).send({ message: "Code OK" });
+      } else{
+        res.status(404).send({ message: "Wrong code" });
+      }
+    }else {
+      res.status(404).send({ message: 'Client could not be found' });
     }
   } catch (err) {
     const { message } = err;
@@ -55,12 +77,23 @@ app.get('/client/:id', function (req, res) {
 app.post('/client', function (req, res) {
   // register
   const client = req.body;
+  
+  if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.status(400).send({ message: 'Object missing' });
+    return;
+  }
+  
   try {
+    
     const result = clientService.add(client);
-    if (result) {
+    if (typeof result === 'object') {
       res.status(201).send(result);
-    } else {
-      res.status(403).send({ message: 'Client could not be added' });
+    } else if(result === "cpf") {
+      res.status(403).send({ message: 'Client with CPF already registered' });
+    } else if(result === "email") {
+      res.status(403).send({ message: 'Client with email already registered' });
+    }else if(result === "phone") {
+      res.status(403).send({ message: 'Client with phone already registered' });
     }
   } catch (err) {
     const { message } = err;
@@ -158,9 +191,13 @@ app.post('/client/forgot_password/:email', function (req, res) {
 app.get('/orders/:page', function (req, res) {
   // get order list
   var page = req.params.page;
-  var filters = req.body;
+  var filters = req.query.filters;
+
+  console.log(req.query.filters)
+  console.log('server')
   try {
     const result = orderService.get(page, filters);
+    console.log(result)
     if (result) {
       res.status(201).send(result);
     } else {
@@ -172,11 +209,27 @@ app.get('/orders/:page', function (req, res) {
   }
 });
 
+app.get('/order/:id', function (req, res) {
+  // get order data by ID
+  const id = req.params.id;
+  try {
+    const result = orderService.getById(id);
+    if (result) {
+      res.status(201).send(result);
+    } else {
+      res.status(403).send({ message: 'Order could not be found' });
+    }
+  } catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
 app.get('/orders/client/:clientId/:page', function (req, res) {
   // get order list
   const clientId = req.params.clientId;
   const page = req.params.page;
-  var filters = req.body;
+  var filters = req.query.filters
   try {
     const result = orderService.getByClientId(clientId, page, filters);
     if (result) {
@@ -210,11 +263,14 @@ app.get('/orders/restaurant/:restaurantId/:page', function (req, res) {
 
 app.get('/orders/total_orders/:clientId', function (req, res) {
   // get order qt
+  console.log(req.params)
   const clientId = req.params.clientId;
   try {
     const result = orderService.getTotalOrders(clientId);
     if (result >= 0) {
       res.status(201).send({ total_orders: result });
+      console.log('mais de 1')
+      console.log(result, clientId)
     } else {
       res.status(403).send({ message: 'Order list could not be found' });
     }

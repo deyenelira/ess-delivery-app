@@ -1,11 +1,14 @@
 const {Client} = require("./client");
 const {DBService} = require("../../database/database");
+var crypto = require("crypto");
+
 
 var nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 const COMPANY_EMAIL = 'fomiauu@gmail.com';
 const COMPANY_PASSWORD = 'mgot qlcj oojz krvp';
+const PHONECODE = 'ABC123'
 
 class ClientService {
 
@@ -28,19 +31,23 @@ class ClientService {
 
     add(client) {
         if (this.cpfRegistered(client.cpf))
-            return null;
+            return "cpf";
         if (this.emailRegistered(client.email))
-            return null;
+            return "email";
         if (this.phoneRegistered(client.phone))
-            return null;
+            return "phone";
 
+        // var checkCode = crypto.randomBytes(3).toString('hex');
+        var checkCode = PHONECODE;
         var newClient = new Client({
             id: this.idCount,
             name: client.name,
             cpf: client.cpf,
             phone: client.phone,
             email: client.email,
-            password: client.password
+            password: client.password,
+            code: checkCode,
+            validPhone: false
         });
         this.clients.add(newClient);
 
@@ -54,6 +61,21 @@ class ClientService {
             var index = this.clients.getData().indexOf(data);
             this.clients.update(index, client);
             return client;
+        }
+        return null;
+    }
+
+    updateValidNumberStatus(clientID, code) {
+        var data = this.clients.getData().find(({ id }) => id == clientID);
+
+        if (data.code === code){
+            data.validPhone = true;
+            var index = this.clients.getData().indexOf(data);
+            this.clients.update(index, data);
+            return data;
+        }else if(data.code !== code){
+            return data;
+
         }
         return null;
     }

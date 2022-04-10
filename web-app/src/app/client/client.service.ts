@@ -57,15 +57,20 @@ export class ClientService {
       .catch(this.catch);
   }
 
-  create(client: Client): Promise<Client> {
+  create(client:{}): Promise<Client> {
+    
     return this.http
-      .post(this.taURL + '/client', JSON.stringify(client), {
+      .post(this.taURL + '/client', JSON.stringify(client),{
         headers: this.headers,
       })
       .toPromise()
       .then((res) => {
-        if (res?.status === 201) return client;
-        else return null;
+        if (res?.status === 201) {
+          var registeredClient =<Client> res.json();
+          return registeredClient
+        }else {
+          return null
+        };
       })
       .catch(this.catch);
   }
@@ -128,6 +133,23 @@ export class ClientService {
       .then((res) => {
         if (res?.status === 201) return true;
         else return null;
+      })
+      .catch(this.catch);
+  }
+
+  confirmNumber(id: number, code:string, email: string, password: string): Promise<Client> {
+    return this.http
+      .put(this.taURL + `/client/valid_phone/${id}&${code}`, { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+        if (res?.status === 200) {
+          this.client = res.json().client;
+          alert('Numero de telefone validado com sucesso');
+          this.login(email, password);
+          return res.json();
+        } else {
+          return null;
+        }
       })
       .catch(this.catch);
   }
