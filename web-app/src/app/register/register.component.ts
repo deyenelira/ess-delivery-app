@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   confirmNumberForm:FormGroup;
   enviouFormsRegister: boolean = false;
   showFormsConfirm: boolean = false;
+  registeredClient: number = -1;
 
   constructor(private clientService: ClientService, private router: Router) {
     this.registrationForm = new FormGroup({
@@ -55,13 +56,39 @@ export class RegisterComponent implements OnInit {
       .create(newClient)
       .then((result) => {
         if (result) {
+          const resultado = <Client>result;
+          this.registeredClient = resultado.id;
           this.clients.push(<Client>result);
           this.client = new Client();
           this.enviouFormsRegister = true;
+          this.showFormsConfirm = true;
         }
       })
       .catch((erro) => alert(erro));
   }
+
+  confirmPhoneNumber(): void {
+    // var phoneCode = {
+    //   id: this.registeredClient,
+    //   code:this.confirmNumberForm.value.code
+    // };
+
+    this.clientService
+      .confirmNumber(this.registeredClient, this.confirmNumberForm.value.code, this.registrationForm.value.email, this.registrationForm.value.password )
+      .then((result) => {
+        if (result) {
+          const resultado = <Client>result;
+          this.registeredClient = resultado.id;
+          this.clients.push(<Client>result);
+          this.client = new Client();
+          this.enviouFormsRegister = true;
+          this.showFormsConfirm = true;
+        }
+      })
+      .catch((erro) => alert(erro));
+
+  }
+
 
   ngOnInit(): void {}
 }

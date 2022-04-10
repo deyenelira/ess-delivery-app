@@ -67,7 +67,6 @@ export class ClientService {
       .then((res) => {
         if (res?.status === 201) {
           var registeredClient =<Client> res.json();
-          this.router.navigate(['/confirm-number']);
           return registeredClient
         }else {
           return null
@@ -138,13 +137,15 @@ export class ClientService {
       .catch(this.catch);
   }
 
-  confirmNumber(id: number, code:number): Promise<Client> {
+  confirmNumber(id: number, code:string, email: string, password: string): Promise<Client> {
     return this.http
-      .get(this.taURL + `/client/${id}`, { headers: this.headers })
+      .put(this.taURL + `/client/valid_phone/${id}&${code}`, { headers: this.headers })
       .toPromise()
       .then((res) => {
-        if (res?.status === 201) {
+        if (res?.status === 200) {
           this.client = res.json().client;
+          alert('Numero de telefone validado com sucesso');
+          this.login(email, password);
           return res.json();
         } else {
           return null;
