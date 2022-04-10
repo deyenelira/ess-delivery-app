@@ -177,7 +177,7 @@ app.get('/orders/:page', function (req, res) {
 });
 
 app.get('/order/:id', function (req, res) {
-  // get client data by ID
+  // get order data by ID
   const id = req.params.id;
   try {
     const result = orderService.getById(id);

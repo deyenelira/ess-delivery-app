@@ -16,21 +16,21 @@ export class orderService {
     console.log(clientId, 'getqtd')
     return this.http.get(this.url + `/orders/total_orders/${clientId}`)
       .toPromise()
-      .then((res => res.json() as number))
+      .then((res => res?.json() as number))
       .catch(this.catch);
   }
 
   getOrders(page: number, clientId: number, dates: string[]): Promise<Order[]> {
     return this.http.get(this.url + `/orders/client/${clientId}/${page}`, { params: { filters: dates }})
       .toPromise()
-      .then((res => res.json() as Order[]))
+      .then((res => res?.json() as Order[]))
       .catch(this.catch);
   }
 
   getOrder(orderId: number): Promise<Order> {
     return this.http.get(this.url + `/order/${orderId}`, { params: { filters: this.date }})
       .toPromise()
-      .then((res => res.json() as Order))
+      .then((res => res?.json() as Order))
       .catch(this.catch);
   }
 
