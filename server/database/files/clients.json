@@ -1,1 +1,1 @@
-{"clients":[{"id":0,"name":"Aninha","cpf":"123","email":"alas3@cin.ufpe.br","phone":"123","pay_method":"mastercard terminado em 0072","addresses":["end_test"],"password":"aninha123A"}]}
+{"clients":[{"name":"aninha","pay_method":"cŕedito master","phone":"12345","addresses":["end_test"],"id":0,"email":"alas3@cin.ufpe.br","password":"aninha123A","cpf":"123"}]}

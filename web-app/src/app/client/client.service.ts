@@ -93,10 +93,10 @@ export class ClientService {
       .catch(this.catch);
   }
 
-  passwordCheck(password: string): Promise<Client>{
-    var body = {password: password};
+  passwordCheck(password: string, id: number): Promise<Client>{
+    var body = {password: password, id:id};
     return this.http
-      .post(this.taURL + '/client/profile', JSON.stringify(body), {
+      .post(this.taURL + '/client/check_password/:id', JSON.stringify(body), {
         headers: this.headers,
       })
       .toPromise()

@@ -1,6 +1,10 @@
+import { UpdatePasswordComponent } from './../../update-password/update-password.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NavbarComponent } from './../navbar/navbar.component';
 import { Component, OnInit  } from "@angular/core";
 import { ClientService } from "src/app/client/client.service";
 import {ReactiveFormsModule} from '@angular/forms';
+import { Client } from 'src/app/client/client';
 import {
   FormBuilder,
   FormControl,
@@ -17,10 +21,12 @@ import {
 export class ProfileComponent{
   name:string;
   cpf:string;
+  email:string;
   telefone:string;
   enderecos:string[];
   metodos_pag:string;
   password:string;
+  id:number;
 
   acertouCheck: boolean = true;
   profileForm: FormGroup;
@@ -35,25 +41,59 @@ export class ProfileComponent{
           });
   }
 
-  confirmPassword(): void{
-        this.clientService.getClient().then((result) => {
-          if(this.profileForm.value.password != result.password){
-            this.acertouCheck=false;
-          }
-          if(this.profileForm.value.password == result.password){
-            this.acertouCheck=true;
-          }
-        });
-      }
+  // método leigo
+  // confirmPassword(): void{
+  //       this.clientService.getClient().then((result) => {
+  //         if(this.profileForm.value.password != result.password){
+  //           this.acertouCheck=false;
+  //         }
+  //         if(this.profileForm.value.password == result.password){
+  //           this.acertouCheck=true;
+  //         }
+  //       });
+  //     }
+
+  // método melhorzin
+  confirmPassword() : void{
+    this.clientService
+      .passwordCheck(this.profileForm.value.password, this.id)
+      .then((result) => {
+        if (!result) {
+          this.acertouCheck = false;
+        }
+        if(result){
+          this.acertouCheck = true;
+          
+          var Novo = new Client
+          Novo.name = this.name;
+          Novo.pay_method = this.metodos_pag;
+          Novo.phone = this.telefone;
+
+          if (this.profileForm.value.name != null){Novo.name = this.profileForm.value.name};
+          if (this.profileForm.value.telefone != null){Novo.phone = this.profileForm.value.telefone};
+          if (this.profileForm.value.metodo_pag != null){Novo.pay_method = this.profileForm.value.metodo_pag};
+          
+          Novo.addresses = this.enderecos;
+          Novo.id = this.id;
+          Novo.email = this.email;
+          Novo.password = this.password;
+          Novo.cpf = this.cpf;
+          this.clientService.update(Novo);
+        }
+      })
+      .catch(() => (this.acertouCheck = false));
+  }
 
   ngOnInit(): void {
     this.clientService.getClient().then((result) => {
       this.name = result.name;
       this.cpf = result.cpf;
+      this.email = result.email
       this.telefone = result.phone;
       this.enderecos = result.addresses;
       this.metodos_pag = result.pay_method;
       this.password = result.password;
+      this.id = result.id
     });
   }
   
