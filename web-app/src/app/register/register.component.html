@@ -1,23 +1,140 @@
-<table>
-<tr>
-   <td><label>Name </label></td>
-   <td><input id="client-name-input" [(ngModel)]="client.name" ></td>
-</tr>
-<tr>
-   <td><label>CPF </label></td>
-   <td><input id="client-cpf-input" [(ngModel)]="client.cpf" ></td>
-</tr>
-<tr>
-   <td><label>Telefone </label></td>
-   <td><input id="client-phone-input" [(ngModel)]="client.phone" ></td>
-</tr>
-<tr>
-   <td><label>E-mail </label></td>
-   <td><input id="client-email-input" [(ngModel)]="client.email" ></td>
-</tr>
-<tr>
-   <td><label>Senha </label></td>
-   <td><input id="client-password-input" [(ngModel)]="client.password" ></td>
-</tr>
-</table>
-<button id="register-client" (click)="createClient(client)">Adicionar</button>
+<form *ngIf="!enviouFormsRegister" [formGroup]="registrationForm">
+   <div class="title-container">
+     <img src="assets/images/logo_80.png" alt="Logo" class="logo" />
+     <h3>foMiau</h3>
+   </div>
+
+ 
+   <div class="container">
+      <div class="item">
+         <label for="name">Nome completo</label>
+         <input 
+         formControlName="name"
+         type="text" 
+         id="name" 
+         name="name" 
+         required
+         
+         >
+      </div>
+
+      <div class="item">
+         <label for="cpf">CPF</label>
+         <input 
+         formControlName="cpf"
+         type="text" 
+         id="cpf" 
+         name="cpf" 
+         placeholder="999.999.999-11" 
+         required>
+      </div>
+      
+      <div class="item">
+         <label for="phone">Telefone</label>
+         <input 
+         formControlName="phone"
+         type="text" 
+         id="phone" 
+         name="phone" 
+         placeholder="(XX) 9XXXX-XXXX" 
+         required>
+      </div> 
+
+     <div class="item">
+       <label for="email">E-mail</label>
+       <input
+         formControlName="email"
+         type="email"
+         name="email"
+         placeholder="nome@email.com.br"
+         required
+       />
+     </div>
+     <div class="item">
+       <label for="password">Senha</label>
+       <input
+         formControlName="password"
+         type="password"
+         name="password"
+         placeholder="•••••••••"
+         required
+       />
+     </div> 
+
+     <div class="item">
+      <label for="confirm_password">Confirme sua senha Senha</label>
+      <input
+        formControlName="confirm_password"
+        type="password"
+        name="confirm_password"
+        placeholder="•••••••••"
+        required
+      />
+      <script>
+        
+      </script>
+      
+    </div> 
+
+     <div class="item">
+       <button
+         class="button-medium"
+         type="submit"
+         (click)="createClient()"
+         [disabled]="!registrationForm.valid"
+       >
+         Continuar
+       </button>
+       
+     </div>
+   </div>
+ </form>
+
+
+
+
+<form *ngIf="showFormsConfirm" [formGroup]="confirmNumberForm">
+  <div class="title-container">
+    <img src="assets/images/logo_80.png" alt="Logo" class="logo" />
+    <h3>foMiau</h3>
+  </div>
+
+
+  <div class="container">
+     <div class="item">
+        <label for="name">Codigo de confirmação</label>
+        <input 
+        formControlName="code"
+        type="text" 
+        id="code" 
+        name="coded" 
+        required
+        
+        >
+     </div>
+
+     
+
+    <div class="button">
+       <button
+       class="button-medium"
+       type="submit"
+       
+       
+     >
+       Voltar
+     </button>
+
+      <button
+        class="button-medium"
+        type="submit"
+        (click)="createClient()"
+        
+      >
+        Continuar
+      </button>
+      
+    </div>
+
+  </div>
+</form>

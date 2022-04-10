@@ -28,7 +28,7 @@ app.get('/clients', function (req, res) {
     if (result) {
       res.status(201).send(result);
     } else {
-      res.status(403).send({ message: 'Client list could not be found' });
+      res.status(404).send({ message: 'Client list could not be found' });
     }
   } catch (err) {
     const { message } = err;
@@ -42,9 +42,31 @@ app.get('/client/:id', function (req, res) {
   try {
     const result = clientService.getById(id);
     if (result) {
-      res.status(201).send(result);
+      res.status(200).send(result);
     } else {
-      res.status(403).send({ message: 'Client could not be found' });
+      res.status(404).send({ message: 'Client could not be found' });
+    }
+  } catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
+app.put('/client/valid_phone/:id&:code', function (req, res) {
+  // get code to valid phone number
+  const id = req.params.id;
+  const code = req.params.code;
+  try {
+    const resultID = clientService.getById(id);
+    if(resultID){
+      const result = clientService.updateValidNumberStatus(id, code);
+      if (resultID && result.code === code) {
+        res.status(200).send({ message: "Code OK" });
+      } else{
+        res.status(404).send({ message: "Wrong code" });
+      }
+    }else {
+      res.status(404).send({ message: 'Client could not be found' });
     }
   } catch (err) {
     const { message } = err;
@@ -55,12 +77,23 @@ app.get('/client/:id', function (req, res) {
 app.post('/client', function (req, res) {
   // register
   const client = req.body;
+  
+  if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.status(400).send({ message: 'Object missing' });
+    return;
+  }
+  
   try {
+    
     const result = clientService.add(client);
-    if (result) {
+    if (typeof result === 'object') {
       res.status(201).send(result);
-    } else {
-      res.status(403).send({ message: 'Client could not be added' });
+    } else if(result === "cpf") {
+      res.status(403).send({ message: 'Client with CPF already registered' });
+    } else if(result === "email") {
+      res.status(403).send({ message: 'Client with email already registered' });
+    }else if(result === "phone") {
+      res.status(403).send({ message: 'Client with phone already registered' });
     }
   } catch (err) {
     const { message } = err;
