@@ -3,30 +3,41 @@
         {
             "id": 0,
             "name": "Aninha",
-            "cpf": "123",
+            "cpf": "123.123.123-11",
             "email": "alas3@cin.ufpe.br",
-            "phone": "123",
+            "phone": "(11)91111-1111",
             "password": "aninhA123",
-            "pay_method": "",
+            "pay_method": "debit",
             "addresses": [
-            {
-                "name": "casa",
-                "postal_code": 11111111,
-                "address": "Rua Paraiso",
-                "district": "Bairro Feliz",
-                "city": "Jaboatão",
-                "state": "PE",
-                "complement": "Apt 201"
-            },
-            {
-                "name": "cin",
-                "postal_code": 22222222,
-                "address": "Rua Paraiso",
-                "district": "Bairro Feliz",
-                "city": "Jaboatão",
-                "state": "PE",
-                "complement": "Apt 201"
-            }
+                {
+                    "name": "casa",
+                    "postal_code": "11111-111",
+                    "address": "Rua Paraiso",
+                    "number": 123,
+                    "district": "Bairro Feliz",
+                    "city": "Jaboatão",
+                    "state": "PE",
+                    "complement": "Apt 201"
+                },
+                {
+                    "name": "cin",
+                    "postal_code": 22222222,
+                    "address": "Rua Paraiso",
+                    "number": 123,
+                    "district": "Bairro Feliz",
+                    "city": "Jaboatão",
+                    "state": "PE",
+                    "complement": "Apt 201"
+                },
+                {
+                    "name": "casa2",
+                    "postal_code": "11111-111",
+                    "address": "Rua Feliz",
+                    "number": "23",
+                    "district": "Recife",
+                    "state": "PE",
+                    "complement": ""
+                }
             ],
             "code": "ABC123",
             "validPhone": true

@@ -154,6 +154,22 @@ export class ClientService {
       .catch(this.catch);
   }
 
+  checkPassword(password: string): Promise<Client> {
+    console.log('psw:' + password);
+    var body = { password: password };
+    return this.http
+      .post(this.taURL + `/client/check_password/${this.getId()}`, JSON.stringify(body), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res) => {
+        if (res?.status === 200) {
+          return true;
+        } else return false;
+      })
+      .catch(this.catch);
+  }
+
   private catch(erro: any): Promise<any> {
     console.error('Oops, something went wrong', erro);
     return Promise.reject(erro.message || erro);

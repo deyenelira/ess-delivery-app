@@ -11,7 +11,7 @@ exports.app = app;
 var allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 };
 
@@ -155,14 +155,15 @@ app.post('/client/login', function (req, res) {
 
 app.post('/client/check_password/:id', function (req, res) {
   // login
+  
   const id = req.params.id;
   const password = req.body.password;
   try {
     const result = clientService.checkPassword(id, password);
     if (result) {
-      res.status(201).send({ message: 'Correct password' });
+      res.status(200).send({ message: 'Correct password' });
     } else {
-      res.status(403).send({ message: 'Incorrect password' });
+      res.status(201).send({ message: 'Incorrect password' });
     }
   } catch (err) {
     const { message } = err;
