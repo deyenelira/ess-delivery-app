@@ -61,6 +61,25 @@
 .pic img {
     width: 80%;
     padding: 10px 10%;
+    border-radius: 50%;
+}
+
+.pic-item {
+    padding: 10px 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.pic-item label {
+    font-size: large;
+    padding: 0 10px 0 0;
+}
+
+.pic-item input {
+    font-size: larger;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
 }
 
 .items {

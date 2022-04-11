@@ -73,6 +73,7 @@ export class ProfileComponent implements OnInit {
         this.client.password = result.password;
         this.client.code = result.code;
         this.client.validPhone = result.validPhone;
+        this.client.pic_url = result.pic_url;
 
         if (this.client.addresses.length) {
           this.address = this.client.addresses[0];
@@ -142,7 +143,9 @@ export class ProfileComponent implements OnInit {
         ok = false;
       } else this.erro['phone'] = false;
 
-      ok = this.validateAddress(false);
+      if (this.client.addresses.length) {
+        ok = this.validateAddress(false);
+      }
       
     }
 

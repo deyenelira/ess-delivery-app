@@ -6,7 +6,11 @@
   </div>
   <div class="content">
     <div class="pic">
-      <img src="assets/images/profile1.png"> 
+      <img src="{{ client.pic_url }}"> 
+      <div class="pic-item">
+        <label>URL: </label>
+        <input id="client-pic-url-input" [(ngModel)]="client.pic_url" [disabled]="!editando">
+      </div>
     </div>
     <div class="items">
       <div class="item">

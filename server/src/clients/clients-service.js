@@ -47,7 +47,8 @@ class ClientService {
             email: client.email,
             password: client.password,
             code: checkCode,
-            validPhone: false
+            validPhone: false,
+            pic_url: "assets/images/profile1.png"
         });
         this.clients.add(newClient);
 

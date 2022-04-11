@@ -9,6 +9,7 @@ export class Client {
   addresses: any[]=[];
   code:  string="";
   validPhone: boolean= false;
+  pic_url: string = "";
 
    constructor(name?: string, 
     cpf?: string,
@@ -24,6 +25,7 @@ export class Client {
       this.addresses = [];
       this.code = "";
       this.validPhone = false;
+      this.pic_url = "assets/images/profile1.png";
     }
   
 }
