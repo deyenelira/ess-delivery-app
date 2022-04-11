@@ -6,7 +6,7 @@ export class Client {
   phone:  string="";
   password:  string="";
   pay_method: string="";
-  addresses: string[]=[];
+  addresses: any[]=[];
   code:  string="";
   validPhone: boolean= false;
 

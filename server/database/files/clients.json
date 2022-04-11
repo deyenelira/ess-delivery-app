@@ -8,7 +8,26 @@
             "phone": "123",
             "password": "aninhA123",
             "pay_method": "",
-            "addresses": [],
+            "addresses": [
+            {
+                "name": "casa",
+                "postal_code": 11111111,
+                "address": "Rua Paraiso",
+                "district": "Bairro Feliz",
+                "city": "Jaboatão",
+                "state": "PE",
+                "complement": "Apt 201"
+            },
+            {
+                "name": "cin",
+                "postal_code": 22222222,
+                "address": "Rua Paraiso",
+                "district": "Bairro Feliz",
+                "city": "Jaboatão",
+                "state": "PE",
+                "complement": "Apt 201"
+            }
+            ],
             "code": "ABC123",
             "validPhone": true
         },

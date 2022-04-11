@@ -1,3 +1,68 @@
-<div>
-  <h1>Perfil</h1>
+<div class="background">
+  <div class="options">
+    <a *ngIf="!editando" (click)="changeEdit()"> <p class="edit"> editar dados </p> </a>
+    <a *ngIf="editando" (click)="changeEdit()"> <p class="save"> salvar alterações </p> </a>
+    <a> <p class="delete"> deletar conta </p> </a>
+  </div>
+  <div class="content">
+    <div class="pic">
+      <img src="assets/images/profile1.png"> 
+    </div>
+    <div class="items">
+      <div class="item">
+        <label>Nome: </label>
+        <input id="client-name-input" [ngModel]="client.name" [disabled]="!editando">
+      </div>
+      <div class="item">
+        <label>E-mail: </label>
+        <input id="client-email-input" [ngModel]="client.email" [disabled]="!editando">
+      </div>
+      <div class="item">
+        <label>Telefone: </label>
+        <input id="client-phone-input" [ngModel]="client.phone" [disabled]="!editando">
+      </div>
+      <div class="item">
+        <label>Método de Pagamento: </label>
+        <input id="client-pay-method-input" [ngModel]="client.pay_method" [disabled]="!editando">
+      </div>
+      <div class="item">
+        <label>Endereços: </label>
+        <select [(ngModel)]="addressIndex" (change)="changeAddress(addressIndex)" [disabled]="!editando || addAddress">
+          <option *ngFor="let ad of client.addresses; let i = index" 
+              [value]="i" >
+            {{ad.name}}
+          </option>
+        </select>
+        <a *ngIf="editando && !addAddress" (click)="newAddress()"> <p > novo endereço </p> </a>
+        <a *ngIf="editando && addAddress" (click)="saveAddress(address)"> <p > adicionar novo endereço </p> </a>
+        <div class="address" *ngIf="client.addresses.length">
+          <div class="item">
+            <label>Nome: </label>
+            <input [ngModel]="address.name" [disabled]="!editando">
+          </div>
+          <div class="item">
+            <label>CEP: </label>
+            <input [ngModel]="address.postal_code" [disabled]="!editando">
+          </div>
+          <div class="item">
+            <label>Logradouro: </label>
+            <input [ngModel]="address.address" [disabled]="!editando">
+          </div>
+          <div class="item">
+            <label>Cidade: </label>
+            <input [ngModel]="address.district" [disabled]="!editando">
+          </div>
+          <div class="item">
+            <label>Estado: </label>
+            <input [ngModel]="address.state" [disabled]="!editando">
+          </div>
+          <div class="item">
+            <label>Complemento: </label>
+            <input [ngModel]="address.complement" [disabled]="!editando">
+          </div>
+        </div>
+      </div>-
+
+    </div>
+  </div>
 </div>

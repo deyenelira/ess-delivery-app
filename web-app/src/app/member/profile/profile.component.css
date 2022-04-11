@@ -1,0 +1,121 @@
+.background {
+    width: 80%;
+    min-height: 600px;
+    background-color: #f7c3aa;
+    margin: 60px auto;
+    border-radius: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: right;
+}
+
+.options a {
+    margin: 10px;
+    font-size: large;
+}
+
+.edit {
+    color: #0085FF;
+    background: none;
+    padding: 10px;
+}
+
+.edit:hover {
+    color: #ffffff;
+    background-color: #0085FF;
+    border-radius: 20px;
+}
+
+.save {
+    color: #09824F;
+    background: none;
+    padding: 10px;
+}
+
+.save:hover {
+    color: #ffffff;
+    background-color: #09824F;
+    border-radius: 20px;
+}
+
+.delete {
+    color: #FF0000;
+    background: none;
+    padding: 10px;
+}
+
+.delete:hover {
+    color: #ffffff;
+    background-color: #FF0000;
+    border-radius: 20px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin: 20px 20px 50px;
+}
+
+.pic img {
+    width: 80%;
+    padding: 10px 10%;
+}
+
+.items {
+    padding: 0 40px;
+}
+
+.item {
+    padding: 20px 0;
+}
+
+.item label {
+    font-size: xx-large;
+}
+
+.item input {
+    font-size: x-large;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
+}
+
+.item select {
+    font-size: x-large;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
+    width: 286px;
+}
+
+.item a p {
+    margin: 0 10px;
+    display: inline;
+    padding: 10px;
+    font-size: large;
+    color: #09824F;
+}
+
+.item a p:hover {
+    color: #ffffff;
+    background: #09824F;
+    border-radius: 20px;
+}
+
+.address {
+    padding: 20px 40px;
+}
+
+.address .item {
+    padding: 10px 0;
+}
+
+.address .item label {
+    font-size: x-large;
+}
+
+.address .item input {
+    font-size: larger;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
+}
