@@ -1,24 +1,25 @@
 <div class="background">
-   <div *ngIf="getHistory">
+   <div class="box" *ngIf="getHistory">
       <div class="header">
          <h1 class="title ">Histórico de pedidos</h1>
       </div>
-      <div class="container">
-         <div class="buttons">
-           <a>
-              <button class="button-order" (click)="previousPage()">voltar página</button>
-           </a>
-           <a>
-               <button class="button-order" (click)="nextPage()">próxima pagina</button>
-            </a>
-           <a>
-              <button class="button-order" (click)="monthFilter()" [disabled]="getFilter">filtrar mês</button>
-           </a>
-           <a>
-              <button class="button-order" (click)="weekFilter()" [disabled]="!getFilter">filtrar semana</button>
-           </a>
+      <div class="filter">
+         <div *ngIf="period !== 'Essa semana'" class="week">
+            <button (click)="weekFilter()">Filtrar Semana</button>    
+         </div> 
+         <div *ngIf="period === 'Essa semana'" class="week">
+              
+         </div> 
+
+         <div class="dp">
+            <input placeholder="{{period}}" [matDatepicker]="dp" (click)="openDatePicker(dp)">
+            <mat-datepicker-toggle [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="year" (monthSelected)="closeDatePicker($event, dp)"></mat-datepicker>
          </div>
-         <div class="item">
+         
+     </div>
+      <div class="container">
+         <div *ngIf="orders.length" class="item">
             <ul *ngFor=" let order of orders">
                <button class="pedido" (click)="clickOrder(order.id)">
                   <span class="text">
@@ -27,9 +28,20 @@
                </button>
             </ul>
          </div>
+         <div *ngIf="!orders.length" class="no-orders">
+            <h2>Sem pedidos nesse período :(</h2>
+         </div>
+      </div>
+      <div class="buttons-orders">
+         <a *ngIf="orders.length">
+            <i class="fa-solid fa-angle-left" (click)="previousPage()"></i>
+         </a>
+         <a *ngIf="orders.length">
+            <i class="fa-solid fa-angle-right" (click)="nextPage()"></i>
+         </a>
       </div>
    </div>
-   <div *ngIf="getOrder">
+   <div class="box" *ngIf="getOrder">
       <div class="header">
          <h1 class="title ">Detalhes do pedido</h1>
       </div>
@@ -91,8 +103,11 @@
             </h3>
             </div>
          </span>
+      </div>
+      <div class="buttons-order">
          <div class="back">
             <button class="button-order" (click)="clickOrder(this.order.id)">voltar</button>    
          </div> 
       </div>
+   </div>
 </div>

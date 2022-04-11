@@ -99,6 +99,8 @@ export class UpdatePasswordComponent implements OnInit {
         this.client.pay_method = result.pay_method;
         this.client.addresses = result.addresses;
         this.client.password = result.password;
+        this.client.code = result.code;
+        this.client.validPhone = result.validPhone;
       }
     });
   }

@@ -1,1 +1,59 @@
-{"clients":[{"id":0,"name":"Aninha","cpf":"123","phone":"123","email":"alas3@cin.ufpe.br","password":"aninha123","pay_method":"","addresses":[]},{"id":1,"name":"EDUARDO J S SILVA","cpf":"10170207447","phone":"(81) 995732414","email":"pjls2@cin.ufpe.br","password":"sdasad","pay_method":"","addresses":[],"code":"ABC123","validPhone":true},{"id":2,"name":"EDUARDO J S SILVA","cpf":"10170207448","phone":"(81) 995732413","email":"pjls3@cin.ufpe.br","password":"asdA123","pay_method":"","addresses":[],"code":"ABC123","validPhone":true}]}
+{
+    "clients": [
+        {
+            "id": 0,
+            "name": "Aninha",
+            "cpf": "123",
+            "email": "alas3@cin.ufpe.br",
+            "phone": "123",
+            "password": "aninhA123",
+            "pay_method": "",
+            "addresses": [
+            {
+                "name": "casa",
+                "postal_code": 11111111,
+                "address": "Rua Paraiso",
+                "district": "Bairro Feliz",
+                "city": "Jaboatão",
+                "state": "PE",
+                "complement": "Apt 201"
+            },
+            {
+                "name": "cin",
+                "postal_code": 22222222,
+                "address": "Rua Paraiso",
+                "district": "Bairro Feliz",
+                "city": "Jaboatão",
+                "state": "PE",
+                "complement": "Apt 201"
+            }
+            ],
+            "code": "ABC123",
+            "validPhone": true
+        },
+        {
+            "id": 1,
+            "name": "EDUARDO J S SILVA",
+            "cpf": "10170207447",
+            "phone": "(81) 995732414",
+            "email": "pjls2@cin.ufpe.br",
+            "password": "sdasad",
+            "pay_method": "",
+            "addresses": [],
+            "code": "ABC123",
+            "validPhone": true
+        },
+        {
+            "id": 2,
+            "name": "EDUARDO J S SILVA",
+            "cpf": "10170207448",
+            "phone": "(81) 995732413",
+            "email": "pjls3@cin.ufpe.br",
+            "password": "aninha123A",
+            "pay_method": "",
+            "addresses": [],
+            "code": "ABC123",
+            "validPhone": true
+        }
+    ]
+}

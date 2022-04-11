@@ -315,21 +315,21 @@ app.delete('/order/:id', function (req, res) {
 app.get('/orders/analytics/:clientId', function (req, res) {
   // get order list
   const clientId = req.params.clientId;
-  var filters = req.body;
+  var filters = JSON.parse(req.query.filters);
   try {
     const result = orderService.getAnalytics(clientId, filters);
     /*
     result = {
       most_request = {
-        food = [ {name: "", total: 3},  {name: "", total: 2}],
+        food = [ {name: "", value: 3},  {name: "", value: 2}],
         total_food = 5,
-        restaurant = [ {name: "", total: 3}, {name: "", total: 2} ],
+        restaurant = [ {name: "", value: 3}, {name: "", value: 2} ],
         total_restaurant = 5
       },
       most_expensive = {
-        food = [ {name: "", total: 13.00},  {name: "", total: 5.00}],
+        food = [ {name: "", value: 13.00},  {name: "", value: 5.00}],
         total_food = 18.00,
-        restaurant = [ {name: "", total: 13.00}, {name: "", total: 5.00} ],
+        restaurant = [ {name: "", value: 13.00}, {name: "", value: 5.00} ],
         total_restaurant = 18.00
       }
     }

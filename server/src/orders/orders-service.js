@@ -6,6 +6,7 @@ const { isTaggedTemplateExpression } = require("typescript");
 const COMPANY_EMAIL = 'fomiauu@gmail.com';
 const COMPANY_PASSWORD = 'mgot qlcj oojz krvp';
 const ordersPerPage = 3;
+const ordersPerChart = 3;
 
 class OrderService {
 
@@ -99,11 +100,13 @@ class OrderService {
         var end = new Date(filters.end);
         var data = this.orders.getData().filter(item => {
             var itemDate = new Date(item.created_at);
-            if (item.clientId == client_id && itemDate >= start && itemDate <= end) return true;
+            if (item.clientId == client_id && itemDate >= start && itemDate <= end) {
+                return true;
+            }
             return false;
         });
 
-        var result = this.getAnalyticsData(data);      
+        var result = this.getAnalyticsData(data);     
 
         result.most_request.restaurant = this.organizeAnalyticsData(result.most_request.restaurant);
         result.most_expensive.restaurant = this.organizeAnalyticsData(result.most_expensive.restaurant);
@@ -136,21 +139,21 @@ class OrderService {
         for (let order of data) {
             result.most_request.restaurant.push({
                 name: order.restaurantId,
-                total: 1
+                value: 1
             });
             result.most_expensive.restaurant.push({
                 name: order.restaurantId,
-                total: order.cost
+                value: order.cost
             });
 
             for (let item of order.items) {
                 result.most_request.food.push({
                     name: item.description,
-                    total: item.qt
+                    value: item.qt
                 });
                 result.most_expensive.food.push({
                     name: item.description,
-                    total: item.price
+                    value: item.price
                 });
             }
         }
@@ -161,27 +164,27 @@ class OrderService {
         var dicAux = {};
         data.map(item => {
             if (dicAux[item.name]) {
-                dicAux[item.name] += item.total;
+                dicAux[item.name] += item.value;
             } else {
-                dicAux[item.name] = item.total;
+                dicAux[item.name] = item.value;
             }
         });
         var arrayAux = [];
         for (let key in dicAux) {
-            arrayAux.push({ name: key, total: dicAux[key] });
+            arrayAux.push({ name: key, value: dicAux[key] });
         }
-        arrayAux = arrayAux.sort((a, b) => (a.total > b.total) ? -1 : ((a.total === b.total) ? ((a.name > b.name) ? 1 : -1) : 1) );
+        arrayAux = arrayAux.sort((a, b) => (a.value > b.value) ? -1 : ((a.value === b.value) ? ((a.name > b.name) ? 1 : -1) : 1) );
         
         var result = [], aux = 0;
         arrayAux.map(item => {
-            if (aux < 3) result.push(item);
-            else if (aux === 3) {
+            if (aux < ordersPerChart) result.push(item);
+            else if (aux === ordersPerChart) {
                 result.push({
                     name: 'others',
-                    total: item.total
+                    value: item.value
                 });
             } else {
-                result[3].total += item.total;
+                result[ordersPerChart].value += item.value;
             }
             aux++;
         });
@@ -190,7 +193,7 @@ class OrderService {
     }
 
     getAnalyticsTotalValue(data) {
-        return data.reduce((previousValue, currentValue) => previousValue + currentValue.total, 0);
+        return data.reduce((previousValue, currentValue) => previousValue + currentValue.value, 0);
     }
 
     printResult(result, num) {
@@ -201,14 +204,14 @@ class OrderService {
         console.log('    food: [');
         for (let i of result.most_request.food) {
             console.log('      name: ' + i.name);
-            console.log('      total: ' + i.total);
+            console.log('      value: ' + i.value);
         }
         console.log('    ],');
         console.log('    total_food: ' + result.most_request.total_food + ',');
         console.log('    restaurant: [');
         for (let i of result.most_request.restaurant) {
             console.log('      name: ' + i.name);
-            console.log('      total: ' + i.total);
+            console.log('      value: ' + i.value);
         }
         console.log('    ],');
         console.log('    total_restaurant: ' + result.most_request.total_restaurant + ',');
@@ -217,14 +220,14 @@ class OrderService {
         console.log('    food: [');
         for (let i of result.most_expensive.food) {
             console.log('      name: ' + i.name);
-            console.log('      total: ' + i.total);
+            console.log('      value: ' + i.value);
         }
         console.log('    ],');
         console.log('    total_food: ' + result.most_expensive.total_food + ',');
         console.log('    restaurant: [');
         for (let i of result.most_expensive.restaurant) {
             console.log('      name: ' + i.name);
-            console.log('      total: ' + i.total);
+            console.log('      value: ' + i.value);
         }
         console.log('    ],');
         console.log('    total_restaurant: ' + result.most_expensive.total_restaurant + ',');

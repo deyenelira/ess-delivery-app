@@ -47,7 +47,7 @@ export class ClientService {
       .get(this.taURL + `/client/${id}`, { headers: this.headers })
       .toPromise()
       .then((res) => {
-        if (res?.status === 201) {
+        if (res?.status === 200) {
           this.client = res.json().client;
           return res.json();
         } else {

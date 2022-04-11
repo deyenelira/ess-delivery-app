@@ -1,4 +1,5 @@
-import { BrowserModule } from "@angular/platform-browser";
+//import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http'; 
@@ -16,7 +17,6 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MemberModule } from "./member/member.module";
 import { AuthGuard } from "./guards/auth.guard";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UpdatePasswordComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
