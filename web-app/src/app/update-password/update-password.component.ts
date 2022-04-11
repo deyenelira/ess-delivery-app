@@ -101,6 +101,7 @@ export class UpdatePasswordComponent implements OnInit {
         this.client.password = result.password;
         this.client.code = result.code;
         this.client.validPhone = result.validPhone;
+        this.client.pic_url = result.pic_url;
       }
     });
   }

@@ -61,6 +61,25 @@
 .pic img {
     width: 80%;
     padding: 10px 10%;
+    border-radius: 50%;
+}
+
+.pic-item {
+    padding: 10px 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.pic-item label {
+    font-size: large;
+    padding: 0 10px 0 0;
+}
+
+.pic-item input {
+    font-size: larger;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
 }
 
 .items {
@@ -68,7 +87,7 @@
 }
 
 .item {
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .item label {
@@ -88,19 +107,19 @@
     width: 286px;
 }
 
-.item a p {
+.item a i {
     margin: 0 10px;
     display: inline;
-    padding: 10px;
-    font-size: large;
+    padding: 12px;
+    font-size: x-large;
     color: #09824F;
 }
 
-.item a p:hover {
+.item a i:hover {
     color: #ffffff;
     background: #09824F;
-    border-radius: 20px;
-}
+    border-radius: 50%;
+} 
 
 .address {
     padding: 20px 40px;
@@ -118,4 +137,104 @@
     font-size: larger;
     padding: 10px 15px;
     font-family: ABeeZee Regular;
+}
+
+.msg-erro {
+    padding: 10px 10px 0;
+}
+
+p {
+    font-size: medium;
+    color: #FF0000;
+    margin: 0;
+}
+
+
+
+.content-modal {
+    background: #E9E9E9;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px #333;
+    min-width: 700px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    
+}
+
+.content-modal .header {
+    border-radius: 20px 20px 0 0;
+    background: #e93574;
+    display: flex;
+    justify-content: center;
+}
+
+.header h1 {
+    color: black;
+    margin: 10px;
+    padding: 15px;
+    font-size: xx-large;
+    font-family: Abeezee Regular;
+}
+
+.content-modal .body {
+    margin: 10px;
+}
+
+.body h2 {
+    font-family: Abeezee Regular;
+    margin: 0 auto;
+    width: fit-content;
+    font-size: x-large;
+}
+
+.body input {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    display: block;
+    align-self: center;
+    font-size: xx-large;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'ROBOTO';
+}
+
+.body .msg-erro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: red;
+    font-size: medium;
+}
+
+.content-modal .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 125px;
+    border-radius: 0 0 20px 20px;
+}
+
+.buttons button {
+    color: #ffffff;
+    width: 40%;
+    font-size: x-large;
+    font-family: Abeezee Regular;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 20px;
+}
+
+.overlay {
+    background: #000;
+    height: 100vh;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
 }
