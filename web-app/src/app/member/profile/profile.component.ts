@@ -144,7 +144,7 @@ export class ProfileComponent implements OnInit {
       } else this.erro['phone'] = false;
 
       if (this.client.addresses.length) {
-        ok = this.validateAddress(false);
+        ok = this.validateAddress(false) && ok;
       }
       
     }
