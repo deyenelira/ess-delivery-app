@@ -109,7 +109,10 @@ class ClientService {
             return this.sendEmail({
                 email: data.email,
                 subject: 'foMiau | Redefina sua senha agora',
-                id: data.id
+                template: 'update_password',
+                context: {
+                    id: data.id
+                }
             });
         }
 
@@ -140,7 +143,7 @@ class ClientService {
         transporter.use('compile', hbs({
 			viewEngine: {
 				extname: '.handlebars',
-				defaultLayout: 'template_email',
+				defaultLayout: body.template,
 				layoutsDir: path.join(__dirname, 'email-assets')
 			},
 			viewPath: path.join(__dirname, 'email-assets')
@@ -150,10 +153,8 @@ class ClientService {
             from: COMPANY_EMAIL,
             to: body.email,
             subject: body.subject,
-            template: 'template_email',
-            context: {                  // <=
-                id: body.id
-            }
+            template: body.template,
+            context: body.context
         };
           
         await transporter.sendMail(mailOptions, function(error, info){
