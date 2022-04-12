@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   addressIndex: number = 0;
   addAddress: boolean = false;
   modal: boolean = false;
+  modalDelete: boolean = false;
 
   hoverCancel: boolean = false;
   hoverConfirm: boolean = false;
@@ -42,7 +43,7 @@ export class ProfileComponent implements OnInit {
     'address-state': false
   }
 
-  reg: { [key: string]: RegExp; }  = {
+  reg: { [key: string]: RegExp; } = {
     'name': new RegExp('^[a-zA-Z\\s]+$'),
     'email': new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     'cpf': new RegExp('^[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}$'),
@@ -60,27 +61,27 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit(): void {
     this.clientService.getClient()
-    .then(result => {
-      if (result) {
-        this.client.id = result.id;
-        this.client.name = result.name;
-        this.client.cpf = result.cpf;
-        this.client.email = result.email;
-        this.client.phone = result.phone;
-        this.client.pay_method = result.pay_method;
-        this.pay_method = result.pay_method;
-        this.client.addresses = result.addresses;
-        this.client.password = result.password;
-        this.client.code = result.code;
-        this.client.validPhone = result.validPhone;
-        this.client.pic_url = result.pic_url;
+      .then(result => {
+        if (result) {
+          this.client.id = result.id;
+          this.client.name = result.name;
+          this.client.cpf = result.cpf;
+          this.client.email = result.email;
+          this.client.phone = result.phone;
+          this.client.pay_method = result.pay_method;
+          this.pay_method = result.pay_method;
+          this.client.addresses = result.addresses;
+          this.client.password = result.password;
+          this.client.code = result.code;
+          this.client.validPhone = result.validPhone;
+          this.client.pic_url = result.pic_url;
 
-        if (this.client.addresses.length) {
-          this.address = this.client.addresses[0];
+          if (this.client.addresses.length) {
+            this.address = this.client.addresses[0];
+          }
+
         }
-        
-      }
-    });
+      });
   }
 
   changeEdit() {
@@ -245,5 +246,33 @@ export class ProfileComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
+  }
+
+  openModalDelete(){
+    this.modalDelete = true;
+  }
+
+  closeModalDelete(){
+    this.modalDelete = false;
+  }
+
+  deleteAccount() {
+    this.clientService.checkPassword(this.psw)
+      .then(res => {
+        console.log('res:' + res);
+        if (!res) {
+          this.wrongPsw = true;
+          setTimeout(() => {
+            this.wrongPsw = false;
+          }, 2000);
+        } else {
+          this.clientService.delete(this.client)
+            .then(res => {
+              if(res){
+                this.clientService.logOut(); 
+              }
+            });
+        }
+      });
   }
 }

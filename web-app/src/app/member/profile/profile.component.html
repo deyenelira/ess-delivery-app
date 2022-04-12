@@ -1,12 +1,18 @@
 <div class="background">
   <div class="options">
-    <a *ngIf="!editando" (click)="changeEdit()"> <p class="edit"> editar dados </p> </a>
-    <a *ngIf="editando" (click)="validate()"> <p class="save"> salvar alterações </p> </a>
-    <a> <p class="delete"> deletar conta </p> </a>
+    <a *ngIf="!editando" (click)="changeEdit()">
+      <p class="edit"> editar dados </p>
+    </a>
+    <a *ngIf="editando" (click)="validate()">
+      <p class="save"> salvar alterações </p>
+    </a>
+    <a (click)="openModalDelete()">
+      <p class="delete"> deletar conta </p>
+    </a>
   </div>
   <div class="content">
     <div class="pic">
-      <img src="{{ client.pic_url }}"> 
+      <img src="{{ client.pic_url }}">
       <div class="pic-item">
         <label>URL: </label>
         <input id="client-pic-url-input" [(ngModel)]="client.pic_url" [disabled]="!editando">
@@ -17,7 +23,7 @@
         <label>Nome: </label>
         <input id="client-name-input" [(ngModel)]="client.name" [disabled]="!editando">
         <div class="msg-erro">
-          <p *ngIf="erro['name']" >
+          <p *ngIf="erro['name']">
             Forneça um nome válido.
           </p>
         </div>
@@ -26,7 +32,7 @@
         <label>CPF: </label>
         <input id="client-cpf-input" [(ngModel)]="client.cpf" [disabled]="!editando">
         <div class="msg-erro">
-          <p *ngIf="erro['cpf']" >
+          <p *ngIf="erro['cpf']">
             Forneça um cpf válido.
           </p>
         </div>
@@ -35,7 +41,7 @@
         <label>E-mail: </label>
         <input id="client-email-input" [(ngModel)]="client.email" [disabled]="!editando">
         <div class="msg-erro">
-          <p *ngIf="erro['email']" >
+          <p *ngIf="erro['email']">
             Forneça um email válido.
           </p>
         </div>
@@ -44,7 +50,7 @@
         <label>Telefone: </label>
         <input id="client-phone-input" [(ngModel)]="client.phone" [disabled]="!editando">
         <div class="msg-erro">
-          <p *ngIf="erro['phone']" >
+          <p *ngIf="erro['phone']">
             Forneça um telefone válido.
           </p>
         </div>
@@ -52,8 +58,7 @@
       <div class="item">
         <label>Método de Pagamento: </label>
         <select [(ngModel)]="pay_method" (change)="changePayMethod(pay_method)" [disabled]="!editando">
-          <option *ngFor="let method of pay_methods" 
-              [value]="method[1]" >
+          <option *ngFor="let method of pay_methods" [value]="method[1]">
             {{ method[0] }}
           </option>
         </select>
@@ -61,23 +66,22 @@
       <div class="item">
         <label>Endereços: </label>
         <select [(ngModel)]="addressIndex" (change)="changeAddress(addressIndex)" [disabled]="!editando || addAddress">
-          <option *ngFor="let ad of client.addresses; let i = index" 
-              [value]="i" >
+          <option *ngFor="let ad of client.addresses; let i = index" [value]="i">
             {{ad.name}}
           </option>
         </select>
-        <a *ngIf="editando && !addAddress" (click)="newAddress()"> 
-          <i class="fa-solid fa-plus"></i> 
+        <a *ngIf="editando && !addAddress" (click)="newAddress()">
+          <i class="fa-solid fa-plus"></i>
         </a>
-        <a *ngIf="editando && addAddress" (click)="validateAddress(true)"> 
-          <i class="fa-solid fa-floppy-disk"></i> 
+        <a *ngIf="editando && addAddress" (click)="validateAddress(true)">
+          <i class="fa-solid fa-floppy-disk"></i>
         </a>
         <div class="address" *ngIf="client.addresses.length">
           <div class="item">
             <label>Nome: </label>
             <input [(ngModel)]="address.name" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-name']" >
+              <p *ngIf="erro['address-name']">
                 Já existe um endereço com esse nome.
               </p>
             </div>
@@ -86,7 +90,7 @@
             <label>CEP: </label>
             <input [(ngModel)]="address.postal_code" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-code']" >
+              <p *ngIf="erro['address-code']">
                 Forneça um CEP válido.
               </p>
             </div>
@@ -95,7 +99,7 @@
             <label>Logradouro: </label>
             <input [(ngModel)]="address.address" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-address']" >
+              <p *ngIf="erro['address-address']">
                 Forneça um logradouro válido.
               </p>
             </div>
@@ -104,7 +108,7 @@
             <label>Número: </label>
             <input [(ngModel)]="address.number" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-number']" >
+              <p *ngIf="erro['address-number']">
                 Forneça um número válido.
               </p>
             </div>
@@ -113,7 +117,7 @@
             <label>Bairro: </label>
             <input [(ngModel)]="address.district" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-district']" >
+              <p *ngIf="erro['address-district']">
                 Forneça um bairro válida.
               </p>
             </div>
@@ -122,7 +126,7 @@
             <label>Cidade: </label>
             <input [(ngModel)]="address.city" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-city']" >
+              <p *ngIf="erro['address-city']">
                 Forneça uma cidade válida.
               </p>
             </div>
@@ -131,7 +135,7 @@
             <label>Estado: </label>
             <input [(ngModel)]="address.state" [disabled]="!editando">
             <div class="msg-erro">
-              <p *ngIf="erro['address-state']" >
+              <p *ngIf="erro['address-state']">
                 Forneça um estado válido.
               </p>
             </div>
@@ -146,6 +150,31 @@
     </div>
   </div>
 </div>
+
+<div class="modal" *ngIf="modalDelete">
+  <div class="content-modal">
+    <div class="header">
+      <h1>Remover conta</h1>
+    </div>
+    <div class="body">
+      <h2>Por que você deseja remover sua conta?</h2>
+      <textarea placeholder="Caso queira compartilhar conosco, digite aqui."></textarea>
+      <h2>Confirme sua senha</h2>
+      <input placeholder="********" [(ngModel)]="psw" type="password">
+      <div *ngIf="wrongPsw" class="msg-erro">
+        <span>Senha incorreta!</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',
+                      color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModalDelete()">
+        Cancelar</button>
+      <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
+                    color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="deleteAccount()">
+        Confirmar</button>
+    </div>
+  </div>
+  <div (click)="closeModalDelete()" class="overlay"></div>
 
 <div class="modal" *ngIf="modal">
   <div class="content-modal">
@@ -176,4 +205,29 @@
     </div>
   </div>
   <div (click)="closeModal()" class="overlay"></div>
+
+<!-- <div class="modal" *ngIf="modalDelete">
+  <div class="content-modal">
+    <div class="header">
+      <h1>Remover conta</h1>
+    </div>
+    <div class="body">
+      <h2>Por que você deseja remover sua conta?</h2>
+      <textarea placeholder="Caso queira compartilhar conosco, digite aqui."></textarea>
+      <h2>Confirme sua senha</h2>
+      <input placeholder="********" [(ngModel)]="psw" type="password">
+      <div *ngIf="wrongPsw" class="msg-erro">
+        <span>Senha incorreta!</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',
+                      color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModalDelete()">
+        Cancelar</button>
+      <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
+                    color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="deleteAccount()">
+        Confirmar</button>
+    </div>
+  </div>
+  <div (click)="closeModalDelete()" class="overlay"></div> -->
 </div>
