@@ -1,0 +1,327 @@
+.profile-page {
+    padding: 60px 0;
+}
+
+.background {
+    width: 80%;
+    min-height: 600px;
+    background-color: #f7c3aa;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: right;
+}
+
+.options a {
+    margin: 10px;
+    font-size: large;
+}
+
+.edit {
+    color: #0085FF;
+    background: none;
+    padding: 10px;
+}
+
+.edit:hover {
+    color: #ffffff;
+    background-color: #0085FF;
+    border-radius: 20px;
+}
+
+.save {
+    color: #09824F;
+    background: none;
+    padding: 10px;
+}
+
+.save:hover {
+    color: #ffffff;
+    background-color: #09824F;
+    border-radius: 20px;
+}
+
+.delete {
+    color: #FF0000;
+    background: none;
+    padding: 10px;
+}
+
+.delete:hover {
+    color: #ffffff;
+    background-color: #FF0000;
+    border-radius: 20px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin: 20px 20px 50px;
+}
+
+.pic img {
+    width: 80%;
+    padding: 10px 10%;
+    border-radius: 50%;
+}
+
+.pic-item {
+    padding: 10px 12.5%;
+    width: 75%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.pic-item label {
+    font-size: large;
+    margin: 0 auto;
+}
+
+.pic-item input {
+    font-size: larger;
+    padding: 3% 10%;
+    font-family: ABeeZee Regular;
+    max-width: 100%;
+}
+
+.items {
+    padding: 0 40px;
+}
+
+.item {
+    padding: 10px 5%;
+    width: 90%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    line-height: 250%;
+}
+
+#ad {
+    grid-template-columns: 30% 50% 20%;
+}
+
+.item label {
+    font-size: xx-large;
+}
+
+.item input {
+    font-size: x-large;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
+}
+
+.item select {
+    font-size: x-large;
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
+}
+
+@media (max-width: 1450px) {
+
+    .pic-item input {
+        font-size: medium;
+    }
+
+    .item label {
+        font-size: x-large;
+    }
+
+    .item input, .item select, .pic-item label {
+        font-size: large;
+    }
+}
+
+@media (max-width: 1050px) {
+
+    .pic-item input {
+        font-size: xx-small;
+    }
+
+    .item label {
+        font-size: large;
+    }
+
+    .item input, .item select, .pic-item label {
+        font-size: larger;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .pic img {
+        width: 60%;
+        padding: 10px 20%;
+        border-radius: 50%;
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: 100%;
+        row-gap: 40px;
+    }
+
+    .pic-item input {
+        font-size: medium;
+    }
+
+    .item label {
+        font-size: x-large;
+    }
+
+    .item input, .item select, .pic-item label {
+        font-size: large;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .pic-item input {
+        font-size: xx-small;
+    }
+
+    .item label {
+        font-size: large;
+    }
+
+    .item input, .item select, .pic-item label {
+        font-size: larger;
+    }
+}
+
+.item a {
+    margin: 0 auto;
+}
+
+.item a i {
+    margin: 0 10px;
+    display: inline;
+    padding: 12px;
+    font-size: x-large;
+    color: #09824F;
+}
+
+.item a i:hover {
+    color: #ffffff;
+    background: #09824F;
+    border-radius: 50%;
+} 
+
+.address {
+    padding: 20px 5% 20px 10%;  
+}
+
+.address .item {
+    padding: 10px 0;
+    width: 100%;
+    grid-template-columns: 35% 65%;
+}
+
+.address .item input {
+    padding: 10px 15px;
+    font-family: ABeeZee Regular;
+}
+
+.msg-erro {
+    padding: 0 10%;
+}
+
+p {
+    font-size: medium;
+    color: #FF0000;
+    margin: 0;
+}
+
+
+
+.content-modal {
+    background: #E9E9E9;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px #333;
+    min-width: 700px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    
+}
+
+.content-modal .header {
+    border-radius: 20px 20px 0 0;
+    background: #e93574;
+    display: flex;
+    justify-content: center;
+}
+
+.header h1 {
+    color: black;
+    margin: 10px;
+    padding: 15px;
+    font-size: xx-large;
+    font-family: Abeezee Regular;
+}
+
+.content-modal .body {
+    margin: 10px;
+}
+
+.body h2 {
+    font-family: Abeezee Regular;
+    margin: 0 auto;
+    width: fit-content;
+    font-size: x-large;
+}
+
+.body input {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    display: block;
+    align-self: center;
+    font-size: xx-large;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'ROBOTO';
+}
+
+.body .msg-erro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: red;
+    font-size: medium;
+}
+
+.content-modal .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 125px;
+    border-radius: 0 0 20px 20px;
+}
+
+.buttons button {
+    color: #ffffff;
+    width: 40%;
+    font-size: x-large;
+    font-family: Abeezee Regular;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 20px;
+}
+
+.overlay {
+    background: #000;
+    height: 100vh;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+}

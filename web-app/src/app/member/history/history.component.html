@@ -1,3 +1,113 @@
-<div>
-  <h1>Historico</h1>
+<div class="background">
+   <div class="box" *ngIf="getHistory">
+      <div class="header">
+         <h1 class="title ">Histórico de pedidos</h1>
+      </div>
+      <div class="filter">
+         <div *ngIf="period !== 'Essa semana'" class="week">
+            <button (click)="weekFilter()">Filtrar Semana</button>    
+         </div> 
+         <div *ngIf="period === 'Essa semana'" class="week">
+              
+         </div> 
+
+         <div class="dp">
+            <input placeholder="{{period}}" [matDatepicker]="dp" (click)="openDatePicker(dp)">
+            <mat-datepicker-toggle [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="year" (monthSelected)="closeDatePicker($event, dp)"></mat-datepicker>
+         </div>
+         
+     </div>
+      <div class="container">
+         <div *ngIf="orders.length" class="item">
+            <ul *ngFor=" let order of orders">
+               <button class="pedido" (click)="clickOrder(order.id)">
+                  <span class="text">
+                     Pedido n° #2020{{order.id}} realizado em {{order.created_at}}
+                  </span>
+               </button>
+            </ul>
+         </div>
+         <div *ngIf="!orders.length" class="no-orders">
+            <h2>Sem pedidos nesse período :(</h2>
+         </div>
+      </div>
+      <div class="buttons-orders">
+         <a *ngIf="orders.length">
+            <i class="fa-solid fa-angle-left" (click)="previousPage()"></i>
+         </a>
+         <a *ngIf="orders.length">
+            <i class="fa-solid fa-angle-right" (click)="nextPage()"></i>
+         </a>
+      </div>
+   </div>
+   <div class="box" *ngIf="getOrder">
+      <div class="header">
+         <h1 class="title ">Detalhes do pedido</h1>
+      </div>
+      <div class="container">
+         <span class="text">
+            <div class="details">
+            <h3>
+               <a class="h">
+                  Pedido #2020{{this.order.id}}
+               </a>
+               <br>
+               <br>
+               <a class="h">
+                  Cliente:
+               </a>
+               {{ this.client.name }} •
+               {{ this.client.cpf}}
+               <br>
+               <a class="h">
+                  Endereço de entrega:
+               </a>
+               {{ this.order.address["postal_code"]}} •
+               {{this.order.address["address"]}} •
+               {{this.order.address["district"]}} •
+               {{this.order.address["city"]}} •
+               {{this.order.address["state"]}},
+               {{ this.order.address["complement"]}}
+               <br>
+               <br>
+               <a class="h">
+                  Itens do pedido
+               </a>
+               <div *ngFor="let item of order.items">
+                  <a class="h2">
+                  &nbsp; Quantidade:
+                  </a>{{ item["qt"]}}
+                  <br>
+                  <a class="h2">
+                  &nbsp; Item:
+                  </a>{{ item["description"]}}
+                  <br><a class="h2">
+                  &nbsp; Preço:
+                  </a>R${{ item["price"]}},00
+                  <br>
+                  <br>
+               </div>
+               <a class="h">
+                  Forma de Pagamento
+               </a>
+               <br><a class="h2">
+                  &nbsp; Subtotal:
+                  </a>R${{ this.order.cost}}
+               <br><a class="h2">
+                  &nbsp; Taxa de entrega:
+                  </a>R${{ this.order.deliveryTax}}
+               <br><a class="h2">
+                  &nbsp; Total:
+                  </a>R${{ this.order.cost + this.order.deliveryTax}}
+            </h3>
+            </div>
+         </span>
+      </div>
+      <div class="buttons-order">
+         <div class="back">
+            <button class="button-order" (click)="clickOrder(this.order.id)">voltar</button>    
+         </div> 
+      </div>
+   </div>
 </div>
