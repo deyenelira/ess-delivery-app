@@ -23,6 +23,11 @@ export class HistoryComponent implements OnInit {
   orders: Order[] = [];
   firstDate: string = "";
   lastDate: string = "";
+  period: string = "Essa semana";
+
+  monthNames: string[] = ['Janeiro', 'Fevereiro', 'Março', 'Abril',
+                        'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                        'Outubro', 'Novembro', 'Dezembro'];
 
   public clickOrder(orderId: number) {
     this.page = 1;
@@ -37,11 +42,11 @@ export class HistoryComponent implements OnInit {
 
   validButton(): void {
     this.getFilter = !this.getFilter;
-    console.log(this.getFilter)
+    console.log(this.getFilter);
   }
 
   ngOnInit(): void {
-    this.monthFilter();
+    this.weekFilter();
   }
 
   getOrders(): void { 
@@ -63,12 +68,14 @@ export class HistoryComponent implements OnInit {
   getMonday(d: Date) {
     d = new Date(d);
     var day = d.getDay(),
-        diff = d.getDate() - day + (day == 0 ? -3:1); // adjust when day is sunday
-    return new Date(d.setDate(diff));
+        diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+    d = new Date(d.setDate(diff));
+    d.setHours(0), d.setMinutes(0), d.setSeconds(0), d.setMilliseconds(0);
+    return d;
   }
 
   public weekFilter(): void {
-    this.validButton();
+    this.period = "Essa semana";
     var date = new Date();
     var monday = this.getMonday(date);
     this.firstDate = `${monday.getFullYear()}/${(monday.getMonth() + 1)}/${monday.getDate()}`
@@ -80,7 +87,14 @@ export class HistoryComponent implements OnInit {
   nextPage(): void {
     if (!this.getOrder){
       this.page = this.page + 1;
-      this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate]).then(orders => this.orders = orders);
+      this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate])
+        .then(orders => {
+          if (orders.length) {
+            this.orders = orders;
+          } else {
+            this.page = this.page - 1;
+          }
+        });
     }
   }
 
@@ -89,5 +103,22 @@ export class HistoryComponent implements OnInit {
       this.page = this.page - 1
       this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate]).then(orders => this.orders = orders);
     }
+  }
+
+  openDatePicker(dp: any) {
+    dp.open();
+  }
+
+  closeDatePicker(eventData: any, dp?: any) {
+    var s = new Date(eventData);
+    var e = new Date(eventData);
+    e.setMonth(e.getMonth() + 1);
+    this.firstDate = s.toDateString();
+    this.lastDate = e.toDateString();
+    dp.close();   
+
+    this.period = this.monthNames[s.getMonth()] + '/' + s.getFullYear();
+    console.log(this.firstDate, this.lastDate);
+    this.getOrders();
   }
 }

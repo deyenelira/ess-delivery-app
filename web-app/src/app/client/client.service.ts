@@ -47,7 +47,7 @@ export class ClientService {
       .get(this.taURL + `/client/${id}`, { headers: this.headers })
       .toPromise()
       .then((res) => {
-        if (res?.status === 201) {
+        if (res?.status === 200) {
           this.client = res.json().client;
           return res.json();
         } else {
@@ -150,6 +150,22 @@ export class ClientService {
         } else {
           return null;
         }
+      })
+      .catch(this.catch);
+  }
+
+  checkPassword(password: string): Promise<Client> {
+    console.log('psw:' + password);
+    var body = { password: password };
+    return this.http
+      .post(this.taURL + `/client/check_password/${this.getId()}`, JSON.stringify(body), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res) => {
+        if (res?.status === 200) {
+          return true;
+        } else return false;
       })
       .catch(this.catch);
   }

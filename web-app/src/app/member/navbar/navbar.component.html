@@ -27,8 +27,10 @@
 </nav>
 <!-- TODO: Mostrar menu lateral -->
 <div class="menu" *ngIf="isMenuOpen">
-  <a routerLink="/profile/">Perfil</a>
-  <a routerLink="/history/">Histórico</a>
-  <a routerLink="/expenses/">Perfil de consumo</a>
-  <a (click)="sair()">Sair</a>
+  <div class="options">
+    <a (click)="clickMenu()" routerLink="/profile/">Perfil</a>
+    <a (click)="clickMenu()" routerLink="/history/">Histórico</a>
+    <a (click)="clickMenu()" routerLink="/expenses/">Perfil de consumo</a>
+    <a (click)="sair()">Sair</a>
+  </div>
 </div>

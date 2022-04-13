@@ -43,6 +43,12 @@ nav {
 }
 
 .menu {
+  position: absolute;
+  right: 0;
+  z-index: 99999;
+}
+
+.options {
   float: right;
   display: grid;
   grid-template-columns: 1fr;
@@ -60,4 +66,9 @@ nav {
 
 a {
   color: #ffff;
+}
+
+a:hover {
+  background: #ffffff;
+  color: #e93574;
 }
