@@ -52,7 +52,7 @@ export class ExpensesComponent{
           height: 500,
         };
 
-        if (!this.data.most_expensive.food.length) this.ordered = false;
+        if (!this.data.most_expensive.restaurant.length) this.ordered = false;
         else this.setData();
       });
   }

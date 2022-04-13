@@ -2,7 +2,7 @@ class Order {
     constructor(order) {
         this.id = order.id;
         this.clientId = order.clientId;
-        this.restaurantId = order.restaurantId;
+        this.restaurantName = order.restaurantName;
         this.address = order.address; 
         // { postal_code: 11111-111, address: Rua Paraiso,   
         //   district: Bairro Feliz, city: Jaboatão,
