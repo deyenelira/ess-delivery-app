@@ -41,12 +41,12 @@ class OrderService {
         return this.getByPage(data, page);
     }
 
-    getByRestaurantId(restaurant_id, page, filters) {
+    getByRestaurantName(restaurant_Name, page, filters) {
         var start = new Date(filters.start);
         var end = new Date(filters.end);
         var data = this.orders.getData().filter(item => {
             var itemDate = new Date(item.created_at);
-            if (item.restaurantId == restaurant_id && itemDate >= start && itemDate <= end) return true;
+            if (item.restaurantName == restaurant_Name && itemDate >= start && itemDate <= end) return true;
             return false;
         });
         return this.getByPage(data, page);
@@ -72,7 +72,7 @@ class OrderService {
         var newOrder = new Order({
             id: this.idCount,
             clientId: order.clientId,
-            restaurantId: order.restaurantId,
+            restaurantName: order.restaurantName,
             address: order.address, 
             items: order.items, 
             cost: order.cost,
@@ -138,22 +138,22 @@ class OrderService {
         };
         for (let order of data) {
             result.most_request.restaurant.push({
-                name: order.restaurantId,
+                name: order.restaurantName,
                 value: 1
             });
             result.most_expensive.restaurant.push({
-                name: order.restaurantId,
+                name: order.restaurantName,
                 value: order.cost
             });
 
             for (let item of order.items) {
                 result.most_request.food.push({
-                    name: item.description,
+                    name: item.description+"\n("+order.restaurantName+")",
                     value: item.qt
                 });
                 result.most_expensive.food.push({
-                    name: item.description,
-                    value: item.price
+                    name: item.description+"\n("+order.restaurantName+")",
+                    value: item.price*item.qt
                 });
             }
         }
