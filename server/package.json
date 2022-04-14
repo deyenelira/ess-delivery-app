@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run tsc && jasmine --config=./spec/support/jasmine.json",
     "tsc": "tsc",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "Daniel Bastos",
   "license": "MIT",

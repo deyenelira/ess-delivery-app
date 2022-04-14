@@ -98,6 +98,7 @@ class ClientService {
                 }
             });
             this.clients.delete(index);
+            return true;
         }
         else return null;
     }
@@ -142,41 +143,44 @@ class ClientService {
         return this.clients.getData().find(c => c.phone === phone) ? true : false;
     }
 
-    async sendEmail(body) {
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: COMPANY_EMAIL,
-                pass: COMPANY_PASSWORD
-            }
+    sendEmail(body) {
+         return new Promise((resolve, reject) => {
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: COMPANY_EMAIL,
+                    pass: COMPANY_PASSWORD
+                }
+            });
+
+            transporter.use('compile', hbs({
+                viewEngine: {
+                    extname: '.handlebars',
+                    defaultLayout: body.template,
+                    layoutsDir: path.join(__dirname, 'email-assets')
+                },
+                viewPath: path.join(__dirname, 'email-assets')
+            }));
+
+            var mailOptions = {
+                from: COMPANY_EMAIL,
+                to: body.email,
+                subject: body.subject,
+                template: body.template,
+                context: body.context
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                    resolve(false);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve(true);
+                }
+            });
         });
-
-        transporter.use('compile', hbs({
-            viewEngine: {
-                extname: '.handlebars',
-                defaultLayout: body.template,
-                layoutsDir: path.join(__dirname, 'email-assets')
-            },
-            viewPath: path.join(__dirname, 'email-assets')
-        }));
-
-        var mailOptions = {
-            from: COMPANY_EMAIL,
-            to: body.email,
-            subject: body.subject,
-            template: body.template,
-            context: body.context
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-                return false;
-            } else {
-                console.log('Email sent: ' + info.response);
-                return true;
-            }
-        });
+            
     }
 }
 exports.ClientService = ClientService;
