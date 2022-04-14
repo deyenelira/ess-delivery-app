@@ -17,6 +17,7 @@ class DBService {
     }
 
     write() {
+        console.log('write');
         fs.writeFileSync(this.path, JSON.stringify(this.data), (err) => {
             if (err) throw err;
         });

@@ -110,7 +110,7 @@ app.delete('/client/:id', function (req, res) {
     if (result) {
       res.status(201).send({ message: 'Client successfully deleted' });
     } else {
-      res.status(403).send({ message: 'Client could not be deleted' });
+      res.status(200).send({ message: 'Client could not be deleted' });
     }
   } catch (err) {
     const { message } = err;

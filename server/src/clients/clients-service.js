@@ -81,22 +81,23 @@ class ClientService {
         return null;
     }
 
-    delete(clientId, reason) {
+    async delete(clientId, reason) {
         var data = this.clients.getData().find(({ id }) => id == clientId);
         if (data) {
             var name = data.name;
             var email = data.email;
-            var id = data.id;
             var index = this.clients.getData().indexOf(data);
-            this.clients.delete(index);
-            return this.sendEmail({
+            await this.sendEmail({
                 email: COMPANY_EMAIL,
-                subject: 'foMiau | Redefina sua senha agora',
-                template: 'update_password',
+                subject: 'foMiau | Cliente deletou conta',
+                template: 'deleted_account',
                 context: {
-                    id: id
+                    name: name,
+                    email: email,
+                    reason: reason
                 }
             });
+            this.clients.delete(index);
         }
         else return null;
     }
@@ -167,7 +168,7 @@ class ClientService {
             context: body.context
         };
 
-        await transporter.sendMail(mailOptions, function (error, info) {
+        transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
                 return false;
