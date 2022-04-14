@@ -329,7 +329,7 @@ p {
     z-index: 10;
 }
 
-.body textarea{
+.body textarea {
     width: 60%;
     height: 120px;
     margin: 10px auto;
@@ -339,4 +339,17 @@ p {
     border: none;
     padding: 10px 20px;
     font-family: 'ROBOTO';
+}
+
+.warning {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.warning span {
+    margin-right: 10px;
+    margin-top: 50px;
+    position: absolute;
+    color: #FF0000;
 }

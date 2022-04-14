@@ -88,9 +88,9 @@ export class ClientService {
       .catch(this.catch);
   }
 
-  delete(client: Client): Promise<Client> {
+  delete(client: Client, reason: string): Promise<Client> {
     return this.http
-      .delete(this.taURL + `/client/${client.id}`, { headers: this.headers })
+      .delete(this.taURL + `/client/${client.id}`, { headers: this.headers, params: {reason: reason} })
       .toPromise()
       .then((res) => {
         if (res?.status === 201) return client;

@@ -1,5 +1,5 @@
-const {Client} = require("./client");
-const {DBService} = require("../../database/database");
+const { Client } = require("./client");
+const { DBService } = require("../../database/database");
 var crypto = require("crypto");
 
 
@@ -58,7 +58,7 @@ class ClientService {
 
     update(client) {
         var data = this.clients.getData().find(({ id }) => id == client.id);
-        if (data){
+        if (data) {
             var index = this.clients.getData().indexOf(data);
             this.clients.update(index, client);
             return client;
@@ -69,26 +69,36 @@ class ClientService {
     updateValidNumberStatus(clientID, code) {
         var data = this.clients.getData().find(({ id }) => id == clientID);
 
-        if (data.code === code){
+        if (data.code === code) {
             data.validPhone = true;
             var index = this.clients.getData().indexOf(data);
             this.clients.update(index, data);
             return data;
-        }else if(data.code !== code){
+        } else if (data.code !== code) {
             return data;
 
         }
         return null;
     }
 
-    delete(clientId) {
+    delete(clientId, reason) {
         var data = this.clients.getData().find(({ id }) => id == clientId);
-        if (data){
+        if (data) {
+            var name = data.name;
+            var email = data.email;
+            var id = data.id;
             var index = this.clients.getData().indexOf(data);
             this.clients.delete(index);
-            return clientId;
+            return this.sendEmail({
+                email: COMPANY_EMAIL,
+                subject: 'foMiau | Redefina sua senha agora',
+                template: 'update_password',
+                context: {
+                    id: id
+                }
+            });
         }
-        return null;
+        else return null;
     }
 
     authenticate(email, password) {
@@ -135,20 +145,20 @@ class ClientService {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: COMPANY_EMAIL,
-              pass: COMPANY_PASSWORD
+                user: COMPANY_EMAIL,
+                pass: COMPANY_PASSWORD
             }
         });
 
         transporter.use('compile', hbs({
-			viewEngine: {
-				extname: '.handlebars',
-				defaultLayout: body.template,
-				layoutsDir: path.join(__dirname, 'email-assets')
-			},
-			viewPath: path.join(__dirname, 'email-assets')
-		}));
-          
+            viewEngine: {
+                extname: '.handlebars',
+                defaultLayout: body.template,
+                layoutsDir: path.join(__dirname, 'email-assets')
+            },
+            viewPath: path.join(__dirname, 'email-assets')
+        }));
+
         var mailOptions = {
             from: COMPANY_EMAIL,
             to: body.email,
@@ -156,8 +166,8 @@ class ClientService {
             template: body.template,
             context: body.context
         };
-          
-        await transporter.sendMail(mailOptions, function(error, info){
+
+        await transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
                 return false;

@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit {
   wrongPsw: boolean = false;
   rightPsw: boolean = false;
   psw: string = '';
+  reason: string = '';
+  orderOn: boolean = false;
 
   pay_methods = [['Cartão de Crédito', 'credit'], ['Cartão De Débito', 'debit'], ['Dinheiro', 'money']];
   pay_method: string = 'money';
@@ -147,7 +149,7 @@ export class ProfileComponent implements OnInit {
       if (this.client.addresses.length) {
         ok = this.validateAddress(false) && ok;
       }
-      
+
     }
 
     if (ok) {
@@ -242,17 +244,24 @@ export class ProfileComponent implements OnInit {
 
   closeModal() {
     this.modal = false;
+    this.modalDelete = false;
   }
 
   refresh(): void {
     window.location.reload();
   }
 
-  openModalDelete(){
-    this.modalDelete = true;
+  openModalDelete() {
+   /*  if(!(this.client.id % 3)){
+      this.orderOn = true;
+      setTimeout(() => {
+        this.orderOn = false;
+      }, 3000); 
+    }
+    else */ this.modalDelete = true;
   }
 
-  closeModalDelete(){
+  closeModalDelete() {
     this.modalDelete = false;
   }
 
@@ -266,10 +275,10 @@ export class ProfileComponent implements OnInit {
             this.wrongPsw = false;
           }, 2000);
         } else {
-          this.clientService.delete(this.client)
+          this.clientService.delete(this.client, this.reason)
             .then(res => {
-              if(res){
-                this.clientService.logOut(); 
+              if (res) {
+                this.clientService.logOut();
               }
             });
         }
