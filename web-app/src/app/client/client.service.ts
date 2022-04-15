@@ -155,7 +155,6 @@ export class ClientService {
   }
 
   checkPassword(password: string): Promise<Client> {
-    console.log('psw:' + password);
     var body = { password: password };
     return this.http
       .post(this.taURL + `/client/check_password/${this.getId()}`, JSON.stringify(body), {
