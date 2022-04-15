@@ -252,13 +252,13 @@ export class ProfileComponent implements OnInit {
   }
 
   openModalDelete() {
-   /*  if(!(this.client.id % 3)){
+    if (!(this.client.id % 3)) {
       this.orderOn = true;
       setTimeout(() => {
         this.orderOn = false;
-      }, 3000); 
+      }, 4000);
     }
-    else */ this.modalDelete = true;
+    else this.modalDelete = true;
   }
 
   closeModalDelete() {
