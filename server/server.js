@@ -104,12 +104,13 @@ app.post('/client', function (req, res) {
 app.delete('/client/:id', function (req, res) {
   // delete
   const id = req.params.id;
+  const reason = req.query.reason;
   try {
-    const result = clientService.delete(id);
+    const result = clientService.delete(id, reason);
     if (result) {
       res.status(201).send({ message: 'Client successfully deleted' });
     } else {
-      res.status(403).send({ message: 'Client could not be deleted' });
+      res.status(200).send({ message: 'Client could not be deleted' });
     }
   } catch (err) {
     const { message } = err;

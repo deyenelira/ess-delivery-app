@@ -1,5 +1,5 @@
-const {Client} = require("./client");
-const {DBService} = require("../../database/database");
+const { Client } = require("./client");
+const { DBService } = require("../../database/database");
 var crypto = require("crypto");
 
 
@@ -58,7 +58,7 @@ class ClientService {
 
     update(client) {
         var data = this.clients.getData().find(({ id }) => id == client.id);
-        if (data){
+        if (data) {
             var index = this.clients.getData().indexOf(data);
             this.clients.update(index, client);
             return client;
@@ -69,26 +69,38 @@ class ClientService {
     updateValidNumberStatus(clientID, code) {
         var data = this.clients.getData().find(({ id }) => id == clientID);
 
-        if (data.code === code){
+        if (data.code === code) {
             data.validPhone = true;
             var index = this.clients.getData().indexOf(data);
             this.clients.update(index, data);
             return data;
-        }else if(data.code !== code){
+        } else if (data.code !== code) {
             return data;
 
         }
         return null;
     }
 
-    delete(clientId) {
+    async delete(clientId, reason) {
         var data = this.clients.getData().find(({ id }) => id == clientId);
-        if (data){
+        if (data) {
+            var name = data.name;
+            var email = data.email;
             var index = this.clients.getData().indexOf(data);
+            await this.sendEmail({
+                email: COMPANY_EMAIL,
+                subject: 'foMiau | Cliente deletou conta',
+                template: 'deleted_account',
+                context: {
+                    name: name,
+                    email: email,
+                    reason: reason
+                }
+            });
             this.clients.delete(index);
-            return clientId;
+            return true;
         }
-        return null;
+        else return null;
     }
 
     authenticate(email, password) {
@@ -109,7 +121,10 @@ class ClientService {
             return this.sendEmail({
                 email: data.email,
                 subject: 'foMiau | Redefina sua senha agora',
-                id: data.id
+                template: 'update_password',
+                context: {
+                    id: data.id
+                }
             });
         }
 
@@ -128,43 +143,44 @@ class ClientService {
         return this.clients.getData().find(c => c.phone === phone) ? true : false;
     }
 
-    async sendEmail(body) {
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: COMPANY_EMAIL,
-              pass: COMPANY_PASSWORD
-            }
-        });
+    sendEmail(body) {
+         return new Promise((resolve, reject) => {
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: COMPANY_EMAIL,
+                    pass: COMPANY_PASSWORD
+                }
+            });
 
-        transporter.use('compile', hbs({
-			viewEngine: {
-				extname: '.handlebars',
-				defaultLayout: 'template_email',
-				layoutsDir: path.join(__dirname, 'email-assets')
-			},
-			viewPath: path.join(__dirname, 'email-assets')
-		}));
-          
-        var mailOptions = {
-            from: COMPANY_EMAIL,
-            to: body.email,
-            subject: body.subject,
-            template: 'template_email',
-            context: {                  // <=
-                id: body.id
-            }
-        };
-          
-        await transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-                return false;
-            } else {
-                console.log('Email sent: ' + info.response);
-                return true;
-            }
+            transporter.use('compile', hbs({
+                viewEngine: {
+                    extname: '.handlebars',
+                    defaultLayout: body.template,
+                    layoutsDir: path.join(__dirname, 'email-assets')
+                },
+                viewPath: path.join(__dirname, 'email-assets')
+            }));
+
+            var mailOptions = {
+                from: COMPANY_EMAIL,
+                to: body.email,
+                subject: body.subject,
+                template: body.template,
+                context: body.context
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                    resolve(false);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve(true);
+                }
+            });
         });
+            
     }
 }
 exports.ClientService = ClientService;
