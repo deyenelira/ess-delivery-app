@@ -31,7 +31,6 @@ export class HistoryComponent implements OnInit {
                         'Outubro', 'Novembro', 'Dezembro'];
 
   public clickOrder(orderId: number) {
-    this.page = 1;
     this.getOrder = !this.getOrder;
     this.getHistory = !this.getHistory;
     this.showOrder(orderId);
