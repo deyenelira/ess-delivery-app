@@ -3,7 +3,7 @@
         {
             "id": 0,
             "clientId": 0,
-            "restaurantId": 1,
+            "restaurantName": "Dalena",
             "address": {
                 "postal_code": 11111111,
                 "address": "Rua Paraiso",
@@ -26,7 +26,7 @@
         {
             "id": 1,
             "clientId": 0,
-            "restaurantId": 1,
+            "restaurantName": "Dalena",
             "address": {
                 "postal_code": 11111111,
                 "address": "Rua Paraiso",
@@ -49,7 +49,7 @@
         {
             "id": 2,
             "clientId": 0,
-            "restaurantId":2,
+            "restaurantName": "Frisabor",
             "address": {
                 "postal_code": 11111111,
                 "address": "Rua Paraiso",
@@ -72,7 +72,7 @@
         {
             "id": 3,
             "clientId": 0,
-            "restaurantId": 3,
+            "restaurantName": "Pizza Hut",
             "address": {
                 "postal_code": 11111111,
                 "address": "Rua Paraiso",
@@ -95,7 +95,7 @@
         {
             "id": 4,
             "clientId": 0,
-            "restaurantId": 4,
+            "restaurantName": "Bv Sul",
             "address": {
                 "postal_code": 11111111,
                 "address": "Rua Paraiso",
@@ -118,7 +118,7 @@
         {
             "id": 5,
             "clientId": 0,
-            "restaurantId": 4,
+            "restaurantName": "Bv Sul",
             "address": {
                 "postal_code": 11111111,
                 "address": "Rua Paraiso",
@@ -141,7 +141,7 @@
         {
             "id": 6,
             "clientId": 1,
-            "restaurantId": 1,
+            "restaurantName": "Dalena",
             "address": {
                 "postal_code": 45150090,
                 "address": "Rua Paraiso",
