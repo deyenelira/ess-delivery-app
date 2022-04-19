@@ -82,7 +82,16 @@
        />
        <div class="msg-erro">
         <small *ngIf="(registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched)" >
-          Forneça uma senha valida.
+          A senha precisa ter pelo menos
+        </small>
+        <small *ngIf="(registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched)" >
+          - 8 caracteres
+        </small>
+        <small *ngIf="(registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched)" >
+          - 1 letra maiúscula
+        </small>
+        <small *ngIf="(registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched)" >
+          - 1 número
         </small>
       </div>
      </div> 
