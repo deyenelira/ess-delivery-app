@@ -33,12 +33,12 @@
          </div>
       </div>
       <div class="buttons-orders">
-         <a *ngIf="orders.length">
-            <i class="fa-solid fa-angle-left" (click)="previousPage()"></i>
-         </a>
-         <a *ngIf="orders.length">
-            <i class="fa-solid fa-angle-right" (click)="nextPage()"></i>
-         </a>
+         <button *ngIf="orders.length" (click)="previousPage()" [disabled]="page === 1">
+            <i class="fa-solid fa-angle-left"></i>
+         </button>
+         <button *ngIf="orders.length" (click)="nextPage()" [disabled]="lastPage">
+            <i class="fa-solid fa-angle-right"></i>
+         </button>
       </div>
    </div>
    <div class="box" *ngIf="getOrder">

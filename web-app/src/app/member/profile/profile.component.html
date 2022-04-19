@@ -83,7 +83,7 @@
             <i class="fa-solid fa-floppy-disk"></i>
           </a>
         </div>
-        <div class="address" *ngIf="client.addresses.length">
+        <div class="address" *ngIf="client.addresses.length || addAddress">
           <div class="item">
             <label>Nome: </label>
             <input [(ngModel)]="address.name" [disabled]="!editando">
