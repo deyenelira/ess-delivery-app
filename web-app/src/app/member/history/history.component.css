@@ -138,18 +138,24 @@ ul {
   padding: 20px 0 40px 0;
 }
 
-.buttons-orders a {
+.buttons-orders button {
   display: flex;
   justify-content: center;
-}
-
-.buttons-orders a i {
-  font-size: xxx-large;
+  background: none;
+  border: none;
   color: #e93574;
 }
 
-.buttons-orders a i:hover {
+.buttons-orders button i {
+  font-size: xxx-large;
+}
+
+.buttons-orders button:hover {
   color: #ffffff;
+}
+
+button:disabled {
+  color: #b7b3b3 !important;
 }
 
 .text {

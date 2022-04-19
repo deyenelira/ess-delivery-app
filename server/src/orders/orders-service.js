@@ -56,9 +56,9 @@ class OrderService {
         if (page < 1 || ordersPerPage*(page-1) > data.length) return [];
         
         if (ordersPerPage >= data.length - ordersPerPage*(page-1)) {
-            return data.slice(ordersPerPage*(page-1))
+            return { data: data.slice(ordersPerPage*(page-1)), lastPage: true };
         };
-        return data.slice(ordersPerPage*(page-1), ordersPerPage);
+        return  { data: data.slice(ordersPerPage*(page-1), ordersPerPage), lastPage: false };
     }
 
     getTotalOrders(client_id) {

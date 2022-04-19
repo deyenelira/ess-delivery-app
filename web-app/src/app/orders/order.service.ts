@@ -20,10 +20,10 @@ export class orderService {
       .catch(this.catch);
   }
 
-  getOrders(page: number, clientId: number, dates: string[]): Promise<Order[]> {
+  getOrders(page: number, clientId: number, dates: string[]): Promise<any> {
     return this.http.get(this.url + `/orders/client/${clientId}/${page}`, { params: { filters: dates }})
       .toPromise()
-      .then((res => res?.json() as Order[]))
+      .then((res => res?.json()))
       .catch(this.catch);
   }
 

@@ -19,6 +19,7 @@ export class HistoryComponent implements OnInit {
   getFilter: boolean = false;
   client: Client = new Client();
   page: number = 1;
+  lastPage: boolean = false;
   order: Order = new Order();
   orders: Order[] = [];
   firstDate: string = "";
@@ -52,7 +53,11 @@ export class HistoryComponent implements OnInit {
   getOrders(): void { 
     this.clientService.getClient().then((result) => {
       this.client = result;
-      this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate]).then(orders => this.orders = orders);
+      this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate])
+        .then(result =>  {
+          this.orders = result.data;
+          this.lastPage = result.lastPage;
+        });
     }); 
   }
 
@@ -85,23 +90,24 @@ export class HistoryComponent implements OnInit {
   }
 
   nextPage(): void {
-    if (!this.getOrder){
+    if (!this.getOrder && !this.lastPage){
       this.page = this.page + 1;
       this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate])
-        .then(orders => {
-          if (orders.length) {
-            this.orders = orders;
-          } else {
-            this.page = this.page - 1;
-          }
-        });
+      .then(result =>  {
+        this.orders = result.data;
+        this.lastPage = result.lastPage;
+      });
     }
   }
 
   previousPage(): void {
     if(this.page != 1 && !this.getOrder){
       this.page = this.page - 1
-      this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate]).then(orders => this.orders = orders);
+      this.orderService.getOrders(this.page, this.client.id, [this.firstDate, this.lastDate])
+      .then(result =>  {
+        this.orders = result.data;
+        this.lastPage = result.lastPage;
+      });
     }
   }
 
