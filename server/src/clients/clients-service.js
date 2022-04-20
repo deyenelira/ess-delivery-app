@@ -1,11 +1,14 @@
-const {Client} = require("./client");
-const {DBService} = require("../../database/database");
+const { Client } = require("./client");
+const { DBService } = require("../../database/database");
+var crypto = require("crypto");
+
 
 var nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 const COMPANY_EMAIL = 'fomiauu@gmail.com';
 const COMPANY_PASSWORD = 'mgot qlcj oojz krvp';
+const PHONECODE = 'ABC123'
 
 class ClientService {
 
@@ -28,19 +31,24 @@ class ClientService {
 
     add(client) {
         if (this.cpfRegistered(client.cpf))
-            return null;
+            return "cpf";
         if (this.emailRegistered(client.email))
-            return null;
+            return "email";
         if (this.phoneRegistered(client.phone))
-            return null;
+            return "phone";
 
+        // var checkCode = crypto.randomBytes(3).toString('hex');
+        var checkCode = PHONECODE;
         var newClient = new Client({
             id: this.idCount,
             name: client.name,
             cpf: client.cpf,
             phone: client.phone,
             email: client.email,
-            password: client.password
+            password: client.password,
+            code: checkCode,
+            validPhone: false,
+            pic_url: "assets/images/profile1.png"
         });
         this.clients.add(newClient);
 
@@ -50,7 +58,7 @@ class ClientService {
 
     update(client) {
         var data = this.clients.getData().find(({ id }) => id == client.id);
-        if (data){
+        if (data) {
             var index = this.clients.getData().indexOf(data);
             this.clients.update(index, client);
             return client;
@@ -58,14 +66,41 @@ class ClientService {
         return null;
     }
 
-    delete(clientId) {
-        var data = this.clients.getData().find(({ id }) => id == clientId);
-        if (data){
+    updateValidNumberStatus(clientID, code) {
+        var data = this.clients.getData().find(({ id }) => id == clientID);
+
+        if (data.code === code) {
+            data.validPhone = true;
             var index = this.clients.getData().indexOf(data);
-            this.clients.delete(index);
-            return clientId;
+            this.clients.update(index, data);
+            return data;
+        } else if (data.code !== code) {
+            return data;
+
         }
         return null;
+    }
+
+    async delete(clientId, reason) {
+        var data = this.clients.getData().find(({ id }) => id == clientId);
+        if (data) {
+            var name = data.name;
+            var email = data.email;
+            var index = this.clients.getData().indexOf(data);
+            await this.sendEmail({
+                email: COMPANY_EMAIL,
+                subject: 'foMiau | Cliente deletou conta',
+                template: 'deleted_account',
+                context: {
+                    name: name,
+                    email: email,
+                    reason: reason
+                }
+            });
+            this.clients.delete(index);
+            return true;
+        }
+        else return null;
     }
 
     authenticate(email, password) {
@@ -86,7 +121,10 @@ class ClientService {
             return this.sendEmail({
                 email: data.email,
                 subject: 'foMiau | Redefina sua senha agora',
-                id: data.id
+                template: 'update_password',
+                context: {
+                    id: data.id
+                }
             });
         }
 
@@ -105,43 +143,44 @@ class ClientService {
         return this.clients.getData().find(c => c.phone === phone) ? true : false;
     }
 
-    async sendEmail(body) {
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: COMPANY_EMAIL,
-              pass: COMPANY_PASSWORD
-            }
-        });
+    sendEmail(body) {
+         return new Promise((resolve, reject) => {
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: COMPANY_EMAIL,
+                    pass: COMPANY_PASSWORD
+                }
+            });
 
-        transporter.use('compile', hbs({
-			viewEngine: {
-				extname: '.handlebars',
-				defaultLayout: 'template_email',
-				layoutsDir: path.join(__dirname, 'email-assets')
-			},
-			viewPath: path.join(__dirname, 'email-assets')
-		}));
-          
-        var mailOptions = {
-            from: COMPANY_EMAIL,
-            to: body.email,
-            subject: body.subject,
-            template: 'template_email',
-            context: {                  // <=
-                id: body.id
-            }
-        };
-          
-        await transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-                return false;
-            } else {
-                console.log('Email sent: ' + info.response);
-                return true;
-            }
+            transporter.use('compile', hbs({
+                viewEngine: {
+                    extname: '.handlebars',
+                    defaultLayout: body.template,
+                    layoutsDir: path.join(__dirname, 'email-assets')
+                },
+                viewPath: path.join(__dirname, 'email-assets')
+            }));
+
+            var mailOptions = {
+                from: COMPANY_EMAIL,
+                to: body.email,
+                subject: body.subject,
+                template: body.template,
+                context: body.context
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                    resolve(false);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve(true);
+                }
+            });
         });
+            
     }
 }
 exports.ClientService = ClientService;

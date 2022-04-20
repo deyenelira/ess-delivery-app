@@ -8,6 +8,9 @@ class Client {
         this.password = client.password;
         this.pay_method = "";
         this.addresses = [];
+        this.code = client.code;
+        this.validPhone = client.validPhone;
+        this.pic_url = client.pic_url;
     }
 }
 exports.Client = Client;

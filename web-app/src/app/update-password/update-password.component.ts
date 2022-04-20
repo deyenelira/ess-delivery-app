@@ -83,7 +83,7 @@ export class UpdatePasswordComponent implements OnInit {
       .subscribe(params => {
         console.log(params); // { id: 0 }
 
-        this.id = params.id;
+        this.id = params['id'];
         console.log(this.id); // 0
       }
     );
@@ -99,6 +99,9 @@ export class UpdatePasswordComponent implements OnInit {
         this.client.pay_method = result.pay_method;
         this.client.addresses = result.addresses;
         this.client.password = result.password;
+        this.client.code = result.code;
+        this.client.validPhone = result.validPhone;
+        this.client.pic_url = result.pic_url;
       }
     });
   }

@@ -1,11 +1,13 @@
-import { ProfileComponent } from './member/profile/profile.component';
-import { BrowserModule } from "@angular/platform-browser";
+//import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
+import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ClientService } from "./client/client.service";
+import { orderService } from "./orders/order.service";
 import { NegateAuthGuard } from "./guards/negate-auth.guard";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
@@ -26,14 +28,16 @@ import { AuthGuard } from "./guards/auth.guard";
     UpdatePasswordComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
     MemberModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [ClientService, NegateAuthGuard, AuthGuard],
+  providers: [ClientService, orderService, NegateAuthGuard, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
