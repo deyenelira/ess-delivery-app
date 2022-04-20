@@ -156,12 +156,8 @@ app.post('/client/login', function (req, res) {
 
 app.post('/client/check_password/:id', function (req, res) {
   // login
-<<<<<<< HEAD
-  const id = req.body.id;
-=======
   
   const id = req.params.id;
->>>>>>> 1c37449e29f9485417ae3de1bbb33333a8d68d17
   const password = req.body.password;
   try {
     const result = clientService.checkPassword(id, password);

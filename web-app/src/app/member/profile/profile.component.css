@@ -1,46 +1,3 @@
-<<<<<<< HEAD
-
-.titulo{
-    position:relative;
-    left:15%;
-    top:5%;
-    bottom:5%;
-    padding-top: 50px;
-    padding-bottom: 30px;
-}
-
-.background {
-    position: absolute;
-    top:15%;
-    left:10%;
-    width: 69%;
-    border-radius: 5px;
-    background: rgb(243, 182, 101);
-    padding-left: 150px;
-    padding-top: 170px;
-    padding-bottom: 30%;
-}
-
-.comp_perfil{
-    display: inline-block;
-    position:relative;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-.msg-erro {
-    color: #ff0000;
-    text-align: center;
-    margin: 0px;
-    height: 19px;
-  }
-
-.msg-acerto {
-    color: #119117;
-    text-align: center;
-    margin: 0px;
-    height: 19px;
-  }
-=======
 .profile-page {
     padding: 60px 0;
 }
@@ -396,4 +353,3 @@ p {
     position: absolute;
     color: #FF0000;
 }
->>>>>>> 1c37449e29f9485417ae3de1bbb33333a8d68d17
