@@ -1,10 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-<<<<<<< HEAD
-=======
 import { MatButtonModule } from "@angular/material/button";
->>>>>>> 1c37449e29f9485417ae3de1bbb33333a8d68d17
 import { RouterModule } from "@angular/router";
 import { HistoryComponent } from "./history/history.component";
 import { HomeComponent } from "./home/home.component";
@@ -37,10 +34,7 @@ import { Order } from "../orders/order";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-<<<<<<< HEAD
-=======
     MatButtonModule,
->>>>>>> 1c37449e29f9485417ae3de1bbb33333a8d68d17
     RouterModule.forChild([
       {
         path: "",
