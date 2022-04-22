@@ -22,6 +22,16 @@ defineSupportCode(function ({ Given, When, Then }) {
     }
   );
 
+  When(/^eu preencho o campo de e-mail com "([^\"]*)"$/, async (email) => {
+    await $("input[name='email']").sendKeys(<string>email);
+    await element(by.buttonText('Entrar')).click();
+  });
+
+  When(/^eu preencho o campo de senha com "([^\"]*)"$/, async (psw) => {
+    await $("input[name='psw']").sendKeys(<string>psw);
+    await element(by.buttonText('Entrar')).click();
+  });
+
   Then(/^eu vou para a página de Home do sistema$/, async () => {
     await expect($("div[name='home']").isPresent()).to.eventually.equal(true);
   });
@@ -30,5 +40,15 @@ defineSupportCode(function ({ Given, When, Then }) {
     await expect($("div[name='errorMsg']").isPresent()).to.eventually.equal(
       true
     );
+  });
+
+  Then(/^não consigo pressionar o botão de entrar$/, async () => {
+    await expect(
+      element(by.buttonText('Entrar')).isEnabled()
+    ).to.eventually.equal(false);
+  });
+
+  Then(/^permaneço na página de login$/, async () => {
+    expect($("input[name='psw']").isPresent()).to.eventually.equal(true);
   });
 });
