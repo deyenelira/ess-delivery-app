@@ -87,6 +87,7 @@ class ClientService {
             var name = data.name;
             var email = data.email;
             var index = this.clients.getData().indexOf(data);
+            this.clients.delete(index);
             await this.sendEmail({
                 email: COMPANY_EMAIL,
                 subject: 'foMiau | Cliente deletou conta',
@@ -97,7 +98,6 @@ class ClientService {
                     reason: reason
                 }
             });
-            this.clients.delete(index);
             return true;
         }
         else return null;

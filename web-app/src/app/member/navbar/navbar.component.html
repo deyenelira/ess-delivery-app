@@ -13,6 +13,7 @@
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       cursor="pointer"
+      name="menu"
       (click)="clickMenu()"
     >
       <path
@@ -31,6 +32,6 @@
     <a (click)="clickMenu()" routerLink="/profile/">Perfil</a>
     <a (click)="clickMenu()" routerLink="/history/">Histórico</a>
     <a (click)="clickMenu()" routerLink="/expenses/">Perfil de consumo</a>
-    <a (click)="sair()">Sair</a>
+    <a name="signOut" (click)="sair()">Sair</a>
   </div>
 </div>

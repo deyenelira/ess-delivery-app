@@ -195,11 +195,8 @@ app.get('/orders/:page', function (req, res) {
   var page = req.params.page;
   var filters = req.query.filters;
 
-  console.log(req.query.filters)
-  console.log('server')
   try {
     const result = orderService.get(page, filters);
-    console.log(result)
     if (result) {
       res.status(201).send(result);
     } else {
@@ -245,34 +242,13 @@ app.get('/orders/client/:clientId/:page', function (req, res) {
   }
 });
 
-app.get('/orders/restaurant/:restaurantId/:page', function (req, res) {
-  // get order list
-  const restaurantId = req.params.restaurantId;
-  const page = req.params.page;
-  var filters = req.body;
-  try {
-    const result = orderService.getByRestaurantId(restaurantId, page, filters);
-    if (result) {
-      res.status(201).send(result);
-    } else {
-      res.status(403).send({ message: 'Order list could not be found' });
-    }
-  } catch (err) {
-    const { message } = err;
-    res.status(400).send({ message });
-  }
-});
-
 app.get('/orders/total_orders/:clientId', function (req, res) {
   // get order qt
-  console.log(req.params)
   const clientId = req.params.clientId;
   try {
     const result = orderService.getTotalOrders(clientId);
     if (result >= 0) {
       res.status(201).send({ total_orders: result });
-      console.log('mais de 1')
-      console.log(result, clientId)
     } else {
       res.status(403).send({ message: 'Order list could not be found' });
     }
