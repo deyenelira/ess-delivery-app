@@ -41,17 +41,6 @@ class OrderService {
         return this.getByPage(data, page);
     }
 
-    getByRestaurantName(restaurant_Name, page, filters) {
-        var start = new Date(filters.start);
-        var end = new Date(filters.end);
-        var data = this.orders.getData().filter(item => {
-            var itemDate = new Date(item.created_at);
-            if (item.restaurantName == restaurant_Name && itemDate >= start && itemDate <= end) return true;
-            return false;
-        });
-        return this.getByPage(data, page);
-    }
-
     getByPage(data, page) {
         if (page < 1 || ordersPerPage*(page-1) > data.length) return [];
         
