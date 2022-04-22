@@ -27,7 +27,7 @@ body {
   .background-guest {
     background-image: url("./assets/images/food.png"),
       linear-gradient(#e93574, #ff5200);
-    min-width: 100%;
+    min-width: fit-content;
     min-height: 100%;
     display: flex;
     justify-content: center;
