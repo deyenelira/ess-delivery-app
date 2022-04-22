@@ -19,7 +19,7 @@ export let config: Config = {
 
     onPrepare: () => {
 
-        browser.ignoreSynchronization = true;
+        browser.ignoreSynchronization = false;
         browser.manage().window().maximize();
 
     },

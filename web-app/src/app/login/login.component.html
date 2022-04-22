@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm">
+<form [formGroup]="loginForm" name="login">
   <div class="title-container">
     <img src="assets/images/logo_80.png" alt="Logo" class="logo" />
     <h3>foMiau</h3>
@@ -25,7 +25,7 @@
         required
       />
       <div class="psw">
-        <a routerLink="../forgot-password/" href="#">Esqueceu a senha?</a>
+        <a routerLink="../forgot-password/" href="#" name="forgot-password">Esqueceu a senha?</a>
       </div>
       <div class="msg-erro" name="errorMsg">
         <span *ngIf="errouSenha">Senha e/ou e-mail incorretos!</span>

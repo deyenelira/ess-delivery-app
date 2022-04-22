@@ -72,10 +72,6 @@ export class UpdatePasswordComponent implements OnInit {
   wrong_passwords(equals: boolean, format: boolean) {
     this.errouSenha.equals = equals;
     this.errouSenha.format = format;
-    setTimeout(() => {
-      this.errouSenha.equals = false;
-      this.errouSenha.format = false;
-    }, 2000);
   }
 
   ngOnInit(): void {
