@@ -4,7 +4,7 @@
   "description": "Servidor",
   "main": "server.ts",
   "scripts": {
-    "test": "npm run tsc && jasmine --config=./spec/support/jasmine.json",
+    "test": "jasmine --config=./spec/support/jasmine.json",
     "tsc": "tsc",
     "start": "nodemon server.js"
   },
