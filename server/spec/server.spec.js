@@ -36,7 +36,10 @@ describe("O servidor", () => {
     deliveryTax: 2.00
   };
 
-  beforeAll(() => {server = require('../server')});
+  beforeAll(() => {
+    server = require('../server');
+    process.stdout.write("server: ");
+  });
 
   afterAll(() => {server.closeServer()});
 

@@ -13,15 +13,20 @@ describe("O serviço de clientes", () => {
     password: "Aninha123"
   };
 
+  beforeAll(() => {
+    process.stdout.write("clients-service: ");
+  });
   beforeEach(() => {
     clientService = new ClientService();
 
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
   });
+  afterEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+  });
   afterAll(() => {
     console.log('\n');
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
 

@@ -14,7 +14,9 @@ describe("O serviço de banco de dados", () => {
     album: "evermore",
     duration: "04:05"
   }
-
+  beforeAll(() => {
+    process.stdout.write("database: ");
+  });
   beforeEach(() => ts = new DBService('ts'));
   afterAll(() => {console.log('\n')});
 

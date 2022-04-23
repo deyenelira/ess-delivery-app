@@ -27,6 +27,9 @@ describe("O serviço de pedidos", () => {
     deliveryTax: 2.00
   };
 
+  beforeAll(() => {
+    process.stdout.write("orders-service: ");
+  });
   beforeEach(() => orderService = new OrderService());
   afterAll(() => {console.log('\n')});
 
