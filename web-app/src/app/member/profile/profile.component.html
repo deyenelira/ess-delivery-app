@@ -8,7 +8,7 @@
       <a *ngIf="editando" (click)="validate()">
         <p class="save"> salvar alterações </p>
       </a>
-      <a (click)="openModalDelete()">
+      <a (click)="openModalDelete()" name="deleteAccount">
         <p class="delete"> deletar conta </p>
       </a>
       </div>
@@ -191,7 +191,7 @@
       <h2>Por que você deseja remover sua conta?</h2>
       <textarea placeholder="Caso queira compartilhar conosco, digite aqui." [(ngModel)]="reason"></textarea>
       <h2>Confirme sua senha</h2>
-      <input placeholder="********" [(ngModel)]="psw" type="password">
+      <input placeholder="********" [(ngModel)]="psw" type="password" name="psw">
       <div *ngIf="wrongPsw" class="msg-erro">
         <span>Senha incorreta!</span>
       </div>
@@ -201,7 +201,7 @@
                         color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModalDelete()">
         Cancelar</button>
       <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
-                      color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="deleteAccount()">
+                      color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="deleteAccount()" name="confirmar">
         Confirmar</button>
     </div>
   </div>
