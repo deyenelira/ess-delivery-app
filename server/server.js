@@ -21,21 +21,6 @@ app.use(bodyParser.json());
 var clientService = new ClientService();
 var orderService = new OrderService();
 
-app.get('/clients', function (req, res) {
-  // get client list
-  try {
-    const result = clientService.get();
-    if (result) {
-      res.status(201).send(result);
-    } else {
-      res.status(404).send({ message: 'Client list could not be found' });
-    }
-  } catch (err) {
-    const { message } = err;
-    res.status(400).send({ message });
-  }
-});
-
 app.get('/client/:id', function (req, res) {
   // get client data by ID
   const id = req.params.id;
@@ -190,40 +175,6 @@ app.post('/client/forgot_password/:email', function (req, res) {
   }
 });
 
-app.get('/orders/:page', function (req, res) {
-  // get order list
-  var page = req.params.page;
-  var filters = req.query.filters;
-
-  try {
-    const result = orderService.get(page, filters);
-    if (result) {
-      res.status(201).send(result);
-    } else {
-      res.status(403).send({ message: 'Order list could not be found' });
-    }
-  } catch (err) {
-    const { message } = err;
-    res.status(400).send({ message });
-  }
-});
-
-app.get('/order/:id', function (req, res) {
-  // get order data by ID
-  const id = req.params.id;
-  try {
-    const result = orderService.getById(id);
-    if (result) {
-      res.status(201).send(result);
-    } else {
-      res.status(403).send({ message: 'Order could not be found' });
-    }
-  } catch (err) {
-    const { message } = err;
-    res.status(400).send({ message });
-  }
-});
-
 app.get('/orders/client/:clientId/:page', function (req, res) {
   // get order list
   const clientId = req.params.clientId;
@@ -326,7 +277,7 @@ app.get('/orders/analytics/:clientId', function (req, res) {
 });
 
 var server = app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('\nExample app listening on port 3000!');
 });
 exports.server = server;
 

@@ -25,11 +25,13 @@ body {
   
   /* Background para usar nas paginas em que usuario nao está logado, login, cadastro, redefinicao de senha etc */
   .background-guest {
-    position: absolute;
     background-image: url("./assets/images/food.png"),
       linear-gradient(#e93574, #ff5200);
-    width: 100%;
-    height: 100%;
+    min-width: fit-content;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   /* Background para usar nas paginas em que o usuario está logado */

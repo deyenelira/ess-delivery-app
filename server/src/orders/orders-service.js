@@ -14,21 +14,6 @@ class OrderService {
         this.orders = new DBService('orders');
         this.idCount = this.orders.getIdCount();
     }
-    
-    getById(orderId) {
-        return this.orders.getData().find(({ id }) => id == orderId);
-    }
-
-    get(page, filters) {
-        var start = new Date(filters.start);
-        var end = new Date(filters.end);
-        var data = this.orders.getData().filter(item => {
-            var itemDate = new Date(item.created_at);
-            if (itemDate >= start && itemDate <= end) return true;
-            return false;
-        });
-        return this.getByPage(data, page);
-    }
 
     getByClientId(client_id, page, filters) {
         var start = new Date(filters[0]);
@@ -79,7 +64,7 @@ class OrderService {
         if (data){
             var index = this.orders.getData().indexOf(data);
             this.orders.delete(index);
-            return orderId;
+            return true;
         }
         return null;
     }
