@@ -34,7 +34,7 @@ describe("O servidor", () => {
     ],
     cost: 39.00,
     deliveryTax: 2.00
-  }
+  };
 
   beforeAll(() => {server = require('../server')});
 

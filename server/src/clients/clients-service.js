@@ -115,10 +115,10 @@ class ClientService {
         return false;
     }
 
-    forgotPassword(email) {
+    async forgotPassword(email) {
         var data = this.getByEmail(email);
         if (data) {
-            return this.sendEmail({
+            await this.sendEmail({
                 email: data.email,
                 subject: 'foMiau | Redefina sua senha agora',
                 template: 'update_password',
@@ -126,6 +126,7 @@ class ClientService {
                     id: data.id
                 }
             });
+            return true;
         }
 
         return null;
@@ -172,10 +173,10 @@ class ClientService {
 
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                    console.log(error);
+                    //console.log(error);
                     resolve(false);
                 } else {
-                    console.log('Email sent: ' + info.response);
+                    //console.log('Email sent: ' + info.response);
                     resolve(true);
                 }
             });
