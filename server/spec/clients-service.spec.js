@@ -2,6 +2,7 @@ const { ClientService } = require('../src/clients/clients-service');
 const { Client } = require('../src/clients/client');
 
 describe("O serviço de clientes", () => {
+  var originalTimeout;
   var clientService;
   var client;
   var newClient = {
@@ -12,8 +13,16 @@ describe("O serviço de clientes", () => {
     password: "Aninha123"
   };
 
-  beforeEach(() => clientService = new ClientService());
-  afterAll(() => {console.log('\n')});
+  beforeEach(() => {
+    clientService = new ClientService();
+
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+  });
+  afterAll(() => {
+    console.log('\n');
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+  });
 
 
   function addClient(){
