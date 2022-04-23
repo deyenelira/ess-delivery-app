@@ -144,7 +144,6 @@ export class ClientService {
       .then((res) => {
         if (res?.status === 200) {
           this.client = res.json().client;
-          alert('Numero de telefone validado com sucesso');
           this.login(email, password);
           return res.json();
         } else {

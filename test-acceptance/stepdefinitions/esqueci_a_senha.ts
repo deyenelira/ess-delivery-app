@@ -5,7 +5,6 @@ let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
 async function goToPage(page) {
-  console.log('gotopage');
   await browser.get(`http://localhost:4200/${page}`);
   if ((await browser.getCurrentUrl()) !== `http://localhost:4200/${page}`) {
     await $("svg[name='menu']").click();
