@@ -13,6 +13,8 @@ describe("O serviço de clientes", () => {
   };
 
   beforeEach(() => clientService = new ClientService());
+  afterAll(() => {console.log('\n')});
+
 
   function addClient(){
     client = clientService.add(newClient);

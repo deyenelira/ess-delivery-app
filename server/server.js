@@ -277,7 +277,7 @@ app.get('/orders/analytics/:clientId', function (req, res) {
 });
 
 var server = app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('\nExample app listening on port 3000!');
 });
 exports.server = server;
 
