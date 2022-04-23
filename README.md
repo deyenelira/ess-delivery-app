@@ -32,24 +32,31 @@ sudo npm install -g n
 n 14.15
 ```
 
-### Iniciando o projeto
-```
-cd web-app
-sudo npm install
-cd ..
-cd server
-sudo npm install
-```
 ### Rodando o projeto
-Iniciar o servidor
+- Iniciar o servidor
 ```
 cd server
+sudo npm install
 npm start
 ```
-Iniciando o frontend
+- Iniciando o frontend
 ```
 cd web-app
 sudo npm install 
 cd src
 ng serve
+```
+
+### Rodando Testes
+- Testes para o Server
+
+```
+cd server
+npm test
+
+```
+- Testes de Interface
+```
+cd server
+npm test
 ```

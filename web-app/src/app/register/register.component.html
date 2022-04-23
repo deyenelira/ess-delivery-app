@@ -15,7 +15,7 @@
          name="name" 
          required
          >
-         <div class="msg-erro">
+         <div class="msg-erro"  name="errorMsgName">
           <small *ngIf="(registrationForm.get('name')!.invalid && registrationForm.get('name')!.touched)" >
             Forneça um nome valido.
           </small>
@@ -32,7 +32,7 @@
          placeholder="99999999911" 
          required>
 
-         <div class="msg-erro">
+         <div class="msg-erro" name="errorMsgCPF">
           <small *ngIf="(registrationForm.get('cpf')!.invalid && registrationForm.get('cpf')!.touched)" >
             Forneça um cpf valido.
           </small>
@@ -49,7 +49,7 @@
          placeholder="(XX)9XXXX-XXXX" 
          required>
 
-         <div class="msg-erro">
+         <div class="msg-erro"  name="errorMsgPhone">
           <small *ngIf="(registrationForm.get('phone')!.invalid && registrationForm.get('phone')!.touched)" >
             Forneça um número valido.
           </small>
@@ -65,7 +65,7 @@
          placeholder="nome@email.com.br"
          required
        />
-       <div class="msg-erro">
+       <div class="msg-erro"  name="errorMsgEmail">
         <small *ngIf="(registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched)" >
           Forneça um email valido.
         </small>
@@ -80,7 +80,7 @@
          placeholder="•••••••••"
          required
        />
-       <div class="msg-erro">
+       <div class="msg-erro"  name="errorMsgPassword">
         <small *ngIf="(registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched)" >
           A senha precisa ter pelo menos
         </small>
@@ -105,7 +105,7 @@
         placeholder="•••••••••"
         required
       />
-      <div class="msg-erro">
+      <div class="msg-erro"  name="errorMsgPasswordMismatch">
         <small *ngIf="passwordMismatch" >
           As senhas são diferentes.
         </small>

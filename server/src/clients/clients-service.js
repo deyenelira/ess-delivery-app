@@ -88,16 +88,16 @@ class ClientService {
             var email = data.email;
             var index = this.clients.getData().indexOf(data);
             this.clients.delete(index);
-            await this.sendEmail({
-                email: COMPANY_EMAIL,
-                subject: 'foMiau | Cliente deletou conta',
-                template: 'deleted_account',
-                context: {
-                    name: name,
-                    email: email,
-                    reason: reason
-                }
-            });
+            // await this.sendEmail({
+            //     email: COMPANY_EMAIL,
+            //     subject: 'foMiau | Cliente deletou conta',
+            //     template: 'deleted_account',
+            //     context: {
+            //         name: name,
+            //         email: email,
+            //         reason: reason
+            //     }
+            // });
             return true;
         }
         else return null;
@@ -118,14 +118,14 @@ class ClientService {
     async forgotPassword(email) {
         var data = this.getByEmail(email);
         if (data) {
-            await this.sendEmail({
-                email: data.email,
-                subject: 'foMiau | Redefina sua senha agora',
-                template: 'update_password',
-                context: {
-                    id: data.id
-                }
-            });
+            // await this.sendEmail({
+            //     email: data.email,
+            //     subject: 'foMiau | Redefina sua senha agora',
+            //     template: 'update_password',
+            //     context: {
+            //         id: data.id
+            //     }
+            // });
             return true;
         }
 

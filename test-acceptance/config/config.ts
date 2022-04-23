@@ -7,8 +7,8 @@ export let config: Config = {
     SELENIUM_PROMISE_MANAGER: false,
 
     capabilities: {
-        browserName: 'chrome'
-    },
+        browserName: 'firefox'
+        },
 
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
