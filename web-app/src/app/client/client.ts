@@ -10,8 +10,9 @@ export class Client {
   code:  string="";
   validPhone: boolean= false;
   pic_url: string = "";
+  hasOpenOrder : boolean = false;
 
-   constructor(name?: string, 
+   constructor(name?: string,
     cpf?: string,
     email?: string,
     phone?: string,
@@ -26,6 +27,7 @@ export class Client {
       this.code = "";
       this.validPhone = false;
       this.pic_url = "assets/images/profile1.png";
+      this.hasOpenOrder = false;
     }
-  
+
 }

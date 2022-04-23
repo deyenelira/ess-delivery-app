@@ -11,6 +11,7 @@ class Client {
         this.code = client.code;
         this.validPhone = client.validPhone;
         this.pic_url = client.pic_url;
+        this.hasOpenOrder = false;
     }
 }
 exports.Client = Client;
