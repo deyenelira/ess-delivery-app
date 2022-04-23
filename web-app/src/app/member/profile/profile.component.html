@@ -152,7 +152,16 @@
             <input [(ngModel)]="address.complement" [disabled]="!editando">
           </div>
         </div>
-
+        <div class="item">
+          <label>Pedido em andamento: </label>
+          <input
+            [(ngModel)]="hasOpenOrder"
+            [disabled]="!editando"
+            class="check"
+            type="checkbox"
+            (change)="changeHasOpenOrder(hasOpenOrder)"
+          />
+        </div>
       </div>
     </div>
   </div>
