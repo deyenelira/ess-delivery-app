@@ -1,7 +1,7 @@
 const { OrderService } = require('../src/orders/orders-service');
 const { Order } = require('../src/orders/order');
 
-describe("O serviço de clientes", () => {
+describe("O serviço de pedidos", () => {
   var orderService;
   var clientId = 11;
   var order;
