@@ -49,11 +49,11 @@
          placeholder="(XX)9XXXX-XXXX" 
          required>
 
-         <div class="msg-erro"  name="errorMsgPhone">
-          <small *ngIf="(registrationForm.get('phone')!.invalid && registrationForm.get('phone')!.touched)" >
-            Forneça um número valido.
-          </small>
-        </div>
+        <div class="msg-erro"  name="errorMsgPhone">
+            <small *ngIf="(registrationForm.get('phone')!.invalid && registrationForm.get('phone')!.touched)" >
+              Forneça um número valido.
+            </small>
+          </div>
       </div> 
 
      <div class="item">
@@ -149,6 +149,12 @@
         
         >
      </div>
+
+     <div class="msg-erro"  name="errorMsgCode">
+      <small *ngIf="!codeIsCorrect" >
+        O código fornecido está errado.
+      </small>
+    </div>
 
      
 

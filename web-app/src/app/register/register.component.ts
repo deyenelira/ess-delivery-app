@@ -21,6 +21,8 @@ export class RegisterComponent implements OnInit {
   showFormsConfirm: boolean = false;
   registeredClient: number = -1;
   passwordMismatch: boolean = false;
+  codeIsCorrect: boolean = true;
+
 
   constructor(private clientService: ClientService, private router: Router) {
     this.registrationForm = new FormGroup({
@@ -106,9 +108,12 @@ export class RegisterComponent implements OnInit {
           this.client = new Client();
           this.enviouFormsRegister = true;
           this.showFormsConfirm = true;
+          this.codeIsCorrect = true;
         }
       })
-      .catch((erro) => alert(erro));
+      .catch((erro) => {
+        this.codeIsCorrect = false;
+      });
 
   }
 

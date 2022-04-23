@@ -98,6 +98,10 @@ defineSupportCode(function ({ Given, When, Then }) {
         await expect($("input[name='code']").isPresent()).to.eventually.equal(false);
       });
 
+      Then(/^permaneço tela para confirmar codigo de telefone$/, async () => {
+        await expect($("input[name='code']").isPresent()).to.eventually.equal(true);
+      });
+
 
       
     
