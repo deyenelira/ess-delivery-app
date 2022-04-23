@@ -102,6 +102,11 @@ defineSupportCode(function ({ Given, When, Then }) {
         await expect($("input[name='code']").isPresent()).to.eventually.equal(true);
       });
 
+      
+
+      Then(/^eu recebo uma mensagem de "email já registrado" e permaneço na mesma tela$/, async () => {
+        await expect($("input[name='email']").isPresent()).to.eventually.equal(true);
+      });
 
       
     

@@ -69,7 +69,11 @@
         <small *ngIf="(registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched)" >
           Forneça um email valido.
         </small>
+        <small *ngIf="emailRegistered" >
+          Esse email já está registrado.
+        </small>
       </div>
+
      </div>
      <div class="item">
        <label for="password">Senha</label>

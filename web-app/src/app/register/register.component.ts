@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { Client } from "src/app/client/client";
 import { ClientService } from "src/app/client/client.service";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: "register",
@@ -22,6 +23,7 @@ export class RegisterComponent implements OnInit {
   registeredClient: number = -1;
   passwordMismatch: boolean = false;
   codeIsCorrect: boolean = true;
+  emailRegistered: boolean = false;
 
 
   constructor(private clientService: ClientService, private router: Router) {
@@ -92,7 +94,14 @@ export class RegisterComponent implements OnInit {
           this.showFormsConfirm = true;
         }
       })
-      .catch((erro) => alert(erro._body));
+      .catch((erro) => {
+        const json = '{"result":true, "count":42}';
+        const erroJSON = JSON.parse(erro._body);
+        if(erroJSON.message === 'Client with email already registered'){
+          this.emailRegistered = true;
+        }
+        
+      });
   }
 
   confirmPhoneNumber(): void {
