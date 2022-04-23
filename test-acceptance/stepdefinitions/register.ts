@@ -4,24 +4,8 @@ let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
 
-let _password = '';
-let _email = '';
-
-async function goTo(page: string) {
-    await browser.driver.get(`http://localhost:4200/${page}`);
-  }
-
-async function deleteUser() {
-
-    
-    await browser.post(`http://localhost:4200/client/login`).send( {email : _email, password: _password});
-    await goTo('profile');
-    await $("a[name='deleteAccount']").click();
-    await browser.waitForAngular();
-    await $("input[name='psw']").sendKeys(_password);
-    await $("button[name='confirmar']").click();
-    await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
-  }
+let local_password = '';
+let local_email = '';
 
 
 defineSupportCode(function ({ Given, When, Then }) {
@@ -52,6 +36,11 @@ defineSupportCode(function ({ Given, When, Then }) {
           await $("input[name='password']").sendKeys(<string>psw);
           await $("input[name='confirm_password']").sendKeys(<string>psw);
           await element(by.buttonText('Continuar')).click();
+          local_email = <string>email;
+          local_password = <string>psw;
+          console.log("ATENCAO");
+          console.log(local_email);
+          console.log(local_password);
       });
 
       When(
@@ -64,6 +53,11 @@ defineSupportCode(function ({ Given, When, Then }) {
           await $("input[name='password']").sendKeys(<string>psw);
           await $("input[name='confirm_password']").sendKeys(<string>psw);
           await element(by.buttonText('Continuar')).click();
+          local_email = <string>email;
+          local_password = <string>psw;
+          console.log("ATENCAO");
+          console.log(local_email);
+          console.log(local_password);
         }
       );
 
@@ -78,20 +72,36 @@ defineSupportCode(function ({ Given, When, Then }) {
       );
 
       Then(/^sou levado para a pagina Home$/, async () => {
+        
         await expect($("div[name='home']").isPresent()).to.eventually.equal(true);
-        //await deleteUser();
+        await browser.driver.get(`http://localhost:4200/profile`);
+        await $("a[name='deleteAccount']").click();
+        await browser.waitForAngular();
+        await $("input[name='psw']").sendKeys(local_password);
+        await $("button[name='confirmar']").click();
+        await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
+        
       });
 
       Then(/^aparece a tela para confirmar codigo de telefone$/, async () => {
         await expect($("input[name='code']").isPresent()).to.eventually.equal(true);
-        //await deleteUser()
-      });
-
-      Then(/^aparece a tela para confirmar codigo de telefone e digito o codigo "([^\"]*)"$/, async (code) => {
-        await expect($("input[name='code']").isPresent()).to.eventually.equal(true);
-        await $("input[name='code']").sendKeys(<string>code);
-        await expect($("div[name='home']").isPresent()).to.eventually.equal(true);
-        //await deleteUser()
+        await browser.get(`http://localhost:4200/login`);
+        await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
+        await $("input[name='email']").sendKeys(<string>local_email);
+        await $("input[name='psw']").sendKeys(<string>local_password);
+        await $("button[name='butao']").click();
+        await browser.waitForAngular();
+        console.log(await browser.getCurrentUrl());
+        console.log(local_email);
+        console.log(local_password);
+        await browser.driver.get(`http://localhost:4200/profile`);
+        console.log(await browser.getCurrentUrl());
+        await $("a[name='deleteAccount']").click();
+        await browser.waitForAngular();
+        await $("input[name='psw']").sendKeys(local_password);
+        await $("button[name='confirmar']").click();
+        await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
+        
       });
 
       Then(/^eu permaneço na mesma página de cadastro e não consigo seguir para a tela de confirmação de codigo.$/, async () => {
@@ -100,6 +110,23 @@ defineSupportCode(function ({ Given, When, Then }) {
 
       Then(/^permaneço tela para confirmar codigo de telefone$/, async () => {
         await expect($("input[name='code']").isPresent()).to.eventually.equal(true);
+        await browser.get(`http://localhost:4200/login`);
+        await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
+        await $("input[name='email']").sendKeys(<string>local_email);
+        await $("input[name='psw']").sendKeys(<string>local_password);
+        await $("button[name='butao']").click();
+        await browser.waitForAngular();
+        console.log(await browser.getCurrentUrl());
+        console.log(local_email);
+        console.log(local_password);
+        await browser.driver.get(`http://localhost:4200/profile`);
+        console.log(await browser.getCurrentUrl());
+        await $("a[name='deleteAccount']").click();
+        await browser.waitForAngular();
+        await $("input[name='psw']").sendKeys(local_password);
+        await $("button[name='confirmar']").click();
+        await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
+        
       });
 
       

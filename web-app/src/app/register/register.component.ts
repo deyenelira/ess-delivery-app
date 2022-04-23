@@ -95,7 +95,6 @@ export class RegisterComponent implements OnInit {
         }
       })
       .catch((erro) => {
-        const json = '{"result":true, "count":42}';
         const erroJSON = JSON.parse(erro._body);
         if(erroJSON.message === 'Client with email already registered'){
           this.emailRegistered = true;
