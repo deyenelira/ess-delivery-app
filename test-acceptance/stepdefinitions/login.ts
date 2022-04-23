@@ -3,13 +3,14 @@ import { browser, $, element, by } from 'protractor';
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
-let password = '';
+let testEmail = '';
+let testPassword = '';
 
 async function goTo(page: string) {
   await browser.driver.get(`http://localhost:4200/${page}`);
 }
 
-async function createUser(email:string, psw:string) {
+async function createUser(email: string, psw: string) {
   await goTo('register');
 
   await $("input[name='name']").sendKeys('Nome teste');
@@ -24,6 +25,14 @@ async function createUser(email:string, psw:string) {
   await logOut();
 }
 
+async function login() {
+  await goTo('login');
+  await $("input[name='email']").sendKeys(testEmail);
+  await $("input[name='psw']").sendKeys(testPassword);
+  await $("button[name='butao']").click();
+  await browser.waitForAngular();
+}
+
 async function confirmCode() {
   await $("input[name='code']").sendKeys('ABC123');
   await $("button[name='continuar-code']").click();
@@ -33,7 +42,7 @@ async function deleteUser() {
   await goTo('profile');
   await $("a[name='deleteAccount']").click();
   await browser.waitForAngular();
-  await $("input[name='psw']").sendKeys(password);
+  await $("input[name='psw']").sendKeys(testPassword);
   await $("button[name='confirmar']").click();
   await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
 }
@@ -53,11 +62,18 @@ defineSupportCode(function ({ Given, When, Then }) {
     await expect($("input[name='psw']").isPresent()).to.eventually.equal(true);
   });
 
+  Given(
+    /^existe um usuário cadastrado com e-mail "([^\"]*)" e senha "([^\"]*)"$/,
+    async (email, psw) => {
+      testEmail = <string>email;
+      testPassword = <string>psw;
+      await createUser(<string>email, <string>psw);
+    }
+  );
+
   When(
     /^eu preencho os campos com e-mail "([^\"]*)" e senha "([^\"]*)"$/,
     async (email, psw) => {
-      password = <string>psw;
-      await createUser(<string>email, <string>psw);
       await $("input[name='email']").sendKeys(<string>email);
       await $("input[name='psw']").sendKeys(<string>psw);
       await $("button[name='butao']").click();
@@ -76,7 +92,6 @@ defineSupportCode(function ({ Given, When, Then }) {
 
   Then(/^eu vou para a página de Home do sistema$/, async () => {
     await expect($("div[name='home']").isPresent()).to.eventually.equal(true);
-    
     await deleteUser();
   });
 
@@ -84,6 +99,8 @@ defineSupportCode(function ({ Given, When, Then }) {
     await expect($("div[name='errorMsg']").isPresent()).to.eventually.equal(
       true
     );
+    await login();
+    await deleteUser();
   });
 
   Then(/^não consigo pressionar o botão de entrar$/, async () => {
@@ -94,7 +111,5 @@ defineSupportCode(function ({ Given, When, Then }) {
 
   Then(/^permaneço na página de login$/, async () => {
     expect($("input[name='psw']").isPresent()).to.eventually.equal(true);
-    deleteUser();
   });
-
-})
+});
