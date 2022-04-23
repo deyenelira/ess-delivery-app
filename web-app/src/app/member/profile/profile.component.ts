@@ -31,6 +31,8 @@ export class ProfileComponent implements OnInit {
   pay_methods = [['Cartão de Crédito', 'credit'], ['Cartão De Débito', 'debit'], ['Dinheiro', 'money']];
   pay_method: string = 'money';
 
+  hasOpenOrder : boolean = false;
+
   erro = {
     'name': false,
     'cpf': false,
@@ -77,6 +79,7 @@ export class ProfileComponent implements OnInit {
           this.client.code = result.code;
           this.client.validPhone = result.validPhone;
           this.client.pic_url = result.pic_url;
+          this.hasOpenOrder = result.hasOpenOrder;
 
           if (this.client.addresses.length) {
             this.address = this.client.addresses[0];
@@ -97,6 +100,10 @@ export class ProfileComponent implements OnInit {
 
   changePayMethod(pay_method: string) {
     this.client.pay_method = pay_method;
+  }
+
+  changeHasOpenOrder(hasOpenOrder: boolean) {
+    this.client.hasOpenOrder = hasOpenOrder;
   }
 
   newAddress() {
@@ -252,7 +259,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openModalDelete() {
-    if (!(this.client.id % 3)) {
+    if (this.client.hasOpenOrder) {
       this.orderOn = true;
       setTimeout(() => {
         this.orderOn = false;

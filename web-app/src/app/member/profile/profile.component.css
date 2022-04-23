@@ -124,6 +124,13 @@
     font-family: ABeeZee Regular;
 }
 
+.check {
+  height: 40px;
+  display: flex;
+  align-self: left;
+  width: 40px;
+}
+
 @media (max-width: 1450px) {
 
     .pic-item input {
@@ -212,10 +219,10 @@
     color: #ffffff;
     background: #09824F;
     border-radius: 50%;
-} 
+}
 
 .address {
-    padding: 20px 5% 20px 10%;  
+    padding: 20px 5% 20px 10%;
 }
 
 .address .item {
@@ -251,7 +258,7 @@ p {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 11;
-    
+
 }
 
 .content-modal .header {
