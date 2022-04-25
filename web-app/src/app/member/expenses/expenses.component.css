@@ -33,7 +33,22 @@
     grid-row: auto auto;
     grid-column-gap: 300px;
     grid-row-gap: 200px;
-    padding-bottom: 100px;
+    padding-bottom: 10px;
+}
+
+.total {
+    display: flex;
+    margin: 50px auto;
+    justify-content: left;
+    width: 1200px;
+}
+
+.total content{
+    width: 240px;
+    padding: 0 25px;
+    border: none;
+    background: -webkit-linear-gradient(#e93574, #ff5200);
+    border-radius: 10px;
 }
 
 @media (max-width: 1200px) {
@@ -41,6 +56,7 @@
         width: 450px;
         justify-content: center;
     }
+
     .graficos {
         width: 450px;
         margin: 0 auto;
@@ -50,6 +66,12 @@
         grid-column-gap: 0;
         grid-row-gap: 200px;
     }
+
+    .total {
+        width: 450px;
+        justify-content: left;
+    }
+
 }
 
 .container {
@@ -89,4 +111,11 @@ h3 {
     font-family: Cherry Bomb One Regular;
     font-size: 32px;
     color: #000000;
-  }
+}
+
+h2 {
+    margin: 0;
+    font-family: 'ABeeZee Regular';
+    font-size: 32px;
+    color: #ffffff;
+}  
