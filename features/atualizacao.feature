@@ -4,8 +4,8 @@ Feature: Atualização dos dados
     So that terei como atualizar dados no perfil
 
     Scenario:  Atualizando um nome de cliente(1)
-        Given : Estou logado como “Aninha” no sistema com senha "aninhA123"
-        And : estou na página do meu perfil com nome "Aninha" 
+        Given : Estou na página de perfil
+        And : estou logado como “Aninha” no sistema com senha "aninhA123" 
         When : Eu tento atualizar os dados do perfil
         And : Eu altero o nome para “Ana”
         Then : O sistema me pede para uma autenticação por senha
