@@ -30,8 +30,10 @@
 
 <!-- Caso não tenham pedidos -->
 <div class="semPedidos" *ngIf="!ordered">
-    <img src="assets/images/cryingCat.png" alt=":(">
-    <h3>Parece que você não comprou nada esse mês</h3>
+    <content>
+        <img src="assets/images/cryingCat.png" alt=":(">
+        <h3>Parece que você não comprou nada esse mês</h3>
+    </content>    
 </div>
 
 <div class="total">
