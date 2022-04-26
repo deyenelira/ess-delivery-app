@@ -41,7 +41,7 @@
          </button>
       </div>
    </div>
-   <div class="box" *ngIf="getOrder">
+   <div name="getOrder" class="box" *ngIf="getOrder">
       <div class="header">
          <h1 class="title ">Detalhes do pedido</h1>
       </div>
@@ -104,7 +104,7 @@
             </div>
          </span>
       </div>
-      <div class="buttons-order">
+      <div class="buttons-order" name="buttonsOrder">
          <div class="back">
             <button class="button-order" (click)="clickOrder(this.order.id)">voltar</button>    
          </div> 

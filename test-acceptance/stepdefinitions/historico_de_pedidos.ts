@@ -74,7 +74,7 @@ defineSupportCode(function ({ Given, When, Then }) {
   Then(
     /^são exibidas informações detalhadas sobre o pedido$/,
     async () => {
-     expect($("div[name='orderDetails']").isPresent()).to.eventually.equal(true);
+     expect($("div[name='getOrder']").isPresent()).to.eventually.equal(true);
     }
   );
 
