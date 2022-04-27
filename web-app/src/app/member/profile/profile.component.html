@@ -2,7 +2,7 @@
   <div class="background">
     <div class="warning">
       <div class="options">
-        <a *ngIf="!editando" (click)="changeEdit()" name="editar">
+        <a *ngIf="!editando" (click)="changeEdit()" name="editar" id="butao-edit">
         <p class="edit"> editar dados </p>
       </a>
       <a *ngIf="editando" (click)="validate()" name="salvar">
@@ -28,8 +28,8 @@
           <label>Nome: </label>
           <input id="client-name-input" [(ngModel)]="client.name" [disabled]="!editando" name = "client_name" value = "client.name">
         </div>
-        <div class="msg-erro">
-          <p *ngIf="erro['name']">
+        <div class="msg-erro" id="nomeErr">
+          <p *ngIf="erro['name']", id="erro['name']">
             Forneça um nome válido.
           </p>
         </div>
@@ -37,25 +37,25 @@
           <label>CPF: </label>
           <input id="client-cpf-input" [(ngModel)]="client.cpf" [disabled]="!editando">
         </div>
-        <div class="msg-erro">
+        <div class="msg-erro" id="cpfErr">
           <p *ngIf="erro['cpf']">
             Forneça um cpf válido.
           </p>
         </div>
         <div class="item">
           <label>E-mail: </label>
-          <input id="client-email-input" [(ngModel)]="client.email" [disabled]="!editando">
+          <input id="client-email-input" [(ngModel)]="client.email" [disabled]="!editando" name = "client_email">
         </div>
-        <div class="msg-erro">
+        <div class="msg-erro" id="emailErr">
           <p *ngIf="erro['email']">
             Forneça um email válido.
           </p>
         </div>
         <div class="item">
           <label>Telefone: </label>
-          <input id="client-phone-input" [(ngModel)]="client.phone" [disabled]="!editando">
+          <input id="client-phone-input" [(ngModel)]="client.phone" [disabled]="!editando" name="client_phone">
         </div>
-        <div class="msg-erro">
+        <div class="msg-erro" id = "telefoneErr">
           <p *ngIf="erro['phone']">
             Forneça um telefone válido.
           </p>
@@ -175,7 +175,7 @@
     <div class="body">
       <h2>Confirme sua senha</h2>
       <input placeholder="********" [(ngModel)]="psw" type="password" name="senhaEditar">
-      <div *ngIf="wrongPsw" class="msg-erro">
+      <div *ngIf="wrongPsw" class="msg-erro" id="erroSenha1">
         <span>Senha incorreta!</span>
       </div>
       <div *ngIf="rightPsw" class="msg-erro">
