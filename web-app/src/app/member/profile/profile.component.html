@@ -3,17 +3,17 @@
     <div class="warning">
       <div class="options">
         <a *ngIf="!editando" (click)="changeEdit()" name="changeData">
-        <p class="edit"> editar dados </p>
-      </a>
-      <a *ngIf="editando" (click)="validate()" name="saveData">
-        <p class="save"> salvar alterações </p>
-      </a>
-      <a (click)="openModalDelete()" name="deleteAccount">
-        <p class="delete"> deletar conta </p>
-      </a>
+          <p class="edit"> editar dados </p>
+        </a>
+        <a *ngIf="editando" (click)="validate()" name="saveData">
+          <p class="save"> salvar alterações </p>
+        </a>
+        <a (click)="openModalDelete()" name="deleteAccount">
+          <p class="delete"> deletar conta </p>
+        </a>
       </div>
-      <div name="erro-order">
-        <span *ngIf="orderOn" >
+      <div name="erro-order" [ngStyle]="{height: '20px'}">
+        <span *ngIf="orderOn">
           Não foi possível deletar sua conta pois há pedidos em andamento.
         </span>
       </div>

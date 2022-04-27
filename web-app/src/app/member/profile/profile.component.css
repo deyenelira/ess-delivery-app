@@ -370,7 +370,5 @@ p {
 
 .warning span {
     margin-right: 10px;
-    margin-top: 50px;
-    position: absolute;
     color: #FF0000;
 }
