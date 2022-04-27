@@ -10,8 +10,23 @@ async function goTo(page: string) {
   await browser.driver.get(`http://localhost:4200/${page}`);
 }
 
-defineSupportCode(function ({ Given, When, Then }) {
-  Given(/^estou logada com o usuário dls6@cin.ufpe.br com senha 123123$/, async () => {
+async function logOut() {
+  await $("svg[name='menu']").click();
+  await $("a[name='signOut']").click();
+}
+
+defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
+  setDefaultTimeout(10 * 1000);
+  
+  Before(async () => {
+    await goTo('login');
+    if ((await browser.getCurrentUrl()) !== `http://localhost:4200/login`) {
+      await $("svg[name='menu']").click();
+      await $("a[name='signOut']").click();
+    }
+  });
+
+  Given(/^estou logada com o usuário "([^\"]*)" com senha "([^\"]*)"$/, async (email, psw) => {
     await goTo('login');
     if ((await browser.getCurrentUrl()) !== `http://localhost:4200/login`) {
       await $("svg[name='menu']").click();
@@ -74,28 +89,32 @@ defineSupportCode(function ({ Given, When, Then }) {
   Then(
     /^são exibidas informações detalhadas sobre o pedido$/,
     async () => {
-     expect($("div[name='getOrder']").isPresent()).to.eventually.equal(true);
+     await expect($("div[name='getOrder']").isPresent()).to.eventually.equal(true);
+     await logOut();
     }
   );
 
   Then(
     /^é exibido uma mensagem informando que não há pedidos naquele período$/,
     async () => {
-     expect($("div[name='no-orders']").isPresent()).to.eventually.equal(true);
+     await expect($("div[name='no-orders']").isPresent()).to.eventually.equal(true);
+     await logOut();
     }
   );
 
   Then(
     /^é exibido na tela todos os pedidos que fiz na semana recorrente de forma paginada$/,
     async () => {
-      expect($("div[name='container']").isPresent()).to.eventually.equal(true);
+      await expect($("div[name='container']").isPresent()).to.eventually.equal(true);
+      await logOut();
     }
   );
 
   Then(
     /^é exibido na tela todos os pedidos que fiz no mês de forma paginada$/,
     async () => {
-      expect($("div[name='container']").isPresent()).to.eventually.equal(true);
+      await expect($("div[name='container']").isPresent()).to.eventually.equal(true);
+      await logOut();
     }
   );
 });
