@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
           this.client.code = result.code;
           this.client.validPhone = result.validPhone;
           this.client.pic_url = result.pic_url;
-          this.hasOpenOrder = result.hasOpenOrder;
+          this.client.hasOpenOrder = result.hasOpenOrder;
 
           if (this.client.addresses.length) {
             this.address = this.client.addresses[0];
@@ -262,9 +262,6 @@ export class ProfileComponent implements OnInit {
   openModalDelete() {
     if (this.client.hasOpenOrder) {
       this.orderOn = true;
-      setTimeout(() => {
-        this.orderOn = false;
-      }, 4000);
     }
     else this.modalDelete = true;
   }
@@ -279,10 +276,8 @@ export class ProfileComponent implements OnInit {
         console.log('res:' + res);
         if (!res) {
           this.wrongPsw = true;
-          setTimeout(() => {
-            this.wrongPsw = false;
-          }, 2000);
         } else {
+          this.wrongPsw = false;
           this.clientService.delete(this.client, this.reason)
             .then(res => {
               if (res) {
