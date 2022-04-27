@@ -10,7 +10,7 @@ Esse projeto desenvolve as features relacionadas ao registro de clientes para um
 - Dayane Lira da Silva
 - Matheus Rodrigues Bueno Godinho
 - Pedro Jorge Lima da Silva
-- Victoria Luisi
+- Victória Luisi Souza Carneiro
 
 ## Como rodar o projeto
 

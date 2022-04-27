@@ -17,15 +17,9 @@ Feature: "Histórico de pedidos"
         Given estou logada com o usuário dls6@cin.ufpe.br com senha 123123
         When clico em Acessar histórico de pedidos e seleciono um mês específico
         Then é exibido na tela todos os pedidos que fiz no mês de forma paginada
-
+    
     Scenario: Visualizando próxima página no histórico de pedidos
         Given estou logada com o usuário dls6@cin.ufpe.br com senha 123123
         When clico em Acessar histórico de pedidos e seleciono um mês específico
         And clico para ir para a próxima página 
         Then é exibido na tela todos os pedidos que fiz no mês de forma paginada
-
-    Scenario: Visualizando informações específicas no histórico de  pedidos 
-        Given estou logada com o usuário dls6@cin.ufpe.br com senha 123123
-        When clico em Acessar histórico de pedidos e seleciono um mês específico
-        And clico em um pedido
-        Then são exibidas informações detalhadas sobre o pedido
