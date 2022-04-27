@@ -29,7 +29,7 @@
 <!-- TODO: Mostrar menu lateral -->
 <div class="menu" *ngIf="isMenuOpen">
   <div class="options">
-    <a (click)="clickMenu()" routerLink="/profile/">Perfil</a>
+    <a (click)="clickMenu()" name="profile" routerLink="/profile/">Perfil</a>
     <a name="history" (click)="clickMenu()" routerLink="/history/">Histórico</a>
     <a (click)="clickMenu()" routerLink="/expenses/">Perfil de consumo</a>
     <a name="signOut" (click)="sair()">Sair</a>
