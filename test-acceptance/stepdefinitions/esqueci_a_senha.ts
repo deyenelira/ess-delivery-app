@@ -15,12 +15,12 @@ async function createUser(email: string, psw: string) {
   await goTo('register');
 
   await $("input[name='name']").sendKeys('Nome teste');
-  await $("input[name='cpf']").sendKeys('14219938052');
-  await $("input[name='phone']").sendKeys('81999999999');
+  await $("input[name='cpf']").sendKeys('12345678912');
+  await $("input[name='phone']").sendKeys('81911119999');
   await $("input[name='email']").sendKeys(<string>email);
   await $("input[name='password']").sendKeys(<string>psw);
   await $("input[name='confirm_password']").sendKeys(<string>psw);
-  await element(by.buttonText('Continuar')).click();
+  await $("button[name='continuar-register']").click();
 
   await confirmCode();
   await logOut();
@@ -54,6 +54,10 @@ async function deleteUser() {
 async function logOut() {
   await $("svg[name='menu']").click();
   await $("a[name='signOut']").click();
+}
+
+function rightPsw(psw1: string, psw2: string) {
+  return psw1 === psw2 && psw1.length >= 8 && /\d/.test(psw1) && /[A-Z]/.test(psw1);
 }
 
 defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
@@ -92,10 +96,8 @@ defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
   Then(/^aparece uma mensagem de sucesso$/, async () => {
     await expect($("div[name='msg-success']").isPresent()).to.eventually.equal(true);
 
-    if (testEmail && testPassword){
-      await login();
-      await deleteUser();
-    }
+    await login();
+    await deleteUser();
   });
 
   Then(/^eu vou para a página de login$/, async () => {
@@ -103,8 +105,8 @@ defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
   });
 
   //update-password
-  Given(/^que estou na página de "([^\"]*)" com id "(\d*)"$/, async (page, id) => {
-    var fullPage: string = `${page}?id=${id}`;
+  Given(/^que estou na página de "([^\"]*)" com email "([^\"]*)"$/, async (page, email) => {
+    var fullPage: string = `${page}?email=${email}`;
     await goTo(fullPage);
     await expect($(`form[name='${page}']`).isPresent()).to.eventually.equal(true);
   });
@@ -112,6 +114,7 @@ defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
   When(
     /^eu preencho os campos com "([^\"]*)" e "([^\"]*)", respectivamente, e confirmo$/,
     async (psw1, psw2) => {
+      if (rightPsw(<string>psw1, <string>psw2)) testPassword = <string>psw1;
       await $("input[name='psw1']").sendKeys(<string>psw1);
       await $("input[name='psw2']").sendKeys(<string>psw2);
       await element(by.buttonText('Redefinir')).click();
@@ -120,6 +123,11 @@ defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
 
   Then(/^aparece uma mensagem de erro de "([^\"]*)"$/, async (erro) => {
     await expect($(`span[name='${erro}']`).isPresent()).to.eventually.equal(true);
+
+    if (<string>erro === "wrong-equals" || <string>erro === "wrong-format") {
+      await login();
+      await deleteUser();
+    }
   });
   
 });

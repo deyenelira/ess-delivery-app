@@ -118,14 +118,14 @@ class ClientService {
     async forgotPassword(email) {
         var data = this.getByEmail(email);
         if (data) {
-            await this.sendEmail({
-                email: data.email,
-                subject: 'foMiau | Redefina sua senha agora',
-                template: 'update_password',
-                context: {
-                    id: data.email
-                }
-            });
+            // await this.sendEmail({
+            //     email: data.email,
+            //     subject: 'foMiau | Redefina sua senha agora',
+            //     template: 'update_password',
+            //     context: {
+            //         id: data.email
+            //     }
+            // });
             return true;
         }
 
