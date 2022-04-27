@@ -52,7 +52,17 @@ async function logOut() {
   await $("a[name='signOut']").click();
 }
 
-defineSupportCode(function ({ Given, When, Then }) {
+defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
+  setDefaultTimeout(10 * 1000);
+  
+  Before(async () => {
+    await goTo('login');
+    if ((await browser.getCurrentUrl()) !== `http://localhost:4200/login`) {
+      await $("svg[name='menu']").click();
+      await $("a[name='signOut']").click();
+    }
+  });
+
   Given(/^que estou na página de login$/, async () => {
     await browser.driver.get(`http://localhost:4200/login`);
     if ((await browser.getCurrentUrl()) !== `http://localhost:4200/login`) {
