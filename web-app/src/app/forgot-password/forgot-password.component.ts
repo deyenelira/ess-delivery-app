@@ -22,6 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
    errouEmail: boolean = false;
    form: FormGroup;
    enviouEmail: boolean = false;
+   loading: boolean = false;
    
    constructor(
       private clientService: ClientService,
@@ -33,13 +34,18 @@ export class ForgotPasswordComponent implements OnInit {
    }
 
    sendEmail(): void {
+      this.loading = true;
       this.clientService.forgot_password(this.form.value.email)
       .then(result => {
          if (result) {
             this.errouEmail = false;
             this.enviouEmail = true;
+            this.loading = false;
          }
-         else this.errouEmail = true;
+         else {
+            this.errouEmail = true;
+            this.loading = false;
+         }
       })
       .catch(erro => alert(erro));
    }

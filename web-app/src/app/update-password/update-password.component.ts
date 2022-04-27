@@ -30,6 +30,7 @@ export class UpdatePasswordComponent implements OnInit {
 
   form: FormGroup;
   id: number = 0;
+  email: string = '';
   client: Client = new Client();
   mudouSenha:boolean = false;
   errouSenha = {
@@ -77,14 +78,12 @@ export class UpdatePasswordComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        console.log(params); // { id: 0 }
-
-        this.id = params['id'];
-        console.log(this.id); // 0
+        console.log(params); 
+        this.email = params['email'];
       }
     );
 
-    this.clientService.getById(this.id)
+    this.clientService.getByEmail(this.email)
     .then(result => {
       if (result) {
         this.client.id = result.id;
