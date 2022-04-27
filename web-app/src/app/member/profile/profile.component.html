@@ -204,6 +204,10 @@
       <div *ngIf="wrongPsw" class="msg-erro">
         <span>Senha incorreta!</span>
       </div>
+      <div *ngIf="deleting" class="msg-success">
+        <span class="msg">Senha correta, sua conta está sendo deletada. Até mais!</span>
+        <mat-progress-spinner mode="indeterminate" color="accent" diameter="25"></mat-progress-spinner>
+      </div>
     </div>
     <div class="buttons">
       <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',

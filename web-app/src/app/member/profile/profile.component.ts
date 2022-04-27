@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   psw: string = '';
   reason: string = '';
   orderOn: boolean = false;
+  deleting: boolean = false;
 
   pay_methods = [['Cartão de Crédito', 'credit'], ['Cartão De Débito', 'debit'], ['Dinheiro', 'money']];
   pay_method: string = 'money';
@@ -285,7 +286,11 @@ export class ProfileComponent implements OnInit {
           this.clientService.delete(this.client, this.reason)
             .then(res => {
               if (res) {
-                this.clientService.logOut();
+                this.deleting = true;
+                setTimeout(() => {
+                  this.deleting = false;
+                  this.clientService.logOut();
+                }, 5000)
               }
             });
         }
