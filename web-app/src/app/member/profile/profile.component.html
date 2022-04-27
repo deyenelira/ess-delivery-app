@@ -62,8 +62,8 @@
         </div>
         <div class="item">
           <label>Método de Pagamento: </label>
-          <select [(ngModel)]="pay_method" (change)="changePayMethod(pay_method)" [disabled]="!editando">
-            <option *ngFor="let method of pay_methods" [value]="method[1]">
+          <select [(ngModel)]="pay_method" (change)="changePayMethod(pay_method)" [disabled]="!editando" id="menuPags">
+            <option *ngFor="let method of pay_methods" [value]="method[1]" id="payName">
               {{ method[0] }}
             </option>
           </select>

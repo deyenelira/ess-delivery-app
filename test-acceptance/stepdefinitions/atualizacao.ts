@@ -5,6 +5,7 @@ let expect = chai.expect;
 
 let currPassword = '';
 let currChange = '';
+let metodoPagNew = 1;
 
 async function goToPage(page) {
     await browser.get(`http://localhost:4200/${page}`);
@@ -59,6 +60,7 @@ async function login(email, password) {
       When(
         /^Eu altero o "([^\"]*)" de "([^\"]*)" para "([^\"]*)"$/, async (field, oldValue, newValue) => {
           currChange = <string>newValue;
+          
           if(<string>field == "nome"){
             var foo = element(by.id('client-name-input'));
             await(foo.clear());
@@ -73,6 +75,21 @@ async function login(email, password) {
             var foo = element(by.id('client-phone-input'));
             await(foo.clear());
             await $("input[name='client_phone']").sendKeys(<string>currChange);
+          }
+          else if(<string>field == "método de pagamento"){
+            if (<string>newValue == "dinheiro"){
+              metodoPagNew = 3;
+            }
+            else if (<string>newValue == "cartão de crédito"){
+              metodoPagNew = 1;
+            }
+            else if (<string>newValue == "cartão de débito"){
+              metodoPagNew = 2;
+            }
+
+            var foo = element(by.id('client-phone-input'));
+            await $("select[id='menuPags']").click();
+            await $("option[value=2]").click();
           }
       });
 
@@ -96,6 +113,11 @@ async function login(email, password) {
         if(<string>fieldName == "telefone"){
           var phone = element(by.id('client-phone-input'));
           await expect(phone.getAttribute('value')).to.eventually.equal(currChange);
+        }
+
+        if(<string>fieldName == "método de pagamento"){
+          var metodoPag = element(by.id('payName'));
+          await expect(metodoPag.getAttribute('value')).to.eventually.equal(currChange);
         }
       });
       

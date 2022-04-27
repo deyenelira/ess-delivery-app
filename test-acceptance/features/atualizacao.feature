@@ -49,7 +49,7 @@ Feature: Atualização dos dados
         And Eu altero o "email" de "alas2cin.ufpe.br" para "alas3cin.ufpe.br"
         Then Aparece uma mensagem de erro no "email" digitado e não é possivel salvar
         
-    Scenario:  Atualizando um nome de endereço(7)
+    Scenario:  Atualizando um método de pagamento(7)
         Given estou logado com e-mail "alas2@cin.ufpe.br" no sistema com senha "aninhA123"
         And estou na página de perfil
         When Eu tento atualizar os dados do perfil
