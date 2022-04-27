@@ -33,7 +33,37 @@
     grid-row: auto auto;
     grid-column-gap: 300px;
     grid-row-gap: 200px;
-    padding-bottom: 100px;
+    padding-bottom: 10px;
+}
+
+.total {
+    display: flex;
+    margin: 50px auto;
+    justify-content: left;
+    width: 1200px;
+}
+
+.total content{
+    width: 240px;
+    padding: 0 25px;
+    border: none;
+    background: -webkit-linear-gradient(#e93574, #ff5200);
+    border-radius: 10px;
+}
+
+.semPedidos{
+    display: flex;
+    margin: 80px auto;
+    justify-content: center;
+    width: 1200px;
+}
+
+.semPedidos content{
+    width: 800px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 @media (max-width: 1200px) {
@@ -41,6 +71,7 @@
         width: 450px;
         justify-content: center;
     }
+
     .graficos {
         width: 450px;
         margin: 0 auto;
@@ -50,6 +81,16 @@
         grid-column-gap: 0;
         grid-row-gap: 200px;
     }
+    .semPedidos{
+        width: auto;
+        justify-content: center;
+    }
+
+    .total {
+        width: 450px;
+        justify-content: left;
+    }
+
 }
 
 .container {
@@ -70,23 +111,16 @@ echarts {
     position: revert !important;
 }
 
-.semPedidos{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    height: 300px;
-    width: 800px;
-    
-    transform: translate(-50%, -50%);
-
-    text-align: center;
-
-}
-
 h3 {
     margin: 0;
     font-family: Cherry Bomb One Regular;
     font-size: 32px;
     color: #000000;
-  }
+}
+
+h2 {
+    margin: 0;
+    font-family: 'ABeeZee Regular';
+    font-size: 32px;
+    color: #ffffff;
+}  
