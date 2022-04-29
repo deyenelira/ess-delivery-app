@@ -1,19 +1,22 @@
-<div class="profile-page">
+<div class="profile-page" name="profile">
   <div class="background">
     <div class="warning">
       <div class="options">
-        <a *ngIf="!editando" (click)="changeEdit()">
-        <p class="edit"> editar dados </p>
-      </a>
-      <a *ngIf="editando" (click)="validate()">
-        <p class="save"> salvar alterações </p>
-      </a>
-      <a (click)="openModalDelete()" name="deleteAccount">
-        <p class="delete"> deletar conta </p>
-      </a>
+        <a *ngIf="!editando" (click)="changeEdit()" name="changeData">
+          <p class="edit"> editar dados </p>
+        </a>
+        <a *ngIf="editando" (click)="validate()" name="saveData">
+          <p class="save"> salvar alterações </p>
+        </a>
+        <a (click)="openModalDelete()" name="deleteAccount">
+          <p class="delete"> deletar conta </p>
+        </a>
       </div>
-      <span *ngIf="orderOn">Não foi
-         possível deletar sua conta pois há pedidos em andamento.</span>
+      <div name="erro-order" [ngStyle]="{height: '20px'}">
+        <span *ngIf="orderOn">
+          Não foi possível deletar sua conta pois há pedidos em andamento.
+        </span>
+      </div>
     </div>
     <div class="content">
       <div class="pic">
@@ -155,11 +158,12 @@
         <div class="item">
           <label>Pedido em andamento: </label>
           <input
-            [(ngModel)]="hasOpenOrder"
+            [(ngModel)]="client.hasOpenOrder"
             [disabled]="!editando"
             class="check"
             type="checkbox"
-            (change)="changeHasOpenOrder(hasOpenOrder)"
+            (change)="changeHasOpenOrder(client.hasOpenOrder)"
+            name='check-orders'
           />
         </div>
       </div>
@@ -174,7 +178,7 @@
     </div>
     <div class="body">
       <h2>Confirme sua senha</h2>
-      <input placeholder="********" [(ngModel)]="psw" type="password">
+      <input placeholder="********" [(ngModel)]="psw" type="password" name="psw-confirm">
       <div *ngIf="wrongPsw" class="msg-erro">
         <span>Senha incorreta!</span>
       </div>
@@ -186,7 +190,7 @@
       <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',
                     color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModal()">
         Cancelar</button>
-      <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
+      <button name="confirm-psw" (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
                   color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="checkPassword()">
         Confirmar</button>
     </div>
@@ -196,22 +200,36 @@
     <div class="header">
       <h1>Remover conta</h1>
     </div>
-    <div class="body">
+    <div class="body" name="deleteModal">
       <h2>Por que você deseja remover sua conta?</h2>
       <textarea placeholder="Caso queira compartilhar conosco, digite aqui." [(ngModel)]="reason"></textarea>
       <h2>Confirme sua senha</h2>
-      <input placeholder="********" [(ngModel)]="psw" type="password" name="psw">
-      <div *ngIf="wrongPsw" class="msg-erro">
+      <input placeholder="********" name="psw" [(ngModel)]="psw" type="password">
+      <div *ngIf="wrongPsw" class="msg-erro" name="erro-psw">
         <span>Senha incorreta!</span>
+      </div>
+      <div *ngIf="deleting" class="msg-success">
+        <span class="msg">Senha correta, sua conta está sendo deletada. Até mais!</span>
+        <mat-progress-spinner mode="indeterminate" color="accent" diameter="25"></mat-progress-spinner>
       </div>
     </div>
     <div class="buttons">
-      <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',
-                        color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModalDelete()">
-        Cancelar</button>
-      <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
-                      color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="deleteAccount()" name="confirmar">
-        Confirmar</button>
+      <button 
+      (mouseover)="hoverCancel = true" 
+      (mouseleave)="hoverCancel = false" 
+      [ngStyle]="{backgroundColor: hoverCancel === true  ? deleting === true ? '#a6a6a6' : '#ffffff' : deleting === true ? '#a6a6a6' : '#C4C4C4',
+        color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModalDelete()" name="cancelar" [disabled]="deleting"
+      >
+        Cancelar
+      </button>
+      <button 
+      (mouseover)="hoverConfirm = true" 
+      (mouseleave)="hoverConfirm = false" 
+      [ngStyle]="{backgroundColor: hoverConfirm === true  ? deleting === true ? '#a6a6a6' : '#ffffff' : deleting === true ? '#a6a6a6' : '#e93574', 
+        color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="deleteAccount()" name="confirmar" [disabled]="deleting"
+      >
+        Confirmar
+      </button>
     </div>
   </div>
 

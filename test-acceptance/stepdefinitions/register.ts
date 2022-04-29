@@ -3,12 +3,15 @@ import { browser, $, element, by } from 'protractor';
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
-
 let local_password = '';
 let local_email = '';
 
+async function goTo(page: string) {
+  await browser.driver.get(`http://localhost:4200/${page}`);
+}
+
 async function login() {
-        await browser.get(`http://localhost:4200/login`);
+        await browser.driver.get(`http://localhost:4200/login`);
         await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
         await $("input[name='email']").sendKeys(<string>local_email);
         await $("input[name='psw']").sendKeys(<string>local_password);
@@ -26,10 +29,20 @@ async function deleteUser() {
     await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
   }
 
-defineSupportCode(function ({ Given, When, Then }) {
+defineSupportCode(function ({ Given, When, Then, Before, setDefaultTimeout }) {
+
+    setDefaultTimeout(10 * 1000);
+
+    Before(async () => {
+      await goTo('login');
+      if ((await browser.getCurrentUrl()) !== `http://localhost:4200/login`) {
+        await $("svg[name='menu']").click();
+        await $("a[name='signOut']").click();
+      }
+    });
 
     Given(/^estou na página de cadastro de cliente$/, async () => {
-        await browser.get(`http://localhost:4200/register`);
+        await goTo('register');
         if ((await browser.getCurrentUrl()) !== `http://localhost:4200/register`) {
           await $("svg[name='menu']").click();
           await $("a[name='signOut']").click();
@@ -40,7 +53,7 @@ defineSupportCode(function ({ Given, When, Then }) {
 
       Given(/^estou na página de confirmar codigo de telefone e preenchi os campos anteriores com nome "([^\"]*)", cpf "([^\"]*)", telefone "([^\"]*)", email "([^\"]*)" e senha "([^\"]*)"$/, 
       async (name, cpf, phone, email, psw) => {
-        await browser.get(`http://localhost:4200/register`);
+        await browser.driver.get(`http://localhost:4200/register`);
         if ((await browser.getCurrentUrl()) !== `http://localhost:4200/register`) {
           await $("svg[name='menu']").click();
           await $("a[name='signOut']").click();

@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   psw: string = '';
   reason: string = '';
   orderOn: boolean = false;
+  deleting: boolean = false;
 
   pay_methods = [['Cartão de Crédito', 'credit'], ['Cartão De Débito', 'debit'], ['Dinheiro', 'money']];
   pay_method: string = 'money';
@@ -79,7 +80,7 @@ export class ProfileComponent implements OnInit {
           this.client.code = result.code;
           this.client.validPhone = result.validPhone;
           this.client.pic_url = result.pic_url;
-          this.hasOpenOrder = result.hasOpenOrder;
+          this.client.hasOpenOrder = result.hasOpenOrder;
 
           if (this.client.addresses.length) {
             this.address = this.client.addresses[0];
@@ -261,9 +262,6 @@ export class ProfileComponent implements OnInit {
   openModalDelete() {
     if (this.client.hasOpenOrder) {
       this.orderOn = true;
-      setTimeout(() => {
-        this.orderOn = false;
-      }, 4000);
     }
     else this.modalDelete = true;
   }
@@ -278,14 +276,16 @@ export class ProfileComponent implements OnInit {
         console.log('res:' + res);
         if (!res) {
           this.wrongPsw = true;
-          setTimeout(() => {
-            this.wrongPsw = false;
-          }, 2000);
         } else {
+          this.wrongPsw = false;
           this.clientService.delete(this.client, this.reason)
             .then(res => {
               if (res) {
-                this.clientService.logOut();
+                this.deleting = true;
+                setTimeout(() => {
+                  this.deleting = false;
+                  this.clientService.logOut();
+                }, 5000)
               }
             });
         }
