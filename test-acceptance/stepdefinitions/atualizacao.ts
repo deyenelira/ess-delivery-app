@@ -5,7 +5,7 @@ let expect = chai.expect;
 
 let currPassword = '';
 let currChange = '';
-let metodoPagNew = 1;
+let metodoPagNew = '';
 
 async function goToPage(page) {
     await browser.get(`http://localhost:4200/${page}`);
@@ -77,19 +77,19 @@ async function login(email, password) {
             await $("input[name='client_phone']").sendKeys(<string>currChange);
           }
           else if(<string>field == "método de pagamento"){
+            await $("select[id='menuPags']").click();
             if (<string>newValue == "dinheiro"){
-              metodoPagNew = 3;
+              await $("option[id='money']").click();
+              metodoPagNew = 'money';
             }
             else if (<string>newValue == "cartão de crédito"){
-              metodoPagNew = 1;
+              await $("option[id='credit']").click();
+              metodoPagNew = 'credit';
             }
             else if (<string>newValue == "cartão de débito"){
-              metodoPagNew = 2;
+              await $("option[id='debit']").click();
+              metodoPagNew = 'debit';
             }
-
-            var foo = element(by.id('client-phone-input'));
-            await $("select[id='menuPags']").click();
-            await $("option[value=2]").click();
           }
       });
 
@@ -116,8 +116,8 @@ async function login(email, password) {
         }
 
         if(<string>fieldName == "método de pagamento"){
-          var metodoPag = element(by.id('payName'));
-          await expect(metodoPag.getAttribute('value')).to.eventually.equal(currChange);
+          var payMethod = element((by.id(metodoPagNew)));
+          await expect(payMethod.isDisplayed()).to.eventually.equal(true);
         }
       });
       
