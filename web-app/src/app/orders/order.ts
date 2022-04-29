@@ -6,7 +6,7 @@ export class Order {
   items: any;
   cost: number=0;
   deliveryTax: number=0;
-  created_at: number=0;
+  created_at: string="";
 
   constructor() { }
 }

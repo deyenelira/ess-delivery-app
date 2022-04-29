@@ -20,10 +20,22 @@ export class AddOrderComponent{
 
   order: Order = new Order();
   orders: Order[] = [];
+  item: any = {
+    qt: 0,
+    description: "",
+    price: 0
+  };
+  clear: any = {
+    qt: 0,
+    description: "",
+    price: 0
+  };
+  items: any[] =[];
   
   createOrder(o: Order): void {
     
     o.clientId = this.clientService.getId();
+    o.items = this.items;
 
     this.orderService
       .create(o)
@@ -34,6 +46,13 @@ export class AddOrderComponent{
         }
       })
       .catch(erro=> alert(erro));
+      
+    this.items = [];
+  }
+
+  createItem(i: any): void {
+    this.items.push(i)
+    this.item = this.clear
   }
 
   deleteAllOrders(): void {
