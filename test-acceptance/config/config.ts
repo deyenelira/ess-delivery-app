@@ -14,7 +14,7 @@ export let config: Config = {
     frameworkPath: require.resolve('protractor-cucumber-framework'),
 
     specs: [
-        '../../features/esqueci_a_senha.feature'
+        '../../features/*.feature'
     ],
 
     onPrepare: () => {
@@ -27,6 +27,6 @@ export let config: Config = {
         compiler: "ts:ts-node/register",
         strict: true,
         format: ['pretty'],
-        require: ['../../stepdefinitions/esqueci_a_senha.ts'],
+        require: ['../../stepdefinitions/*.ts'],
     }
 };
