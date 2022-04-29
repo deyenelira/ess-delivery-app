@@ -57,7 +57,7 @@ export class orderService {
   }
 
   getOrder(orderId: number): Promise<Order> {
-    return this.http.get(this.url + `/order/${orderId}`, { params: { filters: this.date }})
+    return this.http.get(this.url + `/order/${orderId}`, { headers: this.headers })
       .toPromise()
       .then((res => res?.json() as Order))
       .catch(this.catch);
