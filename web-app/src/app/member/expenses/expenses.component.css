@@ -118,6 +118,11 @@ h3 {
     color: #000000;
 }
 
+h1 {
+    position: absolute;
+    display: none;
+}  
+
 h2 {
     margin: 0;
     font-family: 'ABeeZee Regular';

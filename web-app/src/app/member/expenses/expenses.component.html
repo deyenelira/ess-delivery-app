@@ -26,6 +26,12 @@
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsCompraFreq"></echarts>
     </div>
+
+    <h1 name="most_expensive_restaurant">{{data.most_expensive.restaurant[0].name}}</h1>
+    <h1 name="most_expensive_food">{{data.most_expensive.food[0].name}}</h1>
+    <h1 name="most_requested_restaurant">{{data.most_request.restaurant[0].name}}</h1>
+    <h1 name="most_requested_food">{{data.most_request.food[0].name}}</h1>
+
 </div>
 
 <!-- Caso não tenham pedidos -->
@@ -39,7 +45,7 @@
 <div class="total">
     <content>
         <h3>Custo total: </h3> 
-        <h2>R${{data.total_spent}}</h2>
+        <h2 name="custo">R${{data.total_spent}}</h2>
     </content>
 </div>
 

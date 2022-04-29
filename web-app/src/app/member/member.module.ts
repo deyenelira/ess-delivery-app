@@ -8,6 +8,7 @@ import { HomeComponent } from "./home/home.component";
 import { MemberComponent } from "./member.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ExpensesComponent } from "./expenses/expenses.component";
+import { AddOrderComponent } from "./add-order/add-order.component";
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,7 +22,8 @@ import { Order } from "../orders/order";
     ProfileComponent,
     HistoryComponent,
     MemberComponent,
-    ExpensesComponent
+    ExpensesComponent,
+    AddOrderComponent
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -44,6 +46,7 @@ import { Order } from "../orders/order";
           { path: "profile", component: ProfileComponent },
           { path: "history", component: HistoryComponent },
           { path: "expenses", component: ExpensesComponent },
+          { path: "add-order", component: AddOrderComponent },
         ],
       },
     ]),
