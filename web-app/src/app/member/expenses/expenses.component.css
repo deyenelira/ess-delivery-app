@@ -120,7 +120,9 @@ h3 {
 
 h1 {
     position: absolute;
-    display: none;
+    display: block;
+    font-size: 1px;
+    color: #ffffff;
 }  
 
 h2 {

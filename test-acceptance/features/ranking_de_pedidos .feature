@@ -37,8 +37,9 @@ Feature: ranking de pedidos em determinado periodo
     And o custo total apresentado é "R$230"
 
   Scenario: o item mais consumido não foi do restaurante mais pedido
-    Given eu sou cliente  
-    And eu comprei no periodo de "últimos 30 dias" exatamente "3" "pizza vegetariana" e "3" "pizza marguerita" que custam "40.00" e "30.00" reais cada do restaurante "Pizzaria Mia"
+    Given eu sou cliente
+    And eu comprei no periodo de "últimos 30 dias" exatamente "3" "pizza vegetariana" que custam "40.00" reais cada do restaurante "Pizzaria Mia"
+    And eu comprei no periodo de "últimos 30 dias" exatamente "3" "pizza marguerita" que custam "30.00" reais cada do restaurante "Pizzaria Mia"
     And eu comprei no periodo de "últimos 30 dias" exatamente "4" "kebab" que custam "15.00" reais cada do restaurante "Kebabado"
     When eu checo a página "expenses"
     Then o destaque de comida mais pedida indica "kebab (Kebabado)"
