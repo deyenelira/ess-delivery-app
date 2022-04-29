@@ -31,13 +31,15 @@ export class HistoryComponent implements OnInit {
                         'Outubro', 'Novembro', 'Dezembro'];
 
   public clickOrder(orderId: number) {
-    this.getOrder = !this.getOrder;
-    this.getHistory = !this.getHistory;
     this.showOrder(orderId);
   }
 
   public showOrder(orderId: number) {
-    this.orderService.getOrder(orderId).then(orders => this.order = orders);
+    this.orderService.getOrder(orderId).then(orders => {
+      this.order = orders;
+      this.getOrder = !this.getOrder;
+      this.getHistory = !this.getHistory;
+    });
   }
 
   validButton(): void {
