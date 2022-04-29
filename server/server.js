@@ -174,7 +174,6 @@ app.post('/client/check_password/:id', function (req, res) {
 });
 
 app.post('/client/forgot_password/:email', function (req, res) {
-  // login
   const email = req.params.email;
   try {
     clientService.forgotPassword(email).then((result) => {
@@ -186,6 +185,22 @@ app.post('/client/forgot_password/:email', function (req, res) {
     });
   }
   catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
+app.get('/order/:id', function (req, res) {
+  // get order data by ID
+  const id = req.params.id;
+  try {
+    const result = orderService.getById(id);
+    if (result) {
+      res.status(201).send(result);
+    } else {
+      res.status(403).send({ message: 'Order could not be found' });
+    }
+  } catch (err) {
     const { message } = err;
     res.status(400).send({ message });
   }

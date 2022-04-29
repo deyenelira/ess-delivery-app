@@ -15,6 +15,10 @@ class OrderService {
         this.idCount = this.orders.getIdCount();
     }
 
+    getById(orderId) {
+        return this.orders.getData().find(({ id }) => id == orderId);
+    }
+
     getByClientId(client_id, page, filters) {
         var start = new Date(filters[0]);
         var end = new Date(filters[1]);
