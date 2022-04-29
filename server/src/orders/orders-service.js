@@ -133,11 +133,11 @@ class OrderService {
 
             for (let item of order.items) {
                 result.most_request.food.push({
-                    name: item.description+"\n("+order.restaurantName+")",
+                    name: item.description+" ("+order.restaurantName+")",
                     value: item.qt
                 });
                 result.most_expensive.food.push({
-                    name: item.description+"\n("+order.restaurantName+")",
+                    name: item.description+" ("+order.restaurantName+")",
                     value: item.price*item.qt
                 });
             }

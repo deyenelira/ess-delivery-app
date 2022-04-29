@@ -36,6 +36,9 @@ export class AddOrderComponent{
     
     o.clientId = this.clientService.getId();
     o.items = this.items;
+    for(let i of this.items){
+      o.cost += i.price*i.qt
+    } 
 
     this.orderService
       .create(o)

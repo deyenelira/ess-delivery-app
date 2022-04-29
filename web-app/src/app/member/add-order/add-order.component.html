@@ -10,7 +10,7 @@
         <table>
           <tr>
             <td><label>Quantidade</label></td>
-            <td><input id="items-qt-input" [(ngModel)]="item.qt" ></td>
+            <td><input id="items-qt-input" type="number" [(ngModel)]="item.qt" ></td>
             <td><button id="register-item" (click)="createItem(item)">Adicionar</button></td>
           </tr>
           <tr>
@@ -19,7 +19,7 @@
           </tr>
           <tr>
             <td><label>Preço</label></td>
-            <td><input id="items-price-input" [(ngModel)]="item.price" ></td>
+            <td><input id="items-price-input" type="number" [(ngModel)]="item.price" ></td>
           </tr>
         </table>
      </td>
