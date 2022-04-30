@@ -57,6 +57,21 @@ export class ClientService {
       .catch(this.catch);
   }
 
+  getByEmail(email: string): Promise<Client> {
+    return this.http
+      .get(this.taURL + `/client/email/${email}`, { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+        if (res?.status === 200) {
+          this.client = res.json().client;
+          return res.json();
+        } else {
+          return null;
+        }
+      })
+      .catch(this.catch);
+  }
+
   create(client:{}): Promise<Client> {
     
     return this.http

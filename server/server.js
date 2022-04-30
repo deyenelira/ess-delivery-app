@@ -37,6 +37,22 @@ app.get('/client/:id', function (req, res) {
   }
 });
 
+app.get('/client/email/:email', function (req, res) {
+  // get client data by email
+  const email = req.params.email;
+  try {
+    const result = clientService.getByEmail(email);
+    if (result) {
+      res.status(200).send(result);
+    } else {
+      res.status(404).send({ message: 'Client could not be found' });
+    }
+  } catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
 app.put('/client/valid_phone/:id&:code', function (req, res) {
   // get code to valid phone number
   const id = req.params.id;
@@ -158,7 +174,6 @@ app.post('/client/check_password/:id', function (req, res) {
 });
 
 app.post('/client/forgot_password/:email', function (req, res) {
-  // login
   const email = req.params.email;
   try {
     clientService.forgotPassword(email).then((result) => {
@@ -170,6 +185,22 @@ app.post('/client/forgot_password/:email', function (req, res) {
     });
   }
   catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
+app.get('/order/:id', function (req, res) {
+  // get order data by ID
+  const id = req.params.id;
+  try {
+    const result = orderService.getById(id);
+    if (result) {
+      res.status(201).send(result);
+    } else {
+      res.status(403).send({ message: 'Order could not be found' });
+    }
+  } catch (err) {
     const { message } = err;
     res.status(400).send({ message });
   }

@@ -15,6 +15,10 @@ class OrderService {
         this.idCount = this.orders.getIdCount();
     }
 
+    getById(orderId) {
+        return this.orders.getData().find(({ id }) => id == orderId);
+    }
+
     getByClientId(client_id, page, filters) {
         var start = new Date(filters[0]);
         var end = new Date(filters[1]);
@@ -99,16 +103,13 @@ class OrderService {
         var result = {
             most_request: {
               food: [],
-              total_food: 0,
               restaurant: [],
-              total_restaurant: 0
             },
             most_expensive: {
                 food: [],
-                total_food: 0.00,
                 restaurant: [],
-                total_restaurant: 0.00
-              }
+            },
+            total_spent: 0.00
         };
         for (let order of data) {
             result.most_request.restaurant.push({
@@ -130,6 +131,7 @@ class OrderService {
                     value: item.price*item.qt
                 });
             }
+            result.total_spent += order.cost
         }
         return result;
     }

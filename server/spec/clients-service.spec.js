@@ -38,8 +38,8 @@ describe("O serviço de clientes", () => {
     clientService.delete(client.id);
   }
 
-  it("tem inicialmente 3 clientes cadastrados", () => {
-    expect(clientService.get().length).toBe(3);
+  it("tem inicialmente 2 clientes cadastrados", () => {
+    expect(clientService.get().length).toBe(2);
   });
 
   it("retorna dados de um cliente cadastrado pelo id", () => {

@@ -123,7 +123,7 @@ class ClientService {
             //     subject: 'foMiau | Redefina sua senha agora',
             //     template: 'update_password',
             //     context: {
-            //         id: data.id
+            //         id: data.email
             //     }
             // });
             return true;

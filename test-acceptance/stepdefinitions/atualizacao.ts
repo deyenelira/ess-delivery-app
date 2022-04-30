@@ -80,7 +80,7 @@ async function login() {
 
       When(
         /^Eu tento atualizar os dados do perfil$/, async () => {
-          await $("a[name='editar']").click();
+          await $("a[name='changeData']").click();
         }
       );
 
@@ -121,12 +121,12 @@ async function login() {
       });
 
       Then(/^O sistema me pede para uma autenticação por senha$/, async () => {
-        await $("a[name='salvar']").click();
+        await $("a[name='saveData']").click();
       });
 
       //Eu tenho sucesso e o perfil recarrega com o nome "Ana"
       Then(/^Eu tenho sucesso e o perfil recarrega com o "([^\"]*)" novo$/, async (fieldName) => {
-        await $("input[name='senhaEditar']").sendKeys(currPassword);
+        await $("input[name='psw-confirm']").sendKeys(currPassword);
         await $("button[name='confirmarAlt']").click();
         if(<string>fieldName == "nome"){
           var nome = element(by.id('client-name-input'));
@@ -151,16 +151,16 @@ async function login() {
       });
       
       Then(/^Eu não tenho sucesso e permaneço na mesma página$/, async () => {
-        await $("input[name='senhaEditar']").sendKeys("errado123");
+        await $("input[name='psw-confirm']").sendKeys("errado123");
         await $("button[name='confirmarAlt']").click();
         //var msgErro = element(by.id('erroSenha1'));
         //await expect(msgErro.isDisplayed()).to.eventually.equal(true);
-        await expect($("input[name='senhaEditar']").isPresent()).to.eventually.equal(true);
+        await expect($("input[name='psw-confirm']").isPresent()).to.eventually.equal(true);
         await deleteUser();
       });
 
       Then(/^Aparece uma mensagem de erro no "([^\"]*)" digitado e não é possivel salvar$/, async (currentField) => {
-        await $("a[name='salvar']").click();
+        await $("a[name='saveData']").click();
         var campoAtual = <string>currentField+"Err"
         var msgErro = element(by.id(campoAtual));
         await expect(msgErro.isDisplayed()).to.eventually.equal(true);
