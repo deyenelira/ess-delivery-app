@@ -16,8 +16,10 @@
     "chai": "^4.0.2",
     "chai-as-promised": "^7.0.0",
     "cucumber": "^2.3.0",
+    "firefox-profile": "^4.2.2",
     "mkdirp": "^0.5.1",
     "protractor-cucumber-framework": "^3.1.1",
+    "q": "^1.5.1",
     "typescript": "^2.9.2"
   },
   "dependencies": {

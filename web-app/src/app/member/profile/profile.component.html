@@ -2,7 +2,7 @@
   <div class="background">
     <div class="warning">
       <div class="options">
-        <a *ngIf="!editando" (click)="changeEdit()" name="changeData">
+        <a *ngIf="!editando" (click)="changeEdit()" name="changeData" id ="butao-edit">
           <p class="edit"> editar dados </p>
         </a>
         <a *ngIf="editando" (click)="validate()" name="saveData">
@@ -29,10 +29,10 @@
       <div class="items">
         <div class="item">
           <label>Nome: </label>
-          <input id="client-name-input" [(ngModel)]="client.name" [disabled]="!editando">
+          <input id="client-name-input" [(ngModel)]="client.name" [disabled]="!editando" name = "client_name" value = "client.name">
         </div>
-        <div class="msg-erro">
-          <p *ngIf="erro['name']">
+        <div class="msg-erro" id="nomeErr">
+          <p *ngIf="erro['name']", id="erro['name']">
             Forneça um nome válido.
           </p>
         </div>
@@ -40,33 +40,33 @@
           <label>CPF: </label>
           <input id="client-cpf-input" [(ngModel)]="client.cpf" [disabled]="!editando">
         </div>
-        <div class="msg-erro">
+        <div class="msg-erro" id="cpfErr">
           <p *ngIf="erro['cpf']">
             Forneça um cpf válido.
           </p>
         </div>
         <div class="item">
           <label>E-mail: </label>
-          <input id="client-email-input" [(ngModel)]="client.email" [disabled]="!editando">
+          <input id="client-email-input" [(ngModel)]="client.email" [disabled]="!editando" name = "client_email">
         </div>
-        <div class="msg-erro">
+        <div class="msg-erro" id="emailErr">
           <p *ngIf="erro['email']">
             Forneça um email válido.
           </p>
         </div>
         <div class="item">
           <label>Telefone: </label>
-          <input id="client-phone-input" [(ngModel)]="client.phone" [disabled]="!editando">
+          <input id="client-phone-input" [(ngModel)]="client.phone" [disabled]="!editando" name="client_phone">
         </div>
-        <div class="msg-erro">
+        <div class="msg-erro" id = "telefoneErr">
           <p *ngIf="erro['phone']">
             Forneça um telefone válido.
           </p>
         </div>
         <div class="item">
           <label>Método de Pagamento: </label>
-          <select [(ngModel)]="pay_method" (change)="changePayMethod(pay_method)" [disabled]="!editando">
-            <option *ngFor="let method of pay_methods" [value]="method[1]">
+          <select [(ngModel)]="pay_method" (change)="changePayMethod(pay_method)" [disabled]="!editando" id="menuPags">
+            <option *ngFor="let method of pay_methods" [value]="method[1]" id="payName" id="{{method[1]}}">
               {{ method[0] }}
             </option>
           </select>
@@ -178,7 +178,7 @@
     </div>
     <div class="body">
       <h2>Confirme sua senha</h2>
-      <input placeholder="********" [(ngModel)]="psw" type="password" name="psw-confirm">
+      <input placeholder="********" [(ngModel)]="psw" type="password" name="psw-confirm" id="erroSenha1">
       <div *ngIf="wrongPsw" class="msg-erro">
         <span>Senha incorreta!</span>
       </div>
@@ -188,10 +188,10 @@
     </div>
     <div class="buttons">
       <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',
-                    color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModal()">
+                    color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModal()" name="closeConfirm">
         Cancelar</button>
-      <button name="confirm-psw" (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
-                  color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="checkPassword()">
+      <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
+                  color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="checkPassword()" name ="confirmarAlt">
         Confirmar</button>
     </div>
   </div>

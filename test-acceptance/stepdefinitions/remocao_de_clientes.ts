@@ -69,7 +69,7 @@ defineSupportCode(function ({ Given, When, Then }) {
       await $("input[name='check-orders']").click();
       await $("a[name='saveData']").click();
       await $("input[name='psw-confirm']").sendKeys(testPassword);
-      await $("button[name='confirm-psw']").click();
+      await $("button[name='confirmarAlt']").click();
       await expect($("input[name='check-orders']").getAttribute('checked')).to.eventually.equal('true');
     }
   });
@@ -80,7 +80,7 @@ defineSupportCode(function ({ Given, When, Then }) {
       await $("input[name='check-orders']").click();
       await $("a[name='saveData']").click();
       await $("input[name='psw-confirm']").sendKeys(testPassword);
-      await $("button[name='confirm-psw']").click();
+      await $("button[name='confirmarAlt']").click();
       await expect($("input[name='check-orders']").getAttribute('checked')).to.eventually.equal(null);
     }
   });
