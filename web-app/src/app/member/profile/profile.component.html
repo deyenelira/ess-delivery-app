@@ -184,7 +184,7 @@
     </div>
     <div class="buttons">
       <button (mouseover)="hoverCancel = true" (mouseleave)="hoverCancel = false" [ngStyle]="{backgroundColor: hoverCancel === true  ? '#ffffff' : '#C4C4C4',
-                    color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModal()">
+                    color: hoverCancel === true  ? '#C4C4C4' : '#ffffff'}" (click)="closeModal()" name="closeConfirm">
         Cancelar</button>
       <button (mouseover)="hoverConfirm = true" (mouseleave)="hoverConfirm = false" [ngStyle]="{backgroundColor: hoverConfirm === true  ? '#ffffff' : '#e93574',
                   color: hoverConfirm === true  ? '#e93574' : '#ffffff'}" (click)="checkPassword()" name ="confirmarAlt">

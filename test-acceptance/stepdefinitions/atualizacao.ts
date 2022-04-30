@@ -1,32 +1,57 @@
 import { defineSupportCode } from 'cucumber';
-import { browser, $, element, by } from 'protractor';
+import { browser, $, element, by , protractor} from 'protractor';
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
 let currPassword = '';
+let currEmail = '';
 let currChange = '';
 let metodoPagNew = '';
 
-async function goToPage(page) {
-    await browser.get(`http://localhost:4200/${page}`);
-    if ((await browser.getCurrentUrl()) !== `http://localhost:4200/${page}`) {
-      await $("svg[name='menu']").click();
-      await $("a[name='profile']").click();
-      await browser.get(`http://localhost:4200/${page}`);
-    }
-  }
+async function createUser(email: string, psw: string) {
+  await goTo('register');
+
+  await $("input[name='name']").sendKeys('Nome teste');
+  await $("input[name='cpf']").sendKeys('14219938052');
+  await $("input[name='phone']").sendKeys('81999999999');
+  await $("input[name='email']").sendKeys(<string>email);
+  await $("input[name='password']").sendKeys(<string>psw);
+  await $("input[name='confirm_password']").sendKeys(<string>psw);
+  await element(by.buttonText('Continuar')).click();
+
+  await confirmCode();
+  await logOut();
+}
+
+async function confirmCode() {
+  await $("input[name='code']").sendKeys('ABC123');
+  await $("button[name='continuar-code']").click();
+}
+
+async function logOut() {
+  await $("svg[name='menu']").click();
+  await $("a[name='signOut']").click();
+}
 
 async function goTo(page: string) {
     await browser.driver.get(`http://localhost:4200/${page}`);
   }
 
-async function login(email, password) {
-    await browser.get(`http://localhost:4200/login`);
-    await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
-    await $("input[name='email']").sendKeys(<string>email);
-    await $("input[name='psw']").sendKeys(<string>password);
-    await $("button[name='butao']").click();
-    await browser.waitForAngular();
+async function deleteUser() {
+  await goTo('profile');
+  await $("a[name='deleteAccount']").click();
+  await browser.waitForAngular();
+  await $("input[name='psw']").sendKeys(currPassword);
+  await $("button[name='confirmar']").click();
+  await expect($("form[name='login']").isPresent()).to.eventually.equal(true);
+}
+
+async function login() {
+  await goTo('login');
+  await $("input[name='email']").sendKeys(currEmail);
+  await $("input[name='psw']").sendKeys(currPassword);
+  await $("button[name='butao']").click();
+  await browser.waitForAngular();
 }
 
 
@@ -43,12 +68,14 @@ async function login(email, password) {
     });
 
     Given(/^estou logado com e-mail "([^\"]*)" no sistema com senha "([^\"]*)"$/, async (email, password) => {
+        currEmail = <string>email;
         currPassword = <string>password;
-        await browser.waitForAngularEnabled(false);
-        await login(email, currPassword);
+        await createUser(currEmail, currPassword)
       });
-    Given(/^estou na página de perfil$/, async () => {
-      await goToPage("profile");
+    
+      Given(/^estou na página de perfil$/, async () => {
+      await login();
+      await goTo("profile");
     });
 
       When(
@@ -119,13 +146,17 @@ async function login(email, password) {
           var payMethod = element((by.id(metodoPagNew)));
           await expect(payMethod.isDisplayed()).to.eventually.equal(true);
         }
+        
+        await deleteUser();
       });
       
       Then(/^Eu não tenho sucesso e permaneço na mesma página$/, async () => {
-        await $("input[name='senhaEditar']").sendKeys("aninha123");
+        await $("input[name='senhaEditar']").sendKeys("errado123");
         await $("button[name='confirmarAlt']").click();
-        var msgErro = element(by.id('erroSenha1'));
-        await expect(msgErro.isDisplayed()).to.eventually.equal(true);
+        //var msgErro = element(by.id('erroSenha1'));
+        //await expect(msgErro.isDisplayed()).to.eventually.equal(true);
+        await expect($("input[name='senhaEditar']").isPresent()).to.eventually.equal(true);
+        await deleteUser();
       });
 
       Then(/^Aparece uma mensagem de erro no "([^\"]*)" digitado e não é possivel salvar$/, async (currentField) => {
@@ -133,6 +164,7 @@ async function login(email, password) {
         var campoAtual = <string>currentField+"Err"
         var msgErro = element(by.id(campoAtual));
         await expect(msgErro.isDisplayed()).to.eventually.equal(true);
+        await deleteUser();
       });
 
 
