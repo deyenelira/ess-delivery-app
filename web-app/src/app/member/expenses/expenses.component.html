@@ -6,7 +6,7 @@
 
 <!-- Caso tenham pedidos -->
 
-<div class="graficos" *ngIf="ordered" > 
+<div class="graficos" name ="graficos" *ngIf="ordered" > 
     <div class="container" >
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsRestauranteCusto"></echarts>
@@ -26,20 +26,26 @@
         <div class="titulo" ></div>
         <echarts [initOpts]="initOpts" [options]="optionsCompraFreq"></echarts>
     </div>
+    
+    <h1 name="most_expensive_restaurant">{{data.most_expensive.restaurant[0].name}}</h1>
+    <h1 name="most_expensive_food">{{data.most_expensive.food[0].name}}</h1>
+    <h1 name="most_requested_restaurant">{{data.most_request.restaurant[0].name}}</h1>
+    <h1 name="most_requested_food">{{data.most_request.food[0].name}}</h1>
+
 </div>
 
 <!-- Caso não tenham pedidos -->
-<div class="semPedidos" *ngIf="!ordered">
+<div class="semPedidos" name="semPedidos" *ngIf="!ordered">
     <content>
         <img src="assets/images/cryingCat.png" alt=":(">
         <h3>Parece que você não comprou nada esse mês</h3>
     </content>    
 </div>
 
-<div class="total">
+<div class="total" name="total">
     <content>
         <h3>Custo total: </h3> 
-        <h2>R${{data.total_spent}}</h2>
+        <h2 name="custo">R${{data.total_spent}}</h2>
     </content>
 </div>
 

@@ -12,6 +12,35 @@ export class orderService {
 
   constructor(private http: Http) {}
 
+  create(order:{}): Promise<Order> {
+    
+    return this.http
+      .post(this.url + '/order', JSON.stringify(order),{
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res) => {
+        if (res?.status === 201) {
+          var registeredOrder =<Order> res.json();
+          return registeredOrder
+        }else {
+          return null
+        };
+      })
+      .catch(this.catch);
+  }
+
+  deleteAll(clientId: number, order: Order, reason: string): Promise<Order> {
+    return this.http
+      .delete(this.url + `/order/client/${clientId}`, { headers: this.headers, params: {reason: reason} })
+      .toPromise()
+      .then((res) => {
+        if (res?.status === 201) return order;
+        else return null;
+      })
+      .catch(this.catch);
+  }
+
   getQtd(clientId: number): Promise<number> {
     console.log(clientId, 'getqtd')
     return this.http.get(this.url + `/orders/total_orders/${clientId}`)
