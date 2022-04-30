@@ -55,6 +55,7 @@ export class ExpensesComponent{
         if (!this.data.most_expensive.restaurant.length) this.ordered = false;
         else this.setData();
       });
+      console.log(this.data)
   }
 
   public setData() {

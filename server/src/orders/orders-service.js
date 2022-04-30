@@ -46,7 +46,8 @@ class OrderService {
 
     add(order) {
         var date = new Date();
-        date.setTime( date.getTime() - date.getTimezoneOffset()*60*1000 );
+        if(order.created_at) date = order.created_at; 
+        else date.setTime( date.getTime() - date.getTimezoneOffset()*60*1000 );
         var newOrder = new Order({
             id: this.idCount,
             clientId: order.clientId,
@@ -68,6 +69,19 @@ class OrderService {
         if (data){
             var index = this.orders.getData().indexOf(data);
             this.orders.delete(index);
+            return true;
+        }
+        return null;
+    }
+
+    deleteByClientId(client_id) {
+        var data = this.orders.getData().filter(({clientId}) => clientId == client_id);
+        console.log(data)
+        if (data){
+            for(let order of data){
+                var index = this.orders.getData().indexOf(order);
+                this.orders.delete(index);
+            }
             return true;
         }
         return null;
@@ -123,11 +137,11 @@ class OrderService {
 
             for (let item of order.items) {
                 result.most_request.food.push({
-                    name: item.description+"\n("+order.restaurantName+")",
+                    name: item.description+" ("+order.restaurantName+")",
                     value: item.qt
                 });
                 result.most_expensive.food.push({
-                    name: item.description+"\n("+order.restaurantName+")",
+                    name: item.description+" ("+order.restaurantName+")",
                     value: item.price*item.qt
                 });
             }

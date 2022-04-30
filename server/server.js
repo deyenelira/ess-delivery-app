@@ -272,6 +272,22 @@ app.delete('/order/:id', function (req, res) {
   }
 });
 
+app.delete('/order/client/:clientId', function (req, res) {
+  // delete all by clientID
+  const clientId = req.params.clientId;
+  try {
+    const result = orderService.deleteByClientId(clientId);
+    if (result) {
+      res.status(201).send({ message: 'Order(s) successfully deleted' });
+    } else {
+      res.status(403).send({ message: 'Order(s) could not be deleted' });
+    }
+  } catch (err) {
+    const { message } = err;
+    res.status(400).send({ message });
+  }
+});
+
 app.get('/orders/analytics/:clientId', function (req, res) {
   // get order list
   const clientId = req.params.clientId;
